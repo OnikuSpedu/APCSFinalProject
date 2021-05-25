@@ -12,5 +12,5 @@ For our final project, we are going to create a photo editor similar to Photosho
 
 ## 📃 Development Log
 ### Day 1: May 24, 2021
-- **Rickey**
+- **Rickey** 🎈  
     Experimented with file handling for importing and saving images. Discovered that you can successfully choose a file to load in, edit and save it under a specific directory name, and access all of the images under a directory as an array.
