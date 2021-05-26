@@ -14,7 +14,7 @@ For our final project, we are going to create a photo editor similar to Photosho
 ### Day 1: May 24, 2021
 
 - **Shadman**  
-    Created initial files and global variables for color palette.
+    Created dev branch to ensure main branch always has functioning code. Created initial files and global variables for color palette.
     
 - **Rickey** 🎈  
     Experimented with file handling for importing and saving images. Discovered that you can successfully choose a file to load in, edit and save it under a specific directory name, and access all of the images under a directory as an array.
