@@ -1,5 +1,5 @@
 class Sidebar extends UiElement {
-  private int x, y, w, h;
+  private float x, y, w, h;
   private color c;
   
   Sidebar() { 
@@ -11,8 +11,8 @@ class Sidebar extends UiElement {
   }
   
   void click() {
-    if(mouseX >= x && mouseX < x + w && mouseY >= 0 && mouseY < y + h) {
-       println("Clicked"); 
+    if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+       println("Sidebar clicked"); 
     }
   }
   
