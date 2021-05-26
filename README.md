@@ -28,4 +28,4 @@ For our final project, we are going to create a photo editor similar to Photosho
     
 ### Day 3: May 25, 2021
 - **Shadman**  
-    Created an abstract class called UiElement so that UI elements can be displayed and interacted with easily. Create the initial parts of the toolbar and sidebar.
+    Created an abstract class called UiElement so that UI elements can be displayed and interacted with easily. Create the initial parts of the toolbar and sidebar. Created Button class with on press and on hover rendering.
