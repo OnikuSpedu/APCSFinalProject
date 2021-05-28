@@ -17,13 +17,15 @@ int scene = 0;
 int canvasWidth = 650;
 int canvasHeight = 650;
 
-EditorScreen editorScreen = new EditorScreen();
-StartScreen startScreen = new StartScreen();
+EditorScreen editorScreen;
+StartScreen startScreen;
 
 void setup() {
   size(1366,768);
   background(DARK4);
   
+  editorScreen = new EditorScreen();
+  startScreen = new StartScreen();
 }
 
 void draw() {
