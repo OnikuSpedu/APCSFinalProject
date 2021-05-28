@@ -1,3 +1,6 @@
+import uibooster.*;
+UiBooster booster;
+
 color BLACK = color(0);
 color DARK4 = color(30,30,30);
 color DARK3 = color(37,37,38);
@@ -24,6 +27,8 @@ void setup() {
   size(1366,768);
   background(DARK4);
   
+  booster = new UiBooster();
+
   editorScreen = new EditorScreen();
   startScreen = new StartScreen();
 }
