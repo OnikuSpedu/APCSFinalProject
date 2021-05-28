@@ -138,6 +138,39 @@ public class Kernel
     }
     return color(convolutedRed, convolutedGreen, convolutedBlue);
   }
+  color calcNewColorBottomRightCorner(PImage img, int x, int y) {
+    float convolutedRed = 0.0;
+    float convolutedGreen = 0.0;
+    float convolutedBlue = 0.0;
+    int row = 0;
+    for (int i = y-1; i <= y+1; i++) {
+      int col = 0;
+      for (int j = x-1; j <= x+1; j++) {
+        color c;
+        if (j == img.width && i == img.height) {
+          c = img.get(x, y);
+        }
+        else if (j == img.width) {
+          c = img.get(j-1, i);
+        }
+        else if (i == img.height) {
+          c = img.get(j, i-1);
+        }
+        else {
+          c = img.get(j,i);
+        }
+        float r = red(c);
+        float g = green(c);
+        float b = blue(c);
+        convolutedRed += (r*kernel[row][col]);
+        convolutedGreen += (g*kernel[row][col]);
+        convolutedBlue += (b*kernel[row][col]);
+        col++;
+      }
+      row++;
+    }
+    return color(convolutedRed, convolutedGreen, convolutedBlue);
+  }
   color calcNewColor(PImage img, int x, int y)
   {
     if (x == 0 || x == img.width - 1 || y == 0 || y == img.height - 1)
@@ -153,6 +186,9 @@ public class Kernel
       }
       else if (x == 0 && y == img.height-1){
         return calcNewColorBottomLeftCorner(img, x, y);
+      }
+      else if (x == img.width - 1 && y == img.height - 1) {
+        return calcNewColorBottomRightCorner(img, x, y);
       }
     }
     else
