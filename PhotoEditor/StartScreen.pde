@@ -237,7 +237,7 @@ class StartScreen extends Screen {
           
           if (selected != null) {
             String pathToSelectedFile = selected.getAbsolutePath();
-            if (pathToSelectedFile.endsWith(".jpg") || pathToSelectedFile.endsWith(".png") || pathToSelectedFile.endsWith(".tga") || pathToSelectedFile.endsWith(".gif")) {
+            if (pathToSelectedFile.toLowerCase().endsWith(".jpg") || pathToSelectedFile.toLowerCase().endsWith(".png") || pathToSelectedFile.toLowerCase().endsWith(".tga") || pathToSelectedFile.toLowerCase().endsWith(".gif")) {
               
               
               selectedPath = selected.getAbsolutePath();
