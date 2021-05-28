@@ -12,7 +12,6 @@ For our final project, we are going to create a photo editor similar to Photosho
 
 ## 📃 Development Log
 ### May 24, 2021
-
 - **Shadman**  
     Created dev branch to ensure main branch always has functioning code. Created initial files and global variables for color palette.
     
@@ -29,7 +28,13 @@ For our final project, we are going to create a photo editor similar to Photosho
 ### May 26, 2021
 - **Shadman**  
     Created an abstract class called UiElement so that UI elements can be displayed and interacted with easily. Create the initial parts of the toolbar and sidebar. Created Button class with on press and on hover rendering.
+
+- **Rickey** 🎈  
+    Worked on creating abstract UiElement class and Button class along with Shadman while he screenshared.
     
 ### May 28, 2021
 - **Shadman**  
     Created start screen. Implemented buttons to move between the start screen and upload screen. Created controlled input elements to take canvas width and height.
+
+- **Rickey** 🎈  
+    Implemented modified kernel convolution algorithm complete with edge extension to handle the border pixels.
