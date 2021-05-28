@@ -13,7 +13,7 @@ For our final project, we are going to create a photo editor similar to Photosho
 ## 📃 Development Log
 ### May 24, 2021 (Monday)
 - **Shadman** 🧰  
-    Created dev branch to ensure main branch always has functioning code. Created initial files and global variables for color palette.
+    Created a dev branch to ensure that the main branch always has functioning code. Created initial files and global variables for color palette.
     
 - **Rickey** 🎈  
     Experimented with file handling for importing and saving images. Discovered that you can successfully choose a file to load in, edit and save it under a specific directory name, and access all of the images under a directory as an array.
@@ -23,11 +23,11 @@ For our final project, we are going to create a photo editor similar to Photosho
     Designed Figma sketches for how the different screens in the app would look.
 
 - **Rickey** 🎈  
-    Created a Sandbox directory in dev branch where all the experimental code snippets can be stored for later use. Also found out that I was using wrong vocabulary term: it is not normalization that handles edges; it is edge extension.
+    Created a Sandbox directory in the dev branch where all the experimental code snippets can be stored for later use. Also found out that I was using wrong vocabulary term: it is not normalization that handles edges; it is edge extension.
     
 ### May 26, 2021 (Wednesday)
 - **Shadman** 🧰  
-    Created an abstract class called UiElement so that UI elements can be displayed and interacted with easily. Create the initial parts of the toolbar and sidebar. Created Button class with on press and on hover rendering.
+    Created an abstract class called UiElement so that UI elements can be displayed and interacted with easily. Created the initial parts of the toolbar and sidebar. Created Button class with on press and on hover rendering.
 
 - **Rickey** 🎈  
     Worked on creating abstract UiElement class and Button class along with Shadman while he screenshared.
