@@ -10,6 +10,7 @@ EditorScreen() {
 }
 
 void display() {
+  background(DARK4);
   for (UiElement e : elements) {
       e.display();
   }

@@ -14,7 +14,12 @@ color PRIMARY = color(0,122,204);
 */
 int scene = 0;
 
-EditorScreen editor = new EditorScreen();
+int canvasWidth = 650;
+int canvasHeight = 650;
+
+EditorScreen editorScreen = new EditorScreen();
+StartScreen startScreen = new StartScreen();
+
 void setup() {
   size(1366,768);
   background(DARK4);
@@ -22,9 +27,19 @@ void setup() {
 }
 
 void draw() {
-  editor.display();
+  if (scene == 0) {
+    startScreen.display();
+  }
+  
+  if (scene == 1) {
+  editorScreen.display();
+  }
 }
 
-void mouseClicked() {
-  editor.click();
+void mousePressed() {
+  if (scene == 0) {
+      startScreen.click();
+  } else if (scene == 1) {
+    editorScreen.click();
+  }
 }

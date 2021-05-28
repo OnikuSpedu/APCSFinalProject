@@ -21,7 +21,7 @@ abstract class Button extends UiElement {
     textAlign(CENTER);
     textSize(16);
     fill(fontColor);
-    text(label, x + w / 2, y + h / 2); 
+    text(label, x + (w / 2), y + h / 2 + 6); 
     
     if(isHovering()) {
         if (mousePressed) 
