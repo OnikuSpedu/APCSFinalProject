@@ -15,6 +15,9 @@ void display() {
   for (UiElement e : elements) {
       e.display();
   }
+  if (canvas != null) {
+     canvas.display(); 
+  }
 }
 
 void click() {

@@ -1,4 +1,6 @@
 import uibooster.*;
+import java.util.Arrays;
+
 UiBooster booster;
 
 color BLACK = color(0);
@@ -22,6 +24,7 @@ int canvasHeight = 650;
 
 EditorScreen editorScreen;
 StartScreen startScreen;
+Canvas canvas = new Canvas(700,700);
 
 void setup() {
   size(1366,768);

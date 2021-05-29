@@ -99,7 +99,7 @@ class StartScreen extends Screen {
       }
       void click() {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
-          //Add Create Processing
+          canvas = new Canvas(canvasWidth, canvasHeight);
           scene++;
         }
       }
@@ -200,7 +200,11 @@ class StartScreen extends Screen {
       }
       void click() {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
-          scene++;
+          if(!selectedPath.equals("") && (selectedPath.endsWith(".jpg") || selectedPath.endsWith(".png") || selectedPath.endsWith(".tga") || selectedPath.endsWith(".gif"))) {
+             PImage selectedImage = loadImage(selectedPath);
+             canvas = new Canvas(selectedImage);
+             scene++;
+          }
         }
       }
     }
@@ -238,7 +242,6 @@ class StartScreen extends Screen {
           if (selected != null) {
             String pathToSelectedFile = selected.getAbsolutePath();
             if (pathToSelectedFile.endsWith(".jpg") || pathToSelectedFile.endsWith(".png") || pathToSelectedFile.endsWith(".tga") || pathToSelectedFile.endsWith(".gif")) {
-              
               
               selectedPath = selected.getAbsolutePath();
             
