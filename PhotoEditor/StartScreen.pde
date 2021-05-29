@@ -75,7 +75,7 @@ class StartScreen extends Screen {
       textAlign(LEFT, TOP);
       textSize(20);
       fill(color(240));
-      text("Create a Canvas", x+36,y+36);
+      text("Create A Canvas", x+36,y+36);
       textSize(16);
       text("Width:", x+36,362);
       text("Height:", x+36,423);
@@ -179,7 +179,7 @@ class StartScreen extends Screen {
       textAlign(LEFT, TOP);
       textSize(20);
       fill(color(240));
-      text("Import an image", x+36,293);
+      text("Import An Image", x+36,293);
       
       for (Button button : buttons) {
          button.display(); 
@@ -219,7 +219,7 @@ class StartScreen extends Screen {
         if (pathToSelectedFile != null && !pathToSelectedFile.equals("")) {
           super.y = 520;
           super.h = 40;
-          super.label = "Upload Another Image";
+          super.label = "Replace Image";
           
           if (thumbnail != null && thumbnail.width > 0 && thumbnail.height > 0) {
               image(thumbnail, x+36, 330);

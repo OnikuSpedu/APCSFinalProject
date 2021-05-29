@@ -12,8 +12,7 @@ color PRIMARY = color(0,122,204);
 
 /*Scenes
 0 - welcome
-1 - select images
-2 - editor
+1 - editor
 3 - filters
 4 - saved confirmation
 */
