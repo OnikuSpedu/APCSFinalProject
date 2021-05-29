@@ -39,10 +39,8 @@ void setup() {
 void draw() {
   if (scene == 0) {
     startScreen.display();
-  }
-  
-  if (scene == 1) {
-  editorScreen.display();
+  } else if (scene == 1) {
+    editorScreen.display();
   }
 }
 
@@ -50,6 +48,6 @@ void mousePressed() {
   if (scene == 0) {
       startScreen.click();
   } else if (scene == 1) {
-    editorScreen.click();
+      editorScreen.click();
   }
 }

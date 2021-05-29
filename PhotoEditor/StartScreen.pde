@@ -150,7 +150,7 @@ class StartScreen extends Screen {
     ImportButton importBtn;
     UploadButton uploadBtn;
 
-    String selectedPath;
+    String pathToSelectedFile;
     
     ArrayList<Button> buttons;
     
@@ -160,7 +160,7 @@ class StartScreen extends Screen {
       w = 369;
       h = 396;
      
-      selectedPath = "";
+      pathToSelectedFile = "";
       
        buttons = new ArrayList<Button>();
      
@@ -200,8 +200,8 @@ class StartScreen extends Screen {
       }
       void click() {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
-          if(!selectedPath.equals("") && (selectedPath.endsWith(".jpg") || selectedPath.endsWith(".png") || selectedPath.endsWith(".tga") || selectedPath.endsWith(".gif"))) {
-             PImage selectedImage = loadImage(selectedPath);
+          if(!pathToSelectedFile.equals("") && ((pathToSelectedFile.endsWith(".jpg") || pathToSelectedFile.endsWith(".png") || pathToSelectedFile.endsWith(".tga") || pathToSelectedFile.endsWith(".gif")))) {
+             PImage selectedImage = loadImage(pathToSelectedFile);
              canvas = new Canvas(selectedImage);
              scene++;
           }
@@ -216,7 +216,7 @@ class StartScreen extends Screen {
       }
       
       void display() {
-        if (selectedPath != null && !selectedPath.equals("")) {
+        if (pathToSelectedFile != null && !pathToSelectedFile.equals("")) {
           super.y = 520;
           super.h = 40;
           super.label = "Upload Another Image";
@@ -240,12 +240,10 @@ class StartScreen extends Screen {
           File selected = booster.showFileSelection();
           
           if (selected != null) {
-            String pathToSelectedFile = selected.getAbsolutePath();
+            pathToSelectedFile = selected.getAbsolutePath();
             if (pathToSelectedFile.endsWith(".jpg") || pathToSelectedFile.endsWith(".png") || pathToSelectedFile.endsWith(".tga") || pathToSelectedFile.endsWith(".gif")) {
-              
-              selectedPath = selected.getAbsolutePath();
-            
-              thumbnail = loadImage(selectedPath);
+                          
+              thumbnail = loadImage(pathToSelectedFile);
               
               if (thumbnail.height > 150) {
                 thumbnail.resize((int) ((float) thumbnail.width * ( 150.0 / thumbnail.height )), 150);

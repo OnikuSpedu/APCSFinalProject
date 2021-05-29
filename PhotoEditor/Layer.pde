@@ -99,6 +99,8 @@ class Layer {
   }
   
   color getPixel(int x, int y) {
+      x += (int) this.x;
+      y += (int) this.y;
       if (x >= 0 && x < layerPixels.length && y >= 0 && y < layerPixels[0].length) {
         return layerPixels[x][y];
       } 

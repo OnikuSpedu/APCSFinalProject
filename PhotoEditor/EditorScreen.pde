@@ -24,10 +24,14 @@ void click() {
     for (UiElement e : elements) {
       e.click();
     }
-    }
-    class Sidebar extends UiElement {
+  }
+    
+class Sidebar extends UiElement {
   private float x, y, w, h;
   private color c;
+  
+  AddLayerButton addLayerBtn;
+  ImportLayerButton importLayerBtn;
   
   Sidebar() { 
     x = 1006;
@@ -35,11 +39,16 @@ void click() {
     w = 360;
     h = 704;
     c = DARK3;
+    
+    addLayerBtn = new AddLayerButton();
+    importLayerBtn = new ImportLayerButton();
   }
   
   void click() {
     if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
        println("Sidebar clicked"); 
+       addLayerBtn.click();
+       importLayerBtn.click();
     }
   }
   
@@ -47,8 +56,46 @@ void click() {
     fill(c);
     noStroke();
     rect(x, y, w, h);
+    
+    addLayerBtn.display();
+    importLayerBtn.display();
   }
+  
+  class ImportLayerButton extends Button {
+      ImportLayerButton() {
+        super("Import Layer", x+(w-48)/2+32, y+h-16-40, (w-48)/2, 40,DARK2, color(255));
+      }
+      void click() {
+        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+          File selected = booster.showFileSelection();
+          
+          if (selected != null) {
+            String pathToSelectedFile = selected.getAbsolutePath();
+            if (pathToSelectedFile.endsWith(".jpg") || pathToSelectedFile.endsWith(".png") || pathToSelectedFile.endsWith(".tga") || pathToSelectedFile.endsWith(".gif")) {
+              if (canvas != null) {
+                PImage img = loadImage(pathToSelectedFile);
+                canvas.addLayer(img);
+              }          
+            }
+        }
+      }
+    }
+  }
+    
+    class AddLayerButton extends Button {
+      AddLayerButton() {
+        super("Add Layer", x+16, y+h-16-40, (w-48)/2, 40,PRIMARY, color(255));
+      }
+      void click() {
+        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+          if (canvas != null) {
+            canvas.addLayer();
+          }
+        }
+      }
+    }
 }
+
 class Toolbar extends UiElement {
   private int x, y, w, h;
   private color c;
