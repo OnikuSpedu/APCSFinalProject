@@ -81,6 +81,7 @@ class Toolbar extends UiElement {
     for(Button b : toolbarButtons) {
           b.display(); 
     }
+    image(imageToBeEdited, (1006-imageToBeEdited.width)/2, (704-imageToBeEdited.height)/2 + 64);
   }
   
   class TestButton extends Button {

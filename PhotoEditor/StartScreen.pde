@@ -1,3 +1,4 @@
+PImage imageToBeEdited;
 class StartScreen extends Screen {
 
   ArrayList<UiElement> elements;
@@ -243,7 +244,7 @@ class StartScreen extends Screen {
               selectedPath = selected.getAbsolutePath();
             
               thumbnail = loadImage(selectedPath);
-              
+              imageToBeEdited = loadImage(selectedPath);
               if (thumbnail.height > 150) {
                 thumbnail.resize((int) ((float) thumbnail.width * ( 150.0 / thumbnail.height )), 150);
               } 
