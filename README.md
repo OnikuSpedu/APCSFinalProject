@@ -42,3 +42,6 @@ For our final project, we are going to create a photo editor similar to Photosho
 ### May 29, 2021 (Saturday)
 - **Shadman** 🧰  
     Created canvas and layer classes. Connected start screen create and import buttons to the editor screen through initializing a canvas. Loaded images into 2D color arrays. Created buttons and corresponding methods to create new transparent layers and import a new image as a layer. Created a display method for canvas that uses alpha compositing to render the layers and preserve the transparent effect. Merged and resolved conflicts in Rickey's code and my code.
+
+- **Rickey** 🎈  
+    Completely overhauled/updated the UML diagram and added it to the prototype.
