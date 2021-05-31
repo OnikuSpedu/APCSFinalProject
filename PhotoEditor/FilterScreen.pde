@@ -67,30 +67,14 @@ class FilterOption extends UiElement {
   int y;
   int w;
   int h;
+  int oneTime = 0;
   boolean selected = false;
   float[][] matrix;
   
   FilterOption(Kernel k, int xcor, int ycor) {
-    canvas.calculateComposition();
-    color[][] oldPhotoPixels = canvas.getComposition();
-    originalPhoto = createImage(oldPhotoPixels[0].length, oldPhotoPixels.length, ARGB);
-    for (int hght = 0; hght < originalPhoto.height; hght++) {
-      for (int wdth = 0; wdth < originalPhoto.width; wdth++) {
-        originalPhoto.set(wdth, hght, oldPhotoPixels[hght][wdth]);
-      }
-    }
     matrix = k.getKernelMatrix();
-    newPhoto = originalPhoto.copy();
-    k.apply(originalPhoto, newPhoto);
-    //if (newPhoto.height > 67) {
-    //   newPhoto.resize((int) ((float) newPhoto.width * ( 67.0 / newPhoto.height )), 67);
-    //} //thumbnail resizing?
-    //if (newPhoto.width > 107) {
-    //   newPhoto.resize((int) 107, (int)  ((float) newPhoto.height * ( 107 / newPhoto.width )));
-    //}
-    newPhoto.resize(263, 167);    
-    w = newPhoto.width;
-    h = newPhoto.height;
+    w = 263;
+    h = 167;
     x = xcor;
     y = ycor;
   }
@@ -109,6 +93,30 @@ class FilterOption extends UiElement {
     }
   }
   void display() {
+    display(oneTime);
+  }
+  void display(int times) {
+    if (times == 0) { //have to do this variable wrapper function business or else it's gonna lag up a storm if apply keeps getting called
+        canvas.calculateComposition();
+        color[][] oldPhotoPixels = canvas.getComposition();
+         originalPhoto = createImage(oldPhotoPixels[0].length, oldPhotoPixels.length, ARGB);
+         for (int hght = 0; hght < originalPhoto.height; hght++) {
+           for (int wdth = 0; wdth < originalPhoto.width; wdth++) {
+              originalPhoto.set(wdth, hght, oldPhotoPixels[hght][wdth]);
+            }
+          }
+        newPhoto = originalPhoto.copy();
+        Kernel k = new Kernel(matrix);
+        k.apply(originalPhoto, newPhoto);
+        //if (newPhoto.height > 67) {
+        //   newPhoto.resize((int) ((float) newPhoto.width * ( 67.0 / newPhoto.height )), 67);
+        //} //thumbnail resizing?
+        //if (newPhoto.width > 107) {
+        //   newPhoto.resize((int) 107, (int)  ((float) newPhoto.height * ( 107 / newPhoto.width )));
+        //}
+        newPhoto.resize(263, 167);
+        oneTime++;
+    }
     image(newPhoto, x, y);
   }
 }
