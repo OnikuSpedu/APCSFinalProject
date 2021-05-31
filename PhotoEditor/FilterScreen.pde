@@ -17,6 +17,9 @@ class FilterScreen extends Screen {
     if (canvas != null) {
        canvas.display(); 
     }
+    if (stagedPhoto != null) {
+      image(stagedPhoto, (1006-stagedPhoto.width)/2, (704-stagedPhoto.height)/2 + 64);
+    }
   }
   void click() {
     for (UiElement e : elements) {
