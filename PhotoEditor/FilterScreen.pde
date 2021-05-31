@@ -23,6 +23,31 @@ class FilterScreen extends Screen {
     }
   }
 }
+class FilterOption extends UiElement {
+  PImage originalPhoto; //the one that the user has been working on
+  PImage newPhoto; //like a newPhoto preview of the kernel option
+  int x;
+  int y;
+  FilterOption(Kernel k, int xcor, int ycor) {
+    color[][] oldPhotoPixels = canvas.getComposition();
+    originalPhoto = createImage(oldPhotoPixels[0].length, oldPhotoPixels.length, ARGB);
+    for (int hght = 0; hght < originalPhoto.height; hght++) {
+      for (int wdth = 0; wdth < originalPhoto.width; wdth++) {
+        originalPhoto.set(wdth, hght, oldPhotoPixels[hght][wdth]);
+      }
+    }
+    newPhoto = originalPhoto.copy();
+    k.apply(originalPhoto, newPhoto);
+    if (newPhoto.height > 67) {
+       newPhoto.resize((int) ((float) newPhoto.width * ( 67.0 / newPhoto.height )), 67);
+    } //thumbnail resizing?
+    if (newPhoto.width > 107) {
+       newPhoto.resize((int) 107, (int)  ((float) newPhoto.height * ( 107 / newPhoto.width )));
+    }
+    x = xcor;
+    y = ycor;
+  }
+}
 class Toolbar extends UiElement {
   private int x, y, w, h;
   private color c;
