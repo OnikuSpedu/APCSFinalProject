@@ -34,7 +34,7 @@ class Canvas extends UiElement{
     for (int i = 0; i < composition.length; i++) {
       for (int j = 0; j < composition[0].length; j++) {
         
-         composition[i][j] = calculatePixel(i, j);
+         composition[i][j] = calculatePixel(j, i);
         
       }
     }

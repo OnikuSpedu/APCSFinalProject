@@ -101,16 +101,16 @@ class Layer {
   color getPixel(int x, int y) {
       x += (int) this.x;
       y += (int) this.y;
-      if (x >= 0 && x < layerPixels.length && y >= 0 && y < layerPixels[0].length) {
-        return layerPixels[x][y];
+      if (x >= 0 && x < layerPixels[0].length && y >= 0 && y < layerPixels.length) {
+        return layerPixels[y][x];
       } 
       
       return color(0,0,0,0);
   }
   
   boolean setPixel(int x, int y, color c) {
-      if (x >= 0 && x < layerPixels.length && y >= 0 && y < layerPixels[0].length) {
-        layerPixels[x][y] = c;
+      if (x >= 0 && x < layerPixels[0].length && y >= 0 && y < layerPixels.length) {
+        layerPixels[y][x] = c;
         return true;
       } 
       
