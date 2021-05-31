@@ -24,6 +24,42 @@ class FilterScreen extends Screen {
     }
   }
 }
+class Sidebar extends UiElement {
+  private float x, y, w, h;
+  private color c;
+  private ArrayList<FilterOption> filters;
+  
+  Sidebar() { 
+    x = 1006;
+    y = 64;
+    w = 360;
+    h = 704;
+    c = DARK3;
+    filters = new ArrayList<FilterOption>();
+    Kernel emboss = new Kernel(new float[][] { {-2, -1, 0},
+                                                {-1, 1, 1},
+                                                {0, 1, 2} } );
+    filters.add(new FilterOption(emboss, 1047, 110));
+  }
+  
+  void click() {
+    if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+       println("Sidebar clicked");
+       for (FilterOption choice : filters) {
+         choice.click();
+       }
+    }
+  }
+  
+  void display() {
+    fill(c);
+    noStroke();
+    rect(x, y, w, h);
+    for (FilterOption choice : filters) {
+      choice.display();
+    }
+  }
+}
 class FilterOption extends UiElement {
   PImage originalPhoto; //the one that the user has been working on
   PImage newPhoto; //like a newPhoto preview of the kernel option, a thumbnail
@@ -35,6 +71,7 @@ class FilterOption extends UiElement {
   float[][] matrix;
   
   FilterOption(Kernel k, int xcor, int ycor) {
+    canvas.calculateComposition();
     color[][] oldPhotoPixels = canvas.getComposition();
     originalPhoto = createImage(oldPhotoPixels[0].length, oldPhotoPixels.length, ARGB);
     for (int hght = 0; hght < originalPhoto.height; hght++) {
@@ -45,13 +82,13 @@ class FilterOption extends UiElement {
     matrix = k.getKernelMatrix();
     newPhoto = originalPhoto.copy();
     k.apply(originalPhoto, newPhoto);
-    if (newPhoto.height > 67) {
-       newPhoto.resize((int) ((float) newPhoto.width * ( 67.0 / newPhoto.height )), 67);
-    } //thumbnail resizing?
-    if (newPhoto.width > 107) {
-       newPhoto.resize((int) 107, (int)  ((float) newPhoto.height * ( 107 / newPhoto.width )));
-    }
-    
+    //if (newPhoto.height > 67) {
+    //   newPhoto.resize((int) ((float) newPhoto.width * ( 67.0 / newPhoto.height )), 67);
+    //} //thumbnail resizing?
+    //if (newPhoto.width > 107) {
+    //   newPhoto.resize((int) 107, (int)  ((float) newPhoto.height * ( 107 / newPhoto.width )));
+    //}
+    newPhoto.resize(263, 167);    
     w = newPhoto.width;
     h = newPhoto.height;
     x = xcor;
@@ -394,6 +431,7 @@ class Kernel {
         destination.set(i,j,calcNewColor(source, i, j));
       }
     }
+    println("applied!");
   }
 }
 class Toolbar extends UiElement {
