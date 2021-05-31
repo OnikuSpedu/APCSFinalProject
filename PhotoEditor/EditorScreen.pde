@@ -109,8 +109,9 @@ class Toolbar extends UiElement {
     c = DARK2;
     
     TestButton testBtn = new TestButton();
-    
+    ContinueButton cont = new ContinueButton();
     toolbarButtons.add(testBtn);
+    toolbarButtons.add(cont);
   }
   
   void click() {
@@ -145,6 +146,16 @@ class Toolbar extends UiElement {
     }
     
     
+  }
+  class ContinueButton extends Button {
+    ContinueButton() {
+      super("Continue", 1230, 17, 117, 31, PRIMARY, color(255));
+    }
+    void click() {
+      if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+        scene++;
+      }
+    }
   }
 }
 }

@@ -13,8 +13,8 @@ color PRIMARY = color(0,122,204);
 /*Scenes
 0 - welcome
 1 - editor
-3 - filters
-4 - saved confirmation
+2 - filters
+3 - saved confirmation
 */
 int scene = 0;
 
@@ -40,6 +40,8 @@ void draw() {
     startScreen.display();
   } else if (scene == 1) {
     editorScreen.display();
+  } else if (scene == 2) {
+    startScreen.display();
   }
 }
 
@@ -48,5 +50,7 @@ void mousePressed() {
       startScreen.click();
   } else if (scene == 1) {
       editorScreen.click();
+  } else if (scene == 2) {
+      startScreen.click();
   }
 }
