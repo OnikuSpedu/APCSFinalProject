@@ -1,3 +1,4 @@
+PImage stagedPhoto; //the photo that is displayed on the work area, gets changed by the kernels
 class FilterScreen extends Screen {
   ArrayList<UiElement> elements;
   
@@ -25,12 +26,13 @@ class FilterScreen extends Screen {
 }
 class FilterOption extends UiElement {
   PImage originalPhoto; //the one that the user has been working on
-  PImage newPhoto; //like a newPhoto preview of the kernel option
+  PImage newPhoto; //like a newPhoto preview of the kernel option, a thumbnail
   int x;
   int y;
   int w;
   int h;
   boolean selected = false;
+  float[][] matrix;
   
   FilterOption(Kernel k, int xcor, int ycor) {
     color[][] oldPhotoPixels = canvas.getComposition();
@@ -40,7 +42,7 @@ class FilterOption extends UiElement {
         originalPhoto.set(wdth, hght, oldPhotoPixels[hght][wdth]);
       }
     }
-    
+    matrix = k.getKernelMatrix();
     newPhoto = originalPhoto.copy();
     k.apply(originalPhoto, newPhoto);
     if (newPhoto.height > 67) {
@@ -59,6 +61,14 @@ class FilterOption extends UiElement {
     if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
        println("filter option clicked");
        selected = !selected;
+       if (selected) {
+         stagedPhoto = originalPhoto.copy();
+         Kernel another = new Kernel(matrix);
+         another.apply(originalPhoto, stagedPhoto);
+       }
+       else {
+         stagedPhoto = originalPhoto.copy();
+       }
     }
   }
   void display() {
@@ -77,6 +87,9 @@ class Kernel {
         kernel[i][j] = init[i][j];
       }
     }
+  }
+  float[][] getKernelMatrix() {
+    return kernel;
   }
   color calcNewColorTopLeftCorner(PImage img, int x, int y) {
     float convolutedRed = 0.0;
