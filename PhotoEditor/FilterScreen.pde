@@ -61,6 +61,9 @@ class FilterOption extends UiElement {
        selected = !selected;
     }
   }
+  void display() {
+    image(newPhoto, x, y);
+  }
   
 }
 class Toolbar extends UiElement {
