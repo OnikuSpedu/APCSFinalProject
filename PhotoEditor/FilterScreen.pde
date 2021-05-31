@@ -28,6 +28,10 @@ class FilterOption extends UiElement {
   PImage newPhoto; //like a newPhoto preview of the kernel option
   int x;
   int y;
+  int w;
+  int h;
+  boolean selected = false;
+  
   FilterOption(Kernel k, int xcor, int ycor) {
     color[][] oldPhotoPixels = canvas.getComposition();
     originalPhoto = createImage(oldPhotoPixels[0].length, oldPhotoPixels.length, ARGB);
@@ -36,6 +40,7 @@ class FilterOption extends UiElement {
         originalPhoto.set(wdth, hght, oldPhotoPixels[hght][wdth]);
       }
     }
+    
     newPhoto = originalPhoto.copy();
     k.apply(originalPhoto, newPhoto);
     if (newPhoto.height > 67) {
@@ -44,9 +49,19 @@ class FilterOption extends UiElement {
     if (newPhoto.width > 107) {
        newPhoto.resize((int) 107, (int)  ((float) newPhoto.height * ( 107 / newPhoto.width )));
     }
+    
+    w = newPhoto.width;
+    h = newPhoto.height;
     x = xcor;
     y = ycor;
   }
+  void click() {
+    if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+       println("filter option clicked");
+       selected = !selected;
+    }
+  }
+  
 }
 class Toolbar extends UiElement {
   private int x, y, w, h;
