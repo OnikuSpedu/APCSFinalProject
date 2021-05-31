@@ -27,7 +27,7 @@ class Canvas extends UiElement{
     
     layers.add(new Layer(img));
     
-    composition = new color[w][h];
+    composition = new color[h][w];
   }
   
   void calculateComposition() {
