@@ -111,13 +111,13 @@ class FilterOption extends UiElement {
         newPhoto = originalPhoto.copy();
         Kernel k = new Kernel(matrix);
         k.apply(originalPhoto, newPhoto);
-        //if (newPhoto.height > 67) {
-        //   newPhoto.resize((int) ((float) newPhoto.width * ( 67.0 / newPhoto.height )), 67);
-        //} //thumbnail resizing?
-        //if (newPhoto.width > 107) {
-        //   newPhoto.resize((int) 107, (int)  ((float) newPhoto.height * ( 107 / newPhoto.width )));
-        //}
-        newPhoto.resize(263, 167);
+        if (newPhoto.height > 67) {
+           newPhoto.resize((int) ((float) newPhoto.width * ( 67.0 / newPhoto.height )), 67);
+        } //thumbnail resizing?
+        if (newPhoto.width > 107) {
+           newPhoto.resize((int) 107, (int)  ((float) newPhoto.height * ( 107 / newPhoto.width )));
+        }
+        //newPhoto.resize(263, 167);
         oneTime++;
     }
     image(newPhoto, x, y);
@@ -442,7 +442,6 @@ class Kernel {
         destination.set(i,j,calcNewColor(source, i, j));
       }
     }
-    println("applied!");
   }
 }
 class Toolbar extends UiElement {
