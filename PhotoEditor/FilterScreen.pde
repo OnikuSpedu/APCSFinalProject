@@ -8,4 +8,14 @@ class FilterScreen extends Screen {
       elements.add(toolbar);
       elements.add(sidebar);
   }
+  void display() {
+    background(DARK4);
+    for (UiElement e : elements) {
+        e.display();
+    }
+    if (canvas != null) {
+       canvas.display(); 
+    }
+  }
+
 }
