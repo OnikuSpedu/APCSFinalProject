@@ -23,7 +23,7 @@ int canvasHeight = 650;
 
 EditorScreen editorScreen;
 StartScreen startScreen;
-Canvas canvas = new Canvas(700,700);
+Canvas canvas = new Canvas(canvasWidth,canvasHeight);
 
 void setup() {
   size(1366,768);

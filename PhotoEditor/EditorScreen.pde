@@ -71,7 +71,7 @@ class Sidebar extends UiElement {
           
           if (selected != null) {
             String pathToSelectedFile = selected.getAbsolutePath();
-            if (pathToSelectedFile.endsWith(".jpg") || pathToSelectedFile.endsWith(".png") || pathToSelectedFile.endsWith(".tga") || pathToSelectedFile.endsWith(".gif")) {
+            if (pathToSelectedFile.toLowerCase().endsWith(".jpg") || pathToSelectedFile.toLowerCase().endsWith(".png") || pathToSelectedFile.toLowerCase().endsWith(".tga") || pathToSelectedFile.toLowerCase().endsWith(".gif")) {
               if (canvas != null) {
                 PImage img = loadImage(pathToSelectedFile);
                 canvas.addLayer(img);
