@@ -17,5 +17,10 @@ class FilterScreen extends Screen {
        canvas.display(); 
     }
   }
-
+  void click() {
+    for (UiElement e : elements) {
+      e.click();
+    }
+  }
+    
 }
