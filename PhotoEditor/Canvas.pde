@@ -87,7 +87,7 @@ class Canvas extends UiElement{
     for(int i = 0; i < w; i++) {
        for(int j = 0; j < h; j++) {
           set(x+i,y+j, DARK4);
-          set(x+i,y+j, composition[i][j]);
+          set(x+i,y+j, composition[j][i]);
        }
     }
     
