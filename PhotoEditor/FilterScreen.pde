@@ -1,3 +1,4 @@
+import java.util.Arrays;
 PImage stagedPhoto; //the photo that is displayed on the work area, gets changed by the kernels
 class FilterScreen extends Screen {
   ArrayList<UiElement> elements;
@@ -42,7 +43,11 @@ class Sidebar extends UiElement {
     Kernel emboss = new Kernel(new float[][] { {-2, -1, 0},
                                                 {-1, 1, 1},
                                                 {0, 1, 2} } );
+    Kernel outline = new Kernel(new float[][] { {-1, -1, -1},
+                                                {-1, 8, -1},
+                                                {-1, -1, -1} } );
     filters.add(new FilterOption(emboss, 1047, 110));
+    filters.add(new FilterOption(outline, 1219, 110));
   }
   
   void click() {
@@ -76,8 +81,8 @@ class FilterOption extends UiElement {
   
   FilterOption(Kernel k, int xcor, int ycor) {
     matrix = k.getKernelMatrix();
-    w = 263;
-    h = 167;
+    w = 107;
+    h = 67;
     x = xcor;
     y = ycor;
   }
@@ -91,7 +96,19 @@ class FilterOption extends UiElement {
          another.apply(originalPhoto, stagedPhoto);
        }
        else {
-         stagedPhoto = originalPhoto.copy();
+         PImage tempPhoto = originalPhoto.copy();
+         Kernel another = new Kernel(matrix);
+         another.apply(originalPhoto, tempPhoto);
+         loadPixels();
+         color[] c = pixels.clone();
+         image(tempPhoto, (1006-stagedPhoto.width)/2, (704-stagedPhoto.height)/2 + 64);
+         loadPixels();
+         if (Arrays.equals(pixels, c)) {
+           stagedPhoto = originalPhoto.copy();
+         }
+         else {
+           stagedPhoto = tempPhoto.copy();
+         }
        }
     }
   }
@@ -111,13 +128,15 @@ class FilterOption extends UiElement {
         newPhoto = originalPhoto.copy();
         Kernel k = new Kernel(matrix);
         k.apply(originalPhoto, newPhoto);
-        if (newPhoto.height > 67) {
-           newPhoto.resize((int) ((float) newPhoto.width * ( 67.0 / newPhoto.height )), 67);
-        } //thumbnail resizing?
-        if (newPhoto.width > 107) {
-           newPhoto.resize((int) 107, (int)  ((float) newPhoto.height * ( 107 / newPhoto.width )));
-        }
-        //newPhoto.resize(263, 167);
+        //if (newPhoto.height > 67) {
+        //   newPhoto.resize((int) ((float) newPhoto.width * ( 67.0 / newPhoto.height )), 67);
+        //   h = newPhoto.height;
+        //} //thumbnail resizing?
+        //if (newPhoto.width > 107) {
+        //   newPhoto.resize((int) 107, (int)  ((float) newPhoto.height * ( 107 / newPhoto.width )));
+        //   w = newPhoto.width;
+        //}
+        newPhoto.resize(107, 67);
         oneTime++;
     }
     image(newPhoto, x, y);
