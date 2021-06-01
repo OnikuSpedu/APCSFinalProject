@@ -45,3 +45,7 @@ For our final project, we are going to create a photo editor similar to Photosho
 
 - **Rickey** 🎈  
     Completely overhauled/updated the UML diagram and added it to the prototype.
+
+### May 31, 2021 (Monday)
+- **Rickey** 🎈  
+    Fixed bugs within Shadman's code which were based on the fact that images in Processing are x by y while 2D arrays are created, traversed, and accessed by row, col order. Created the FilterScreen class and corresponding classes and methods to let the user apply a filter to their image using kernel convolution.
