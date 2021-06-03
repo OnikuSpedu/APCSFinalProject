@@ -8,6 +8,21 @@ class SaveScreen extends Screen {
     elements.add(toolbar);
     elements.add(sidebar);
   }
+  
+  void display() {
+    background(DARK4);
+    for (UiElement e : elements) {
+        e.display();
+    }
+    if (stagedPhoto != null) {
+      image(stagedPhoto, (1006-stagedPhoto.width)/2, (704-stagedPhoto.height)/2 + 64);
+    }
+  }
+  void click() {
+    for (UiElement e : elements) {
+      e.click();
+    }
+  }
   class Toolbar extends UiElement {
     private int x, y, w, h;
     private color c;
