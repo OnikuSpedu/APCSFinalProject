@@ -24,6 +24,7 @@ int canvasHeight = 650;
 EditorScreen editorScreen;
 StartScreen startScreen;
 FilterScreen filterScreen;
+SaveScreen saveScreen;
 Canvas canvas = new Canvas(canvasWidth,canvasHeight);
 
 void setup() {
@@ -35,6 +36,7 @@ void setup() {
   editorScreen = new EditorScreen();
   startScreen = new StartScreen();
   filterScreen = new FilterScreen();
+  saveScreen = new SaveScreen();
 }
 
 void draw() {
@@ -44,6 +46,8 @@ void draw() {
     editorScreen.display();
   } else if (scene == 2) {
     filterScreen.display();
+  } else if (scene == 3) {
+    saveScreen.display();
   }
 }
 
@@ -54,5 +58,7 @@ void mousePressed() {
       editorScreen.click();
   } else if (scene == 2) {
       filterScreen.click();
+  } else if (scene == 3) {
+      saveScreen.click();
   }
 }
