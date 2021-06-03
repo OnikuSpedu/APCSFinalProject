@@ -36,6 +36,8 @@ class SaveScreen extends Screen {
     private float x, y, w, h;
     private color c;
     private String confirmation;
+    private YesButton yesBtn;
+    private NoButton noBtn;
     
     Sidebar() { 
       x = 1006;
@@ -44,11 +46,15 @@ class SaveScreen extends Screen {
       h = 704;
       c = DARK3;
       confirmation = "Is this the image you want to save?";
+      yesBtn = new YesButton();
+      noBtn = new NoButton();
     }
     
     void click() {
       if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
          println("Sidebar clicked");
+         yesBtn.click();
+         noBtn.click();
       }
     }
     
@@ -60,6 +66,8 @@ class SaveScreen extends Screen {
       textSize(20);
       fill(color(255));
       text(confirmation, 1030, 301);
+      yesBtn.display();
+      noBtn.display();
     }
   }
   class YesButton extends Button {
