@@ -77,10 +77,10 @@ class SaveScreen extends Screen {
       fill(c);
       noStroke();
       rect(x, y, w, h);
-      textAlign(LEFT);
-      textSize(20);
+      textAlign(CENTER);
+      textSize(18);
       fill(color(255));
-      text(confirmation, 1030, 301);
+      text(confirmation, 1186, 313);
       yesBtn.display();
       noBtn.display();
     }
