@@ -35,6 +35,7 @@ class SaveScreen extends Screen {
   class Sidebar extends UiElement {
     private float x, y, w, h;
     private color c;
+    private String confirmation;
     
     Sidebar() { 
       x = 1006;
@@ -42,6 +43,7 @@ class SaveScreen extends Screen {
       w = 360;
       h = 704;
       c = DARK3;
+      confirmation = "Is this the image you want to save?";
     }
     
     void click() {
@@ -54,6 +56,10 @@ class SaveScreen extends Screen {
       fill(c);
       noStroke();
       rect(x, y, w, h);
+      textAlign(LEFT);
+      textSize(20);
+      fill(color(255));
+      text(confirmation, 1030, 301);
     }
   }
 }
