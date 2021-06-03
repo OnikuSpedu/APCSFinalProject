@@ -62,4 +62,17 @@ class SaveScreen extends Screen {
       text(confirmation, 1030, 301);
     }
   }
+  class YesButton extends Button {
+    YesButton() {
+      super("YES", 1048, 367, 117, 34,color(0,255,0), color(255));
+    }
+    
+    void click() {
+      if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+        String fileName = booster.showTextInputDialog("What would you like this photo to be named? Also include the file extension name. This will be saved within the gallery/ directory within this sketch.");
+        stagedPhoto.save("gallery/"+fileName);
+        exit();
+      }
+    }
+  }
 }
