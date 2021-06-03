@@ -46,8 +46,32 @@ class Sidebar extends UiElement {
     Kernel outline = new Kernel(new float[][] { {-1, -1, -1},
                                                 {-1, 8, -1},
                                                 {-1, -1, -1} } );
+    Kernel blur = new Kernel(new float[][] { {0.111, 0.111, 0.111},
+                                                {0.111, 0.111, 0.111},
+                                                {0.111, 0.111, 0.111} } );
+    Kernel sharpen = new Kernel(new float[][] { {-1, -1, -1},
+                                                {-1, 9, -1},
+                                                {-1, -1, -1} } );
+    Kernel topSobel = new Kernel(new float[][] { {1, 2, 1},
+                                                {0, 0, 0},
+                                                {-1, -2, -1} } );
+    Kernel bottomSobel = new Kernel(new float[][] { {-1, -2, -1},
+                                                    {0, 0, 0},
+                                                    {1, 2, 1} } );
+    Kernel leftSobel = new Kernel(new float[][] { {1, 0, -1},
+                                                    {2, 0, -2},
+                                                    {1, 0, -1} } );
+    Kernel rightSobel = new Kernel(new float[][] { {-1, 0, 1},
+                                                    {-2, 0, 2},
+                                                    {-1, 0, 1} } );
     filters.add(new FilterOption(emboss, 1047, 110));
     filters.add(new FilterOption(outline, 1219, 110));
+    filters.add(new FilterOption(blur, 1047, 291));
+    filters.add(new FilterOption(sharpen, 1219, 291));
+    filters.add(new FilterOption(topSobel, 1047, 472));
+    filters.add(new FilterOption(bottomSobel, 1219, 472));
+    filters.add(new FilterOption(leftSobel, 1047, 655));
+    filters.add(new FilterOption(rightSobel, 1219, 655));
   }
   
   void click() {
