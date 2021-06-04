@@ -92,6 +92,10 @@ class EditorScreen extends Screen {
           println("Sidebar clicked"); 
           addLayerBtn.click();
           importLayerBtn.click();
+
+          for (int i = 0; i < canvas.layers.size(); i++) {
+            layerOptionCards.get(i).click();
+          }
         }
       }
     
@@ -176,13 +180,22 @@ class EditorScreen extends Screen {
           }
           
           noStroke();
-          ellipseMode(CENTER);
-          ellipse(x + 16 + 8, y + 18+8, 16, 16);
+          ellipseMode(LEFT);
+          ellipse(x + 16, y + 18, 16, 16);
 
           textAlign(LEFT, TOP);
           textSize(14);
           fill(color(240));
           text(layer.name, x+ 32 + 8, y + 16);
+        }
+
+        void click() {
+          Layer layer = canvas.layers.get(index);
+          
+          if(mouseX >= x + 16 && mouseX < x + 16 + 16 && mouseY >= y + 18 && mouseY < y + 16 + 18) {
+            layer.selected = !layer.selected;
+            println("Toggled");
+          }
         }
       }
     }
