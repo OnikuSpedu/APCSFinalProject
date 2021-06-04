@@ -26,8 +26,8 @@ class EditorScreen extends Screen {
       }
     }
 
-  void pressed() {
-    canvas.pressed();
+  void dragged() {
+    canvas.dragged();
   }  
       
   class Sidebar extends UiElement {
@@ -35,7 +35,9 @@ class EditorScreen extends Screen {
     private color c;
     
     LayersOptions layersOptions;
+    ColorPicker colorPicker;
     
+    ArrayList<UiElement> elements;
     Sidebar() { 
       x = 1006;
       y = 64;
@@ -43,13 +45,20 @@ class EditorScreen extends Screen {
       h = 704;
       c = DARK3;
       
+      elements = new ArrayList<UiElement>();
+      
       layersOptions = new LayersOptions();
+      colorPicker = new ColorPicker();
+      
+      elements.add(layersOptions);
+      elements.add(colorPicker);
     }
     
     void click() {
       if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
-        println("Sidebar clicked"); 
-        layersOptions.click();
+        for( UiElement e : elements) {
+          e.click();
+        }
       }
     }
     
@@ -58,10 +67,37 @@ class EditorScreen extends Screen {
       noStroke();
       rect(x, y, w, h);
       
-      layersOptions.display();
+      for( UiElement e : elements) {
+          e.display();
+      }
     }    
+    
+    class ColorPicker extends UiElement {
+      private float x, y, w, h;
+       
+      ColorPicker() {
+        x = 1026;
+        y = 72;
+        w = 50;
+        h = 50;
+      }
+      void display() {
+        stroke(255);
+        fill(penColor);
+        rect(x, y, w, h);
+      }
       
-    class LayersOptions {
+      void click() {
+        if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+          Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
+          if(chosenColor != null) {
+            penColor = chosenColor.intValue();
+          }
+        }
+      }
+    }
+      
+    class LayersOptions extends UiElement {
       
       AddLayerButton addLayerBtn;
       ImportLayerButton importLayerBtn;

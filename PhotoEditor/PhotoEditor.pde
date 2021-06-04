@@ -21,6 +21,8 @@ int scene = 0;
 int canvasWidth = 650;
 int canvasHeight = 650;
 
+color penColor = color(0);
+
 EditorScreen editorScreen;
 StartScreen startScreen;
 FilterScreen filterScreen;
@@ -65,7 +67,7 @@ void mouseClicked() {
 
 void mouseDragged() {
   if (scene == 1) {
-      editorScreen.pressed();
-      println("pressed");
+      editorScreen.dragged();
+      println("dragged");
   } 
 }
