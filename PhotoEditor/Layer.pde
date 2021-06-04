@@ -3,6 +3,9 @@ class Layer {
   color[][] layerPixels;
   String name;
   boolean selected = true;
+  boolean shouldMove = false;
+  float xOffset = 0.0; 
+  float yOffset = 0.0; 
   
   Layer(float w, float h) {
     this.x = 0;
@@ -129,5 +132,27 @@ class Layer {
       } 
       
       return false;
+  }
+  
+  void pressed() {
+    if(selected && mouseX > x && mouseX <= x + w && mouseY >= y && mouseY < y + h) { 
+      shouldMove = true; 
+    } else {
+      shouldMove = false;
+    }
+    
+    xOffset = mouseX-x; 
+    yOffset = mouseY-y; 
+  }
+  
+  void dragged() {
+    if(shouldMove) {
+      x = mouseX-xOffset; 
+      y = mouseY-yOffset; 
+    }
+  }
+  
+  void released() {
+    shouldMove = false;
   }
 }

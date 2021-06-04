@@ -99,9 +99,25 @@ class Canvas extends UiElement{
     return composition;
   }
 
+  void pressed() {
+    for (Layer layer : layers) {
+      layer.pressed();
+    }
+  }
+
+  void released() {
+     for (Layer layer : canvas.layers) {
+        layer.released();
+      }
+  }
+
   void dragged() {
     if (mouseX >= x && mouseX < x+w && mouseY >= y && mouseY < y + h) {
       drawTool((int) (mouseX-x), (int) (mouseY-y), penColor, 10);
+      
+      for (Layer layer : canvas.layers) {
+        layer.dragged();
+      }
     }
   }
 
