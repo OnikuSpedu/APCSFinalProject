@@ -21,6 +21,8 @@ int scene = 0;
 int canvasWidth = 650;
 int canvasHeight = 650;
 
+color penColor = color(0);
+
 EditorScreen editorScreen;
 StartScreen startScreen;
 FilterScreen filterScreen;

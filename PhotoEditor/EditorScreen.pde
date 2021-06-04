@@ -89,7 +89,10 @@ class EditorScreen extends Screen {
       
       void click() {
         if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
-          penColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
+          Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
+          if(chosenColor != null) {
+            penColor = chosenColor.intValue();
+          }
         }
       }
     }
