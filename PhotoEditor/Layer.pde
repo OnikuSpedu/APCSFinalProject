@@ -10,7 +10,7 @@ class Layer {
     this.h = h;
     this.opacity = 1;
     
-    name = "";
+    name = "Untitled";
     
     layerPixels = new color[(int)w][(int)h];
     
@@ -28,7 +28,9 @@ class Layer {
     this.h = h;
     this.opacity = 1;
 
-    layerPixels = new color[(int)w][(int)h];
+    name = "Untitled";
+
+    layerPixels = new color[(int)h][(int)w];
 
     for (int row = 0; row < layerPixels.length; row++) {
       for (int col = 0; col < layerPixels[row].length; col++) {
@@ -44,11 +46,13 @@ class Layer {
     this.h = img.height;
     this.opacity = 1;
 
-    layerPixels = new color[(int)w][(int)h];
+    layerPixels = new color[(int)h][(int)w];
+
+    name = "Untitled";
 
     for (int row = 0; row < layerPixels.length; row++) {
       for (int col = 0; col < layerPixels[row].length; col++) {
-        layerPixels[row][col] = img.get(row,col);
+        layerPixels[row][col] = img.get(col,row);
       }
     }
   }
@@ -60,7 +64,9 @@ class Layer {
     this.h = h;
     this.opacity = opacity;
     
-    layerPixels = new color[(int)w][(int)h];
+    name = "Untitled";
+
+    layerPixels = new color[(int)h][(int)w];
     
     for (int row = 0; row < layerPixels.length; row++) {
       for (int col = 0; col < layerPixels[row].length; col++) {
@@ -76,7 +82,9 @@ class Layer {
     this.h = h;
     this.opacity = opacity;
 
-    layerPixels = new color[(int)w][(int)h];
+    name = "Untitled";
+
+    layerPixels = new color[(int)h][(int)w];
 
     for (int row = 0; row < layerPixels.length; row++) {
       for (int col = 0; col < layerPixels[row].length; col++) {
@@ -92,11 +100,13 @@ class Layer {
     this.h = img.height;
     this.opacity = opacity;
     
-    layerPixels = new color[(int)w][(int)h];
+    layerPixels = new color[(int)h][(int)w];
+
+    name = "Untitled";
 
     for (int row = 0; row < layerPixels.length; row++) {
       for (int col = 0; col < layerPixels[row].length; col++) {
-        layerPixels[row][col] = img.get(row,col);
+        layerPixels[row][col] = img.get(col,row);
       }
     }
   }
@@ -104,16 +114,16 @@ class Layer {
   color getPixel(int x, int y) {
       x += (int) this.x;
       y += (int) this.y;
-      if (x >= 0 && x < layerPixels.length && y >= 0 && y < layerPixels[0].length) {
-        return layerPixels[x][y];
+      if (x >= 0 && x < layerPixels[0].length && y >= 0 && y < layerPixels.length) {
+        return layerPixels[y][x];
       } 
       
       return color(0,0,0,0);
   }
   
   boolean setPixel(int x, int y, color c) {
-      if (x >= 0 && x < layerPixels.length && y >= 0 && y < layerPixels[0].length) {
-        layerPixels[x][y] = c;
+      if (x >= 0 && x < layerPixels[0].length && y >= 0 && y < layerPixels.length) {
+        layerPixels[y][x] = c;
         return true;
       } 
       

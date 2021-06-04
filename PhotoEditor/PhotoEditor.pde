@@ -13,8 +13,8 @@ color PRIMARY = color(0,122,204);
 /*Scenes
 0 - welcome
 1 - editor
-3 - filters
-4 - saved confirmation
+2 - filters
+3 - saved confirmation
 */
 int scene = 0;
 
@@ -23,7 +23,9 @@ int canvasHeight = 650;
 
 EditorScreen editorScreen;
 StartScreen startScreen;
-Canvas canvas = new Canvas(700,700);
+FilterScreen filterScreen;
+SaveScreen saveScreen;
+Canvas canvas = new Canvas(canvasWidth,canvasHeight);
 
 void setup() {
   size(1366,768);
@@ -33,6 +35,8 @@ void setup() {
 
   editorScreen = new EditorScreen();
   startScreen = new StartScreen();
+  filterScreen = new FilterScreen();
+  saveScreen = new SaveScreen();
 }
 
 void draw() {
@@ -40,6 +44,10 @@ void draw() {
     startScreen.display();
   } else if (scene == 1) {
     editorScreen.display();
+  } else if (scene == 2) {
+    filterScreen.display();
+  } else if (scene == 3) {
+    saveScreen.display();
   }
 }
 
@@ -48,5 +56,9 @@ void mousePressed() {
       startScreen.click();
   } else if (scene == 1) {
       editorScreen.click();
+  } else if (scene == 2) {
+      filterScreen.click();
+  } else if (scene == 3) {
+      saveScreen.click();
   }
 }

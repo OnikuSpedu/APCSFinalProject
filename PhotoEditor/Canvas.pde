@@ -26,14 +26,14 @@ class Canvas extends UiElement{
     
     layers.add(new Layer(img));
     
-    composition = new color[w][h];
+    composition = new color[h][w];
   }
   
   void calculateComposition() {
     for (int i = 0; i < composition.length; i++) {
       for (int j = 0; j < composition[0].length; j++) {
         
-         composition[i][j] = calculatePixel(i, j);
+         composition[i][j] = calculatePixel(j, i);
         
       }
     }
@@ -86,7 +86,7 @@ class Canvas extends UiElement{
     for(int i = 0; i < w; i++) {
        for(int j = 0; j < h; j++) {
           set(x+i,y+j, DARK4);
-          set(x+i,y+j, composition[i][j]);
+          set(x+i,y+j, composition[j][i]);
        }
     }
     
@@ -94,5 +94,8 @@ class Canvas extends UiElement{
   
   void click() {
     
+  }
+  color[][] getComposition() {
+    return composition;
   }
 }

@@ -200,7 +200,7 @@ class StartScreen extends Screen {
       }
       void click() {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
-          if(!pathToSelectedFile.equals("") && ((pathToSelectedFile.endsWith(".jpg") || pathToSelectedFile.endsWith(".png") || pathToSelectedFile.endsWith(".tga") || pathToSelectedFile.endsWith(".gif")))) {
+          if(!pathToSelectedFile.equals("") && ((pathToSelectedFile.toLowerCase().endsWith(".jpg") || pathToSelectedFile.toLowerCase().endsWith(".png") || pathToSelectedFile.toLowerCase().endsWith(".tga") || pathToSelectedFile.toLowerCase().endsWith(".gif")))) {
              PImage selectedImage = loadImage(pathToSelectedFile);
              canvas = new Canvas(selectedImage);
              scene++;
@@ -241,7 +241,7 @@ class StartScreen extends Screen {
           
           if (selected != null) {
             pathToSelectedFile = selected.getAbsolutePath();
-            if (pathToSelectedFile.endsWith(".jpg") || pathToSelectedFile.endsWith(".png") || pathToSelectedFile.endsWith(".tga") || pathToSelectedFile.endsWith(".gif")) {
+            if (pathToSelectedFile.toLowerCase().endsWith(".jpg") || pathToSelectedFile.toLowerCase().endsWith(".png") || pathToSelectedFile.toLowerCase().endsWith(".tga") || pathToSelectedFile.toLowerCase().endsWith(".gif")) {
                           
               thumbnail = loadImage(pathToSelectedFile);
               
