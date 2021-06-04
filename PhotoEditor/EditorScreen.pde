@@ -25,6 +25,10 @@ class EditorScreen extends Screen {
         e.click();
       }
     }
+
+  void pressed() {
+    canvas.pressed();
+  }  
       
   class Sidebar extends UiElement {
     private float x, y, w, h;

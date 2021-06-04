@@ -51,7 +51,7 @@ void draw() {
   }
 }
 
-void mousePressed() {
+void mouseClicked() {
   if (scene == 0) {
       startScreen.click();
   } else if (scene == 1) {
@@ -61,4 +61,11 @@ void mousePressed() {
   } else if (scene == 3) {
       saveScreen.click();
   }
+}
+
+void mouseDragged() {
+  if (scene == 1) {
+      editorScreen.pressed();
+      println("pressed");
+  } 
 }
