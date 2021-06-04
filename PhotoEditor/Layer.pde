@@ -1,6 +1,7 @@
 class Layer {
   float x, y, w, h, opacity;
   color[][] layerPixels;
+  String name;
   
   Layer(float w, float h) {
     this.x = 0;
@@ -8,6 +9,8 @@ class Layer {
     this.w = w;
     this.h = h;
     this.opacity = 1;
+    
+    name = "";
     
     layerPixels = new color[(int)w][(int)h];
     

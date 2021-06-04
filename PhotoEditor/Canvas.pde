@@ -14,7 +14,6 @@ class Canvas extends UiElement{
     layers.add(new Layer(w, h));
     
     composition = new color[w][h];
-    calculateComposition();
   }
   
   Canvas(PImage img) {
