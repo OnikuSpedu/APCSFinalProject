@@ -196,7 +196,13 @@ class EditorScreen extends Screen {
             layer.selected = !layer.selected;
             println("Toggled");
           }
+
+          if(mouseX >= x + 32 + 8 && mouseX < x + 32 + + 8 + textWidth(layer.name) && mouseY >= y + 16 && mouseY < y + 16 + 16) {
+            layer.name = booster.showTextInputDialog("Layer name:");
+          }
         }
+
+        
       }
     }
   }
