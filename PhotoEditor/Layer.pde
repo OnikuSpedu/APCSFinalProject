@@ -2,6 +2,7 @@ class Layer {
   float x, y, w, h, opacity;
   color[][] layerPixels;
   String name;
+  boolean selected = true;
   
   Layer(float w, float h) {
     this.x = 0;

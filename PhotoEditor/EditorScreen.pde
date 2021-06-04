@@ -61,6 +61,7 @@ class EditorScreen extends Screen {
       
       AddLayerButton addLayerBtn;
       ImportLayerButton importLayerBtn;
+      ArrayList<LayerOptionCard> layerOptionCards;
 
       int layerSelected = 0;
 
@@ -70,13 +71,20 @@ class EditorScreen extends Screen {
       LayersOptions() {
         addLayerBtn = new AddLayerButton();
         importLayerBtn = new ImportLayerButton(); 
-
+        
         x = 1006;
         y =  348;
         w = 360;
         h = 420;
 
         c = DARK3;
+        
+        layerOptionCards = new ArrayList<LayerOptionCard>(10); 
+        
+        for (int i = 0; i < 10; i++) {
+          layerOptionCards.add(new LayerOptionCard(i));
+        }
+
       }
     
       void click() {
@@ -90,6 +98,10 @@ class EditorScreen extends Screen {
       void display() {
         addLayerBtn.display();
         importLayerBtn.display();
+                
+        for (int i = 0; i < canvas.layers.size(); i++) {
+          layerOptionCards.get(i).display();
+        }
       } 
     
       class ImportLayerButton extends Button {
@@ -127,7 +139,45 @@ class EditorScreen extends Screen {
       }
 
       class LayerOptionCard {
+        private float x, y, w, h;
+        private color c;
+        private int index;
 
+        LayerOptionCard(int index) {
+          addLayerBtn = new AddLayerButton();
+          importLayerBtn = new ImportLayerButton(); 
+
+          x = 1026;
+          y =  398 + index * 50;
+          w = 321;
+          h = 50;
+
+          this.index = index;
+
+          c = DARK2;
+        }
+        
+        void display() {
+          Layer layer = canvas.layers.get(index);
+
+          fill(c);
+          stroke(DARK3);
+          rect(x, y, w, h);
+
+          if (layer.selected) {
+            fill(PRIMARY);
+          } else {
+            fill(DARK1);
+          }
+
+          ellipseMode(CENTER);
+          ellipse(x + 14, y + 18, 15, 15);
+
+          textAlign(LEFT, TOP);
+          textSize(14);
+          fill(color(240));
+          text(layer.name, x+16, y+16);
+        }
       }
     }
   }
