@@ -10,8 +10,6 @@ color DARK2 = color(45,45,48);
 color DARK1 = color(55,55,60);
 color PRIMARY = color(0,122,204);
 
-color penColor = color(0);
-
 /*Scenes
 0 - welcome
 1 - editor

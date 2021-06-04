@@ -139,15 +139,15 @@ class FilterScreen extends Screen {
       display(oneTime);
     }
     void display(int times) {
-      if (times == 0) { //have to do this variable wrapper function business or else it's gonna lag up a storm if apply keeps getting called
-          canvas.calculateComposition();
-          color[][] oldPhotoPixels = canvas.getComposition();
-           originalPhoto = createImage(oldPhotoPixels[0].length, oldPhotoPixels.length, ARGB);
-           for (int hght = 0; hght < originalPhoto.height; hght++) {
-             for (int wdth = 0; wdth < originalPhoto.width; wdth++) {
-                originalPhoto.set(wdth, hght, oldPhotoPixels[hght][wdth]);
-              }
+        canvas.calculateComposition();
+        color[][] oldPhotoPixels = canvas.getComposition();
+         originalPhoto = createImage(oldPhotoPixels[0].length, oldPhotoPixels.length, ARGB);
+         for (int hght = 0; hght < originalPhoto.height; hght++) {
+           for (int wdth = 0; wdth < originalPhoto.width; wdth++) {
+              originalPhoto.set(wdth, hght, oldPhotoPixels[hght][wdth]);
             }
+          }
+        if (times == 0) { //have to do this variable wrapper function business or else it's gonna lag up a storm if apply keeps getting called
           newPhoto = originalPhoto.copy();
           Kernel k = new Kernel(matrix);
           k.apply(originalPhoto, newPhoto);
@@ -161,7 +161,7 @@ class FilterScreen extends Screen {
           //}
           newPhoto.resize(107, 67);
           oneTime++;
-      }
+        }
       image(newPhoto, x, y);
     }
   }
@@ -532,6 +532,7 @@ class FilterScreen extends Screen {
       void click() {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
           scene--;
+          stagedPhoto = null;
         }
       }
       
