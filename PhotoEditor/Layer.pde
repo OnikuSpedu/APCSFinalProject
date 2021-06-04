@@ -137,8 +137,10 @@ class Layer {
   void pressed() {
     if(selected && mouseX > x && mouseX <= x + w && mouseY >= y && mouseY < y + h) { 
       shouldMove = true; 
+      stroke(0);
     } else {
       shouldMove = false;
+      noStroke();
     }
     
     xOffset = mouseX-x; 

@@ -71,3 +71,17 @@ void mouseDragged() {
       println("dragged");
   } 
 }
+
+void mousePressed() {
+  if (scene == 1) {
+      editorScreen.pressed();
+      println("pressed");
+  } 
+}
+
+void mouseReleased() {
+  if (scene == 1) {
+      editorScreen.released();
+      println("released");
+  } 
+}

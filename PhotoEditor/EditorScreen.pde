@@ -28,7 +28,15 @@ class EditorScreen extends Screen {
 
   void dragged() {
     canvas.dragged();
-  }  
+  } 
+  
+  void pressed() {
+    canvas.pressed();
+  } 
+  
+  void released() {
+    canvas.released();
+  } 
       
   class Sidebar extends UiElement {
     private float x, y, w, h;
@@ -250,8 +258,8 @@ class EditorScreen extends Screen {
   class Toolbar extends UiElement {
     private int x, y, w, h;
     private color c;
-    private ArrayList<Button> toolbarButtons = new ArrayList<Button>();
-    
+    private ArrayList<Button> navButtons = new ArrayList<Button>();
+    ToolOptions toolOptions;
     Toolbar() { 
       x = 0;
       y = 0;
@@ -259,17 +267,19 @@ class EditorScreen extends Screen {
       h = 64;
       c = DARK2;
       
-      TestButton testBtn = new TestButton();
+      BackButton back = new BackButton();
       ContinueButton cont = new ContinueButton();
-      toolbarButtons.add(testBtn);
-      toolbarButtons.add(cont);
+      navButtons.add(back);
+      navButtons.add(cont);
+      
+      toolOptions = new ToolOptions();
     }
     
     void click() {
       if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
         println("Toolbar clicked"); 
         
-        for(Button b : toolbarButtons) {
+        for(Button b : navButtons) {
             b.click(); 
         }
       }
@@ -280,13 +290,17 @@ class EditorScreen extends Screen {
       noStroke();
       rect(x, y, w, h);
       
-      for(Button b : toolbarButtons) {
+      for(Button b : navButtons) {
             b.display(); 
       }
     }
     
-    class TestButton extends Button {
-      TestButton() {
+    int getToolSelected() {
+      return toolSelected;
+    }
+    
+    class BackButton extends Button {
+      BackButton() {
         super("Back", 12, 12, 100, 40,DARK1, color(255));
       }
       
@@ -305,6 +319,25 @@ class EditorScreen extends Screen {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
           scene++;
         }
+      }
+    }
+    
+    class ToolOptions {
+      
+      private int toolSelected = 0;
+      
+      ArrayList<ToolOption> tools;
+      
+      ToolOptions() {
+        tools = new ArrayList<ToolOption>();
+      }
+      
+      int getToolSelected() {
+        return toolSelected;
+      }
+    
+      class ToolOption {
+        
       }
     }
   }
