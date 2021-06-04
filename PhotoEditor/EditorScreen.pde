@@ -98,7 +98,12 @@ class EditorScreen extends Screen {
       void display() {
         addLayerBtn.display();
         importLayerBtn.display();
-                
+        
+        textAlign(LEFT, TOP);
+        textSize(16);
+        fill(color(240));
+        text("Layer(s)", 1026, y + 16);
+
         for (int i = 0; i < canvas.layers.size(); i++) {
           layerOptionCards.get(i).display();
         }
@@ -106,7 +111,7 @@ class EditorScreen extends Screen {
     
       class ImportLayerButton extends Button {
           ImportLayerButton() {
-            super("Import Layer", x+(w-48)/2+32, y+h-16-40, (w-48)/2, 40,DARK2, color(255));
+            super("Import", 1277, 359, 69, 32, DARK2, color(255));
           }
           void click() {
             if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
@@ -127,7 +132,7 @@ class EditorScreen extends Screen {
     
       class AddLayerButton extends Button {
         AddLayerButton() {
-          super("Add Layer", x+16, y+h-16-40, (w-48)/2, 40,PRIMARY, color(255));
+          super("Add", 1208, 359, 59, 32,PRIMARY, color(255));
         }
         void click() {
           if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
@@ -169,14 +174,15 @@ class EditorScreen extends Screen {
           } else {
             fill(DARK1);
           }
-
+          
+          noStroke();
           ellipseMode(CENTER);
-          ellipse(x + 14, y + 18, 15, 15);
+          ellipse(x + 16 + 8, y + 18+8, 16, 16);
 
           textAlign(LEFT, TOP);
           textSize(14);
           fill(color(240));
-          text(layer.name, x+16, y+16);
+          text(layer.name, x+ 32 + 8, y + 16);
         }
       }
     }
