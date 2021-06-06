@@ -27,7 +27,7 @@ EditorScreen editorScreen;
 StartScreen startScreen;
 FilterScreen filterScreen;
 SaveScreen saveScreen;
-Canvas canvas = new Canvas(canvasWidth,canvasHeight);
+Canvas canvas;
 
 void setup() {
   size(1366,768);
@@ -35,6 +35,8 @@ void setup() {
   
   booster = new UiBooster();
 
+  canvas = new Canvas(canvasWidth,canvasHeight);
+  
   editorScreen = new EditorScreen();
   startScreen = new StartScreen();
   filterScreen = new FilterScreen();

@@ -110,36 +110,4 @@ class Canvas extends UiElement{
   color[][] getComposition() {
     return composition;
   }
-
-  void pressed() {
-    for (Layer layer : layers) {
-      layer.pressed();
-    }
-  }
-
-  void released() {
-     for (Layer layer : canvas.layers) {
-        layer.released();
-      }
-  }
-
-  void dragged() {
-    if (mouseX >= x && mouseX < x+w && mouseY >= y && mouseY < y + h) {
-      drawTool((int) (mouseX-x), (int) (mouseY-y), penColor, 10);
-      
-      for (Layer layer : canvas.layers) {
-        layer.dragged();
-      }
-    }
-  }
-
-  void drawTool(int x, int y, color c, int thickness) {
-    for (Layer layer : canvas.layers) {
-      if (layer.selected) {
-        for (int i = 0 - thickness/2; i <= thickness - thickness/2; ++i) {
-          layer.setPixel(x + i,y + i,c);
-        }  
-      }
-    }
-  }
 }

@@ -133,28 +133,4 @@ class Layer {
       
       return false;
   }
-  
-  void pressed() {
-    if(selected && mouseX > canvas.x && mouseX <= canvas.x + canvas.w && mouseY >= canvas.y && mouseY < canvas.y + canvas.h) { 
-      shouldMove = true; 
-      stroke(0);
-    } else {
-      shouldMove = false;
-      noStroke();
-    }
-    
-    xOffset = mouseX-x; 
-    yOffset = mouseY-y; 
-  }
-  
-  void dragged() {
-    if(shouldMove) {
-      x = mouseX-xOffset; 
-      y = mouseY-yOffset; 
-    }
-  }
-  
-  void released() {
-    shouldMove = false;
-  }
 }
