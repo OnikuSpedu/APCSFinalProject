@@ -334,11 +334,11 @@ class EditorScreen extends Screen {
       
       ToolOptions() {
         tools = new ArrayList<ToolOption>();
-        x = 300;
+        x = 1300;
         y = 17;
         w = 117; 
-        h = 32;
-        tools.add(new ToolOption(x, y, 40, h, "Move", 0));
+        h =32;
+        tools.add(new ToolOption(x, y, 40, h, "Move"));
       }
       
       int getToolSelected() {
@@ -347,13 +347,7 @@ class EditorScreen extends Screen {
     
       void display() {
         for (ToolOption option : tools) {
-          option.display();
-        }
-      }
-      
-      void click() {
-        for (ToolOption option : tools) {
-          option.clicked();
+          option.display;
         }
       }
  
@@ -361,15 +355,14 @@ class EditorScreen extends Screen {
         String label;
         float x, y, w, h;
         boolean selected;
-        int index;
         
-        ToolOption(float x, float y, float w, float h, String label, int index) {
+        ToolOption(float x, float y, float w, float h, String label) {
           this.label = label;
           this.x = x;
           this.y = y;
           this.w = w;
           this.h = h;
-          this.index = index;
+          
           selected = false;
         }
         
@@ -394,12 +387,6 @@ class EditorScreen extends Screen {
           }
         }
         
-        void clicked() {
-          if(isHovering()) {
-            selected = true;
-            toolSelected = index;
-          }
-        }
         void setSelected(boolean isSelected) {
           selected = isSelected;
         }

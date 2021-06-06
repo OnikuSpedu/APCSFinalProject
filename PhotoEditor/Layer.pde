@@ -135,7 +135,7 @@ class Layer {
   }
   
   void pressed() {
-    if(selected && mouseX > x && mouseX <= x + w && mouseY >= y && mouseY < y + h) { 
+    if(selected && mouseX > canvas.x && mouseX <= canvas.x + canvas.w && mouseY >= canvas.y && mouseY < canvas.y + canvas.h) { 
       shouldMove = true; 
       stroke(0);
     } else {

@@ -17,10 +17,22 @@ class Canvas extends UiElement{
   }
   
   Canvas(PImage img) {
-    x = (1006-img.width)/2;
-    y = (704-img.height)/2 + 64;
-    this.w = img.width;
-    this.h = img.height;
+    
+    if (img.width < 650) {
+        x = (1006-img.width)/2;
+        this.w = img.width;
+    } else {
+      this.w = 650;
+      x = (1006-w)/2;
+    }
+    
+    if (img.height < 650) {
+        y = (704-img.height)/2 + 64;
+        this.h = img.height;
+    } else {
+      this.h = 650;
+      y = (704-h)/2 + 64;
+    }
     
     layers = new ArrayList<Layer>();
     
