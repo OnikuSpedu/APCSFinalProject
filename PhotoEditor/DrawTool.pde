@@ -2,12 +2,10 @@ class DrawTool extends Tool {
   
   color c;
   int thickness;
-  boolean active;
   
   DrawTool() {
     c = color(0);
     thickness = 10;
-    active = false;
   }
   
   Layer apply(Layer layer, int x, int y) {

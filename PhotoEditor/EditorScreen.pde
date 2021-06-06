@@ -1,18 +1,11 @@
 class EditorScreen extends Screen {
   
-  //Create variables for draw tools
-  DrawTool drawTool;
-  MoveTool moveTool;
-
   EditorScreen() {    
     Navbar navbar = new Navbar();
     Sidebar sidebar = new Sidebar();
     
     super.elements.add(navbar);
     super.elements.add(sidebar);
-    
-    drawTool = new DrawTool();
-    moveTool = new MoveTool();
   }
 
   void display() {
@@ -26,7 +19,7 @@ class EditorScreen extends Screen {
   class Sidebar extends UiElement {
 
     LayersOptions layersOptions;
-    //ColorPicker colorPicker;
+    ColorPicker colorPicker;
     
     ArrayList<UiElement> elements;
     
@@ -38,8 +31,8 @@ class EditorScreen extends Screen {
       layersOptions = new LayersOptions();
       elements.add(layersOptions);
 
-      //colorPicker = new ColorPicker();
-      //elements.add(colorPicker);
+      colorPicker = new ColorPicker();
+      elements.add(colorPicker);
     }
     
     void clicked() {
@@ -57,7 +50,27 @@ class EditorScreen extends Screen {
           e.display();
       }
     }    
+    
+    class ColorPicker extends UiElement {      
+      ColorPicker() {
+        super(1026,72,50,50, TRANSPARENT);
+      }
+      void display() {
+        stroke(255);
+        fill(drawTool.c);
+        rect(super.x, super.y, super.w, super.h);
+      }
       
+      void clicked() {
+        if(super.isHovering()) {
+          Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
+          if(chosenColor != null) {
+            drawTool.c = chosenColor.intValue();
+          }
+        }
+      }
+    }
+    
     class LayersOptions extends UiElement {
       
       ArrayList<LayerOptionCard> layerOptionCards;
@@ -180,7 +193,11 @@ class EditorScreen extends Screen {
           }
 
           if(mouseX >= x + 32 + 8 && mouseX < x + 32 + + 8 + textWidth(layer.name) && mouseY >= y + 16 && mouseY < y + 16 + 16) {
-            layer.name = booster.showTextInputDialog("Layer name:");
+            String newLayerNameInput = booster.showTextInputDialog("Layer name:");
+            
+            if (newLayerNameInput != null && !newLayerNameInput.equals("")) {
+              layer.name = newLayerNameInput;
+            }
           }
         }
       }
@@ -204,6 +221,8 @@ class EditorScreen extends Screen {
         for(Button b : navButtons) {
           b.clicked(); 
         }
+        
+        toolbar.clicked();
       }
     }
     
@@ -213,6 +232,8 @@ class EditorScreen extends Screen {
       for(Button b : navButtons) {
         b.display(); 
       }
+      
+      toolbar.display();
     }
     
     class BackButton extends Button {
@@ -221,7 +242,7 @@ class EditorScreen extends Screen {
       }
       
       void clicked() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+        if(super.isHovering()) {
           scene--;
         }
       }      
@@ -232,7 +253,7 @@ class EditorScreen extends Screen {
         super("Continue", 1230, 17, 117, 31, PRIMARY, color(255));
       }
       void clicked() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+        if(super.isHovering()) {
           scene++;
         }
       }
@@ -240,137 +261,85 @@ class EditorScreen extends Screen {
     
     class Toolbar extends UiElement {
       
+      private ArrayList<Button> toolButtons = new ArrayList<Button>();
+
       Toolbar() {
         super(300, 17, 117, 32, DARK1);
+        toolButtons.add(new DrawToggleButton());
+        toolButtons.add(new MoveToggleButton());        
       }
       
       void display() {
         super.display();
-      }
-    }
-  }
-}
-
-/* class ToolOptions {
-      
-      private int toolSelected = 0;
-      
-      ArrayList<ToolOption> tools;
-      
-      float x, y, w, h;
-      
-      ToolOptions() {
-        tools = new ArrayList<ToolOption>();
-        x = 300;
-        y = 17;
-        w = 117; 
-        h = 32;
-        tools.add(new ToolOption(x, y, 40, h, "Move", 0));
-      }
-      
-      int getToolSelected() {
-        return toolSelected;
-      }
-    
-      void display() {
-        for (ToolOption option : tools) {
-          option.display();
+        
+        for (Button btn : toolButtons) {
+          btn.display();
         }
       }
       
       void clicked() {
-        for (ToolOption option : tools) {
-          option.clicked();
+        for (Button btn : toolButtons) {
+          btn.clicked();
         }
       }
- 
-      class ToolOption {
-        String label;
-        float x, y, w, h;
-        boolean selected;
-        int index;
-        
-        ToolOption(float x, float y, float w, float h, String label, int index) {
-          this.label = label;
-          this.x = x;
-          this.y = y;
-          this.w = w;
-          this.h = h;
-          this.index = index;
-          selected = false;
+      
+      class DrawToggleButton extends Button {
+        DrawToggleButton() {
+          super("Draw", 300, 17, 117, 32, DARK1, color(255));
         }
         
         void display() {
-          if (selected) {
-            fill(DARK1);
-          }
-          else fill(DARK2);
-          
-          rect(x, y, w, h);
-          
-          textAlign(CENTER);
-          textSize(16);
-          fill(color(255));
-          text(label, x + (w / 2), y + h / 2 + 6); 
-          
-          if(isHovering()) {
-              if (mousePressed) 
-                pressedIndicator();
-              else 
-                onHover();
-          }
+         if(drawTool.isActive()) {
+           super.bgColor = PRIMARY;
+         } else {
+           super.bgColor = DARK1;
+         }
+         
+         super.display();
         }
         
         void clicked() {
-          if(isHovering()) {
-            selected = true;
-            toolSelected = index;
+          if (super.isHovering()) {
+            drawTool.setActive(!drawTool.isActive());          
+            for (Tool tool : tools) {
+              if (tool != drawTool) {
+                tool.setActive(false);
+              }
+            }
+            
+            println("Draw");
           }
-        }
-        void setSelected(boolean isSelected) {
-          selected = isSelected;
-        }
-        
-        void onHover() {
-          fill(color(255,255,255, 100));
-          rect(x, y, w, h);
-        }
-        
-        void pressedIndicator() {
-          fill(color(0,0,0, 100));
-          rect(x, y, w, h);
-        }
-        
-        boolean isHovering() {
-          if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
-              return true;
-          }
-          return false;
         }
       }
-    } */
-    
-//class ColorPicker extends UiElement {
-    //  private float x, y, w, h;
-       
-    //  ColorPicker() {
-    //    x = 1026;
-    //    y = 72;
-    //    w = 50;
-    //    h = 50;
-    //  }
-    //  void display() {
-    //    stroke(255);
-    //    fill(color(0));
-    //    rect(x, y, w, h);
-    //  }
       
-    //  //void clicked() {
-    //  //  if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
-    //  //    Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
-    //  //    if(chosenColor != null) {
-    //  //      penColor = chosenColor.intValue();
-    //  //    }
-    //  //  }
-    //  //}
-    //}
+      class MoveToggleButton extends Button {
+        MoveToggleButton() {
+          super("Move", 300 + 117, 17, 117, 32, DARK1, color(255));
+        }
+        
+        void display() {
+         if(moveTool.isActive()) {
+           super.bgColor = PRIMARY;
+         } else {
+           super.bgColor = DARK1;
+         }
+         
+         super.display();
+        }
+        
+        void clicked() {
+          if (super.isHovering()) {
+            moveTool.setActive(!moveTool.isActive()); 
+            
+            println("Move");
+            for (Tool tool : tools) {
+              if (tool != moveTool) {
+                tool.setActive(false);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

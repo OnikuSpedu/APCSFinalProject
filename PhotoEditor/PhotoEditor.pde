@@ -34,6 +34,11 @@ Canvas canvas;
 
 ArrayList<Screen> screens; // We can use an array instead
 
+//Create variables for draw tools
+DrawTool drawTool;
+MoveTool moveTool;
+ArrayList<Tool> tools;
+  
 /*---------------------------------------------------------------------------
    Setup 
    - Set window size and background
@@ -59,6 +64,13 @@ void setup() {
   screens.add(editorScreen);
   screens.add(filterScreen);
   screens.add(saveScreen);
+  
+  drawTool = new DrawTool();
+  moveTool = new MoveTool();
+  
+  tools = new ArrayList<Tool>();
+  tools.add(drawTool);
+  tools.add(moveTool);    
 }
 
 /*---------------------------------------------------------------------------

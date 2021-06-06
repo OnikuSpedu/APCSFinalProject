@@ -1,9 +1,6 @@
 class MoveTool extends Tool {
-  
-   boolean active;
-  
+   
   MoveTool() {
-    active = false;
   }
   
   Layer apply(Layer layer, int x, int y) {
