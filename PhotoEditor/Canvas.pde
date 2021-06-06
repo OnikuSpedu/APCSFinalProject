@@ -52,6 +52,10 @@ class Canvas extends UiElement{
     color aColor = layers.get(layerNum).getPixel(x,y);
     color bColor = calculatePixel(x, y, layerNum + 1);
 
+    return overOperator(aColor, bColor);
+  }
+  
+  color overOperator(color aColor, color bColor) {
     float aRed = aColor >> 16 & 0xFF;
     float bRed = bColor >> 16 & 0xFF;
     
@@ -83,11 +87,12 @@ class Canvas extends UiElement{
   
   void display() {
     super.display();
+    
     calculateComposition();
 
     for(int i = 0; i < h; i++) {
        for(int j = 0; j < w; j++) {
-          set((int) (super.x+j), (int) (super.y+i), composition[i][j]);
+          set((int) (super.x+j), (int) (super.y+i), overOperator(composition[i][j], color(255)));
        }
     }
   }
@@ -102,7 +107,22 @@ class Canvas extends UiElement{
       if(drawTool.isActive()) {
         drawTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
       }
+      
+      if(moveTool.isActive()) {
+         moveTool.pressed();
+      }
     }
+    
+  }
+  
+  void released() {
+    if (super.isHovering()) {
+      
+      if(moveTool.isActive()) {
+         moveTool.released();
+      }
+    }
+    
   }
   
   void dragged() {
@@ -112,15 +132,9 @@ class Canvas extends UiElement{
         drawTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
       }
       
-      for (Layer layer : canvas.layers) {
-        layer.dragged();
+      if(moveTool.isActive()) {
+        moveTool.apply(mouseX-pmouseX,mouseY-pmouseY);
       }
     }
   }
-  
-  //void released() {
-  //   for (Layer layer : canvas.layers) {
-  //      layer.released();
-  //    }
-  //}
 }
