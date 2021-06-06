@@ -105,18 +105,18 @@ class Canvas extends UiElement{
     }
   }
   
-  //void dragged() {
-  //  if (super.isHovering()) {
+  void dragged() {
+    if (super.isHovering()) {
       
-  //    if(drawTool.isActive()) {
-  //      drawTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
-  //    }
+      if(drawTool.isActive()) {
+        drawTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
+      }
       
-  //    for (Layer layer : canvas.layers) {
-  //      layer.dragged();
-  //    }
-  //  }
-  //}
+      for (Layer layer : canvas.layers) {
+        layer.dragged();
+      }
+    }
+  }
   
   //void released() {
   //   for (Layer layer : canvas.layers) {
