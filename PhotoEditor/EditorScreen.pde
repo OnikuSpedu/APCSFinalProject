@@ -6,14 +6,11 @@ class EditorScreen extends Screen {
     
     super.elements.add(navbar);
     super.elements.add(sidebar);
+    super.elements.add(canvas);
   }
 
   void display() {
     super.display();
-    
-    if (canvas != null) {
-      canvas.display(); 
-    }
   }
       
   class Sidebar extends UiElement {

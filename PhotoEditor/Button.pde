@@ -19,10 +19,10 @@ abstract class Button extends UiElement {
     text(label, super.x + (super.w / 2), super.y + super.h / 2 + 6); 
     
     if(isHovering()) {
-        if (mousePressed) 
-          pressedIndicator();
-        else 
-          onHover();
+      if (mousePressed) 
+        pressedIndicator();
+      else 
+        onHover();
     }
     
   }

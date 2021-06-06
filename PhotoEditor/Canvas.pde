@@ -89,7 +89,6 @@ class Canvas extends UiElement{
           set((int) (x+j), (int) (y+i), composition[j][i]);
        }
     }
-    
   }
   
   color[][] getComposition() {
