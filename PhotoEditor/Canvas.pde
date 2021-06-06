@@ -104,7 +104,7 @@ class Canvas extends UiElement{
     
   }
   
-  void click() {
+  void clicked() {
     
   }
   color[][] getComposition() {

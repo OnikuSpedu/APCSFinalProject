@@ -13,7 +13,7 @@ abstract class Button extends UiElement {
     this.fontColor = fontColor;
   }
   
-  abstract void click();
+  abstract void clicked();
   
   void display() {
     fill(bgColor);

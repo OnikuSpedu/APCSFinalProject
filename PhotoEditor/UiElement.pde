@@ -1,6 +1,10 @@
 abstract class UiElement {
  
- public abstract void click();
+ public void clicked() {};
+ public void released() {};
+ public void pressed() {};
+ public void dragged() {};
+ 
  public abstract void display();
  
 }

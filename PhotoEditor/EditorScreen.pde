@@ -20,23 +20,12 @@ class EditorScreen extends Screen {
     }
   }
 
-  void click() {
+  void clicked() {
       for (UiElement e : elements) {
-        e.click();
+        e.clicked();
       }
     }
 
-  void dragged() {
-    canvas.dragged();
-  } 
-  
-  void pressed() {
-    canvas.pressed();
-  } 
-  
-  void released() {
-    canvas.released();
-  } 
       
   class Sidebar extends UiElement {
     private float x, y, w, h;
@@ -62,10 +51,10 @@ class EditorScreen extends Screen {
       elements.add(colorPicker);
     }
     
-    void click() {
+    void clicked() {
       if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
         for( UiElement e : elements) {
-          e.click();
+          e.clicked();
         }
       }
     }
@@ -95,7 +84,7 @@ class EditorScreen extends Screen {
         rect(x, y, w, h);
       }
       
-      void click() {
+      void clicked() {
         if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
           Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
           if(chosenColor != null) {
@@ -135,14 +124,14 @@ class EditorScreen extends Screen {
 
       }
     
-      void click() {
+      void clicked() {
         if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
           println("Sidebar clicked"); 
-          addLayerBtn.click();
-          importLayerBtn.click();
+          addLayerBtn.clicked();
+          importLayerBtn.clicked();
 
           for (int i = 0; i < canvas.layers.size(); i++) {
-            layerOptionCards.get(i).click();
+            layerOptionCards.get(i).clicked();
           }
         }
       }
@@ -165,7 +154,7 @@ class EditorScreen extends Screen {
           ImportLayerButton() {
             super("Import", 1277, 359, 69, 32, DARK2, color(255));
           }
-          void click() {
+          void clicked() {
             if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
               File selected = booster.showFileSelection();
               
@@ -186,7 +175,7 @@ class EditorScreen extends Screen {
         AddLayerButton() {
           super("Add", 1208, 359, 59, 32,PRIMARY, color(255));
         }
-        void click() {
+        void clicked() {
           if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
             if (canvas != null) {
               canvas.addLayer();
@@ -237,7 +226,7 @@ class EditorScreen extends Screen {
           text(layer.name, x+ 32 + 8, y + 16);
         }
 
-        void click() {
+        void clicked() {
           Layer layer = canvas.layers.get(index);
           
           if(mouseX >= x + 16 && mouseX < x + 16 + 16 && mouseY >= y + 18 && mouseY < y + 16 + 18) {
@@ -275,12 +264,12 @@ class EditorScreen extends Screen {
       toolOptions = new ToolOptions();
     }
     
-    void click() {
+    void clicked() {
       if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
         println("Toolbar clicked"); 
         
         for(Button b : navButtons) {
-          b.click(); 
+          b.clicked(); 
         }
       }
     }
@@ -306,7 +295,7 @@ class EditorScreen extends Screen {
         super("Back", 12, 12, 100, 40,DARK1, color(255));
       }
       
-      void click() {
+      void clicked() {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
           scene--;
         }
@@ -317,7 +306,7 @@ class EditorScreen extends Screen {
       ContinueButton() {
         super("Continue", 1230, 17, 117, 31, PRIMARY, color(255));
       }
-      void click() {
+      void clicked() {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
           scene++;
         }
@@ -351,7 +340,7 @@ class EditorScreen extends Screen {
         }
       }
       
-      void click() {
+      void clicked() {
         for (ToolOption option : tools) {
           option.clicked();
         }

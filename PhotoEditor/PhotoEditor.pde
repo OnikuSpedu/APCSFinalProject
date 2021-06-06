@@ -28,6 +28,7 @@ StartScreen startScreen;
 FilterScreen filterScreen;
 SaveScreen saveScreen;
 Canvas canvas;
+ArrayList<Screen> screens;
 
 void setup() {
   size(1366,768);
@@ -37,53 +38,34 @@ void setup() {
 
   canvas = new Canvas(canvasWidth,canvasHeight);
   
-  editorScreen = new EditorScreen();
   startScreen = new StartScreen();
+  editorScreen = new EditorScreen();
   filterScreen = new FilterScreen();
   saveScreen = new SaveScreen();
+  
+  screens = new ArrayList<Screen>();
+  screens.add(startScreen);
+  screens.add(editorScreen);
+  screens.add(filterScreen);
+  screens.add(saveScreen);
 }
 
 void draw() {
-  if (scene == 0) {
-    startScreen.display();
-  } else if (scene == 1) {
-    editorScreen.display();
-  } else if (scene == 2) {
-    filterScreen.display();
-  } else if (scene == 3) {
-    saveScreen.display();
-  }
+  screens.get(scene).display();
 }
 
 void mouseClicked() {
-  if (scene == 0) {
-      startScreen.click();
-  } else if (scene == 1) {
-      editorScreen.click();
-  } else if (scene == 2) {
-      filterScreen.click();
-  } else if (scene == 3) {
-      saveScreen.click();
-  }
+  screens.get(scene).clicked();
 }
 
 void mouseDragged() {
-  if (scene == 1) {
-      editorScreen.dragged();
-      println("dragged");
-  } 
+  screens.get(scene).dragged();
 }
 
 void mousePressed() {
-  if (scene == 1) {
-      editorScreen.pressed();
-      println("pressed");
-  } 
+  screens.get(scene).pressed();
 }
 
 void mouseReleased() {
-  if (scene == 1) {
-      editorScreen.released();
-      println("released");
-  } 
+  screens.get(scene).released();
 }

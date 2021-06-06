@@ -18,9 +18,9 @@ class SaveScreen extends Screen {
       image(stagedPhoto, (1006-stagedPhoto.width)/2, (704-stagedPhoto.height)/2 + 64);
     }
   }
-  void click() {
+  void clicked() {
     for (UiElement e : elements) {
-      e.click();
+      e.clicked();
     }
   }
   class Toolbar extends UiElement {
@@ -35,7 +35,7 @@ class SaveScreen extends Screen {
       c = DARK2;
     }
     
-    void click() {
+    void clicked() {
       if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
          println("Toolbar clicked"); 
       }
@@ -65,11 +65,11 @@ class SaveScreen extends Screen {
       noBtn = new NoButton();
     }
     
-    void click() {
+    void clicked() {
       if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
          println("Sidebar clicked");
-         yesBtn.click();
-         noBtn.click();
+         yesBtn.clicked();
+         noBtn.clicked();
       }
     }
     
@@ -90,7 +90,7 @@ class SaveScreen extends Screen {
       super("YES", 1048, 367, 117, 34, color(0,255,0), color(255));
     }
     
-    void click() {
+    void clicked() {
       if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
         String fileName = booster.showTextInputDialog("What would you like this photo to be named? Also include the file extension name. This will be saved within the gallery/ directory within this sketch.");
         stagedPhoto.save("gallery/"+fileName);
@@ -103,7 +103,7 @@ class SaveScreen extends Screen {
       super("NO", 1207, 367, 117, 34, color(255,0,0), color(255));
     }
     
-    void click() {
+    void clicked() {
       if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
         scene--;
       }

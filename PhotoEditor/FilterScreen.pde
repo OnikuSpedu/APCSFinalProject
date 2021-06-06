@@ -22,9 +22,9 @@ class FilterScreen extends Screen {
       image(stagedPhoto, (1006-stagedPhoto.width)/2, (704-stagedPhoto.height)/2 + 64);
     }
   }
-  void click() {
+  void clicked() {
     for (UiElement e : elements) {
-      e.click();
+      e.clicked();
     }
   }
   class Sidebar extends UiElement {
@@ -73,11 +73,11 @@ class FilterScreen extends Screen {
       filters.add(new FilterOption(rightSobel, 1219, 655));
     }
     
-    void click() {
+    void clicked() {
       if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
          println("Sidebar clicked");
          for (FilterOption choice : filters) {
-           choice.click();
+           choice.clicked();
          }
       }
     }
@@ -109,7 +109,7 @@ class FilterScreen extends Screen {
       x = xcor;
       y = ycor;
     }
-    void click() {
+    void clicked() {
       if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
          println("filter option clicked");
          selected = !selected;
@@ -504,12 +504,12 @@ class FilterScreen extends Screen {
       toolbarButtons.add(cont);
     }
     
-    void click() {
+    void clicked() {
       if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
          println("Toolbar clicked"); 
          
          for(Button b : toolbarButtons) {
-            b.click(); 
+            b.clicked(); 
          }
       }
     }
@@ -529,7 +529,7 @@ class FilterScreen extends Screen {
         super("Back", 12, 12, 100, 40,DARK1, color(255));
       }
       
-      void click() {
+      void clicked() {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
           scene--;
           stagedPhoto = null;
@@ -542,7 +542,7 @@ class FilterScreen extends Screen {
       ContinueButton() {
         super("Continue", 1230, 17, 117, 31, PRIMARY, color(255));
       }
-      void click() {
+      void clicked() {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
           scene++;
         }
