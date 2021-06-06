@@ -3,6 +3,7 @@ import java.util.Arrays;
 
 UiBooster booster;
 
+// Global Color Palette
 color BLACK = color(0);
 color DARK4 = color(30,30,30);
 color DARK3 = color(37,37,38);
@@ -18,16 +19,17 @@ color PRIMARY = color(0,122,204);
 */
 int scene = 0;
 
+// Set default size to 650 x 650
 int canvasWidth = 650;
 int canvasHeight = 650;
 
-color penColor = color(0);
-
+// Create variables for screens
 EditorScreen editorScreen;
 StartScreen startScreen;
 FilterScreen filterScreen;
 SaveScreen saveScreen;
 Canvas canvas;
+
 ArrayList<Screen> screens;
 
 void setup() {
@@ -44,6 +46,7 @@ void setup() {
   saveScreen = new SaveScreen();
   
   screens = new ArrayList<Screen>();
+  
   screens.add(startScreen);
   screens.add(editorScreen);
   screens.add(filterScreen);
