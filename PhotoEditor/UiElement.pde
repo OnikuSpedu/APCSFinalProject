@@ -1,4 +1,4 @@
-abstract class UiElement {
+class UiElement {
  
  float x, y, w, h;
  color bgColor;
@@ -12,7 +12,10 @@ abstract class UiElement {
 
  }
  
- abstract void display();
+ void display() {
+   fill(bgColor);
+   rect(x, y, w, h);
+ }
 
  boolean isHovering() {
    return mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h;

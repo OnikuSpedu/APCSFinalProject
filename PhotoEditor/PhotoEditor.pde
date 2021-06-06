@@ -30,7 +30,14 @@ FilterScreen filterScreen;
 SaveScreen saveScreen;
 Canvas canvas;
 
+// We can use an array instead
 ArrayList<Screen> screens;
+
+/*---------------------------------------------------------------------------
+   Setup 
+   - Set window size and background
+   - Initialize scenes and add them to screens ArrayList.
+  ---------------------------------------------------------------------------*/ 
 
 void setup() {
   size(1366,768);
@@ -53,10 +60,19 @@ void setup() {
   screens.add(saveScreen);
 }
 
+/*---------------------------------------------------------------------------
+   Draw
+  ---------------------------------------------------------------------------*/
+
 void draw() {
+  background(DARK4);
   screens.get(scene).display();
 }
 
+/*---------------------------------------------------------------------------
+   All mouse interactions
+  ---------------------------------------------------------------------------*/
+  
 void mouseClicked() {
   screens.get(scene).clicked();
 }

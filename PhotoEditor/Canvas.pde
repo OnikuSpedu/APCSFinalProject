@@ -1,52 +1,41 @@
 class Canvas extends UiElement{
   ArrayList<Layer> layers;
-  int x, y, w, h;
   color[][] composition;
   
-  Canvas(int w, int h) {
-    x = (1006-w)/2;
-    y = (704-h)/2 + 64;
-    this.w = w;
-    this.h = h;
+  Canvas(float w, float h) {
+    super((1006-w)/2, (704-h)/2 + 64, w, h, BLACK);
     
     layers = new ArrayList<Layer>();
     
-    layers.add(new Layer(w, h));
+    layers.add(new Layer((int) w, (int) h));
     
-    composition = new color[w][h];
+    composition = new color[(int) h][(int) w];
   }
   
   Canvas(PImage img) {
+    super((1006-650)/2, (704-650)/2 + 64, 650, 650, BLACK);
     
     if (img.width < 650) {
-        x = (1006-img.width)/2;
-        this.w = img.width;
-    } else {
-      this.w = 650;
-      x = (1006-w)/2;
+        super.x = (1006-img.width)/2;
+        super.w = img.width;
     }
     
     if (img.height < 650) {
-        y = (704-img.height)/2 + 64;
-        this.h = img.height;
-    } else {
-      this.h = 650;
-      y = (704-h)/2 + 64;
+        super.y = (704-img.height)/2 + 64;
+        super.h = img.height;
     }
     
     layers = new ArrayList<Layer>();
     
     layers.add(new Layer(img));
     
-    composition = new color[h][w];
+    composition = new color[(int) h][(int) w];
   }
   
   void calculateComposition() {
     for (int i = 0; i < composition.length; i++) {
       for (int j = 0; j < composition[0].length; j++) {
-        
          composition[i][j] = calculatePixel(j, i);
-        
       }
     }
   }
@@ -95,18 +84,14 @@ class Canvas extends UiElement{
   void display() {
     calculateComposition();
 
-    for(int i = 0; i < w; i++) {
-       for(int j = 0; j < h; j++) {
-          set(x+i,y+j, DARK4);
-          set(x+i,y+j, composition[j][i]);
+    for(int i = 0; i < h; i++) {
+       for(int j = 0; j < w; j++) {
+          set((int) (x+j), (int) (y+i), composition[j][i]);
        }
     }
     
   }
   
-  void clicked() {
-    
-  }
   color[][] getComposition() {
     return composition;
   }
