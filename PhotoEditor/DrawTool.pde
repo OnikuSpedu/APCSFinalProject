@@ -8,23 +8,29 @@ class DrawTool extends Tool {
     thickness = 10;
   }
   
-  Layer apply(Layer layer, int x, int y) {
-    for (int i = -1 * thickness / 2; i <= thickness - thickness / 2; i++) {
-      for (int j = -1 * thickness / 2; j <= thickness - thickness / 2; j++) {
-        layer.setPixel((int) layer.x + x + i, (int) layer.y + y + j, c);
-      }
+  void apply(Layer layer, int x, int y) {
+    for (int i = 0 - thickness/2; i <= thickness - thickness/2; i++) {
+      for (int j = 0 - thickness/2; j <= thickness - thickness/2; j++) {
+        layer.setPixel(x + i,y + j, BLACK);
+      }  
     }
-
-    return layer;
   }
   
-  ArrayList<Layer> apply(ArrayList<Layer> layers, int x, int y) {
-    for (Layer layer : layers) {
+  void apply(int x, int y) {
+    for (Layer layer : canvas.layers) {
       if (layer.selected) {
-       apply(layer, x, y); 
+         apply(layer, x, y); 
       }
     }
-    
-    return layers;
+  }
+
+  void drawTool(int x, int y, color c, int thickness) {
+    for (Layer layer : canvas.layers) {
+      if (layer.selected) {
+        for (int i = 0 - thickness/2; i <= thickness - thickness/2; ++i) {
+          layer.setPixel(x + i,y + i,c);
+        }  
+      }
+    }
   }
 }

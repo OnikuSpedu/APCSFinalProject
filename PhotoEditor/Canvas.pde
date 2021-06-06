@@ -9,7 +9,7 @@ class Canvas extends UiElement{
     
     layers.add(new Layer((int) w, (int) h));
     
-    composition = new color[(int) h][(int) w];
+    composition = new color[(int) w][(int) h];
   }
   
   Canvas(PImage img) {
@@ -82,11 +82,12 @@ class Canvas extends UiElement{
   }
   
   void display() {
+    super.display();
     calculateComposition();
 
     for(int i = 0; i < h; i++) {
        for(int j = 0; j < w; j++) {
-          set((int) (x+j), (int) (y+i), composition[j][i]);
+          set((int) (super.x+j), (int) (super.y+i), composition[i][j]);
        }
     }
   }
@@ -94,4 +95,32 @@ class Canvas extends UiElement{
   color[][] getComposition() {
     return composition;
   }
+  
+  void pressed() {
+    if (super.isHovering()) {
+      
+      if(drawTool.isActive()) {
+        drawTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
+      }
+    }
+  }
+  
+  //void dragged() {
+  //  if (super.isHovering()) {
+      
+  //    if(drawTool.isActive()) {
+  //      drawTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
+  //    }
+      
+  //    for (Layer layer : canvas.layers) {
+  //      layer.dragged();
+  //    }
+  //  }
+  //}
+  
+  //void released() {
+  //   for (Layer layer : canvas.layers) {
+  //      layer.released();
+  //    }
+  //}
 }

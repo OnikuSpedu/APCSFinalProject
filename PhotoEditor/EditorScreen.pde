@@ -6,13 +6,34 @@ class EditorScreen extends Screen {
     
     super.elements.add(navbar);
     super.elements.add(sidebar);
-    super.elements.add(canvas);
-  }
-
-  void display() {
-    super.display();
   }
       
+  void display() {
+    super.display();
+    canvas.display();
+  }
+  
+  void dragged() {
+    super.dragged();
+    canvas.dragged();
+  }
+  
+  
+  void pressed() {
+    super.pressed();
+    canvas.pressed();
+  }
+  
+  void released() {
+    super.released();
+    canvas.released();
+  }
+  
+  void clicked() {
+    super.clicked();
+    canvas.clicked();
+  }
+  
   class Sidebar extends UiElement {
 
     LayersOptions layersOptions;
@@ -40,13 +61,21 @@ class EditorScreen extends Screen {
       }
     }
     
+    void dragged() {
+      if(super.isHovering()) {
+        for( UiElement e : elements) {
+          e.dragged();
+        }
+      }
+    }
+    
     void display() {
       super.display();
       
       for( UiElement e : elements) {
           e.display();
       }
-    }    
+          }    
     
     class ColorPicker extends UiElement {      
       ColorPicker() {
@@ -142,7 +171,7 @@ class EditorScreen extends Screen {
           super("Add", 1208, 359, 59, 32,PRIMARY, color(255));
         }
         void clicked() {
-          if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+          if(super.isHovering()) {
             if (canvas != null) {
               canvas.addLayer();
             }
