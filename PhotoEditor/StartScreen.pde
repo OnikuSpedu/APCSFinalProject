@@ -41,44 +41,29 @@ class StartScreen extends Screen {
     }
   }
   
-  class CreateCanvas extends UiElement {
-    float x, y, w, h;
-    
-    CreateButton createBtn;
-    WidthButton widthBtn;
-    HeightButton heightBtn;
-
+  class CreateCanvas extends UiElement {   
     ArrayList<Button> buttons;
     
     CreateCanvas() {
-      x = 286;
-      y = 257;
-      w = 369;
-      h = 396;
+      super(286, 257, 369, 396, DARK3);
       
      buttons = new ArrayList<Button>();
      
-     createBtn = new CreateButton();
-     widthBtn = new WidthButton();
-     heightBtn = new HeightButton();
-     
-     buttons.add(createBtn);
-     buttons.add(widthBtn);
-     buttons.add(heightBtn);
+     buttons.add(new CreateButton());
+     buttons.add(new WidthButton());
+     buttons.add(new HeightButton());
     }
     
     void display() {
-      noStroke();
-      fill(DARK3);
-      rect(x, y, w, h);
+      super.display();
       
       textAlign(LEFT, TOP);
       textSize(20);
       fill(color(240));
-      text("Create A Canvas", x+36,y+36);
+      text("Create A Canvas", super.x+36,super.y+36);
       textSize(16);
-      text("Width:", x+36,362);
-      text("Height:", x+36,423);
+      text("Width:",super.x+36,362);
+      text("Height:", super.x+36,423);
       
       for (Button button : buttons) {
          button.display(); 
@@ -86,7 +71,7 @@ class StartScreen extends Screen {
     }
     
     void clicked() {
-      if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+      if(super.isHovering()) {
         for (Button button : buttons) {
          button.clicked(); 
         }
@@ -95,10 +80,10 @@ class StartScreen extends Screen {
     
     class CreateButton extends Button {
       CreateButton() {
-        super("Create", x+36, y+h-48-36, w-36-36, 48,PRIMARY, color(255));
+        super("Create", 286+36, 257+396-48-36, 369-36-36, 48,PRIMARY, color(255));
       }
       void clicked() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+        if(super.isHovering()) {
           canvas = new Canvas(canvasWidth, canvasHeight);
           scene++;
         }
@@ -107,10 +92,10 @@ class StartScreen extends Screen {
     
     class WidthButton extends Button {
       WidthButton() {
-        super(Integer.toString(canvasWidth), x+100, 350, 132, 40, DARK2, color(255));
+        super(Integer.toString(canvasWidth), 286+100, 350, 132, 40, DARK2, color(255));
       }
       void clicked() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+        if(super.isHovering()) {
 
           String inputWidth = booster.showTextInputDialog("Width:");
           
@@ -126,10 +111,10 @@ class StartScreen extends Screen {
     
     class HeightButton extends Button {
       HeightButton() {
-        super(Integer.toString(canvasHeight), x+100, 411, 132, 40, DARK2, color(255));
+        super(Integer.toString(canvasHeight), 286+100, 411, 132, 40, DARK2, color(255));
       }
       void clicked() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+        if(super.isHovering()) {
 
           String inputHeight = booster.showTextInputDialog("Height:");
           
@@ -144,9 +129,7 @@ class StartScreen extends Screen {
     }
   }
   
-  class ImportCanvas extends UiElement {
-    float x, y, w, h;
-    
+  class ImportCanvas extends UiElement {    
     ImportButton importBtn;
     UploadButton uploadBtn;
 
@@ -155,10 +138,7 @@ class StartScreen extends Screen {
     ArrayList<Button> buttons;
     
     ImportCanvas() {
-      x = 710;
-      y = 257;
-      w = 369;
-      h = 396;
+      super(710,257,369,396, DARK3);
      
       pathToSelectedFile = "";
       
@@ -172,14 +152,12 @@ class StartScreen extends Screen {
     }
     
     void display() {
-      noStroke();
-      fill(DARK3);
-      rect(x, y, w, h);
+      super.display();
       
       textAlign(LEFT, TOP);
       textSize(20);
       fill(color(240));
-      text("Import An Image", x+36,293);
+      text("Import An Image", 710+36,293);
       
       for (Button button : buttons) {
          button.display(); 
@@ -187,7 +165,7 @@ class StartScreen extends Screen {
     }
     
     void clicked() {
-      if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+      if(super.isHovering()) {
         for (Button button : buttons) {
          button.clicked(); 
         }
@@ -196,10 +174,10 @@ class StartScreen extends Screen {
     
     class ImportButton extends Button {
       ImportButton() {
-        super("Import", x+36, y+h-36-48, w-72, 48,PRIMARY, color(255));
+        super("Import", 710+36, 257+396-36-48, 369-72, 48,PRIMARY, color(255));
       }
       void clicked() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+        if(super.isHovering()) {
           if(!pathToSelectedFile.equals("") && ((pathToSelectedFile.toLowerCase().endsWith(".jpg") || pathToSelectedFile.toLowerCase().endsWith(".png") || pathToSelectedFile.toLowerCase().endsWith(".tga") || pathToSelectedFile.toLowerCase().endsWith(".gif")))) {
              PImage selectedImage = loadImage(pathToSelectedFile);
              canvas = new Canvas(selectedImage);
@@ -212,7 +190,7 @@ class StartScreen extends Screen {
     class UploadButton extends Button {
       PImage thumbnail;
       UploadButton() {
-        super("Upload An Image", x+36, 350, w-72, 100, DARK2, color(255));
+        super("Upload An Image", 710+36, 350, 369-72, 100, DARK2, color(255));
       }
       
       void display() {
@@ -235,7 +213,7 @@ class StartScreen extends Screen {
       }
       
       void clicked() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+        if(super.isHovering()) {
 
           File selected = booster.showFileSelection();
           
@@ -249,14 +227,13 @@ class StartScreen extends Screen {
                 thumbnail.resize((int) ((float) thumbnail.width * ( 150.0 / thumbnail.height )), 150);
               } 
               
-              if (thumbnail.width > w-72) {
-                thumbnail.resize((int) (w-72), (int)  ((float) thumbnail.height * ( (w-72) / thumbnail.width )));
+              if (thumbnail.width > 369-72) {
+                thumbnail.resize((int) (369-72), (int)  ((float) thumbnail.height * ( (369-72) / thumbnail.width )));
               }
             
             }
             
-        }
-
+          }
         }
       }
     }

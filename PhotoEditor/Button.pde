@@ -18,13 +18,17 @@ abstract class Button extends UiElement {
     fill(fontColor);
     text(label, super.x + (super.w / 2), super.y + super.h / 2 + 6); 
     
-    if(super.isHovering()) {
+    if(isHovering()) {
         if (mousePressed) 
           pressedIndicator();
         else 
           onHover();
     }
     
+  }
+  
+  boolean isHovering() {
+    return super.isHovering();
   }
   
   void onHover() {

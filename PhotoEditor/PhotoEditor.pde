@@ -10,6 +10,8 @@ color DARK3 = color(37,37,38);
 color DARK2 = color(45,45,48);
 color DARK1 = color(55,55,60);
 color PRIMARY = color(0,122,204);
+color TRANSPARENT = color(0,0,0,255);
+
 
 /*Scenes
 0 - welcome

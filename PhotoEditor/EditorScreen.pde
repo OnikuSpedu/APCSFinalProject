@@ -1,58 +1,42 @@
 class EditorScreen extends Screen {
 
-  ArrayList<UiElement> elements;
-
-  EditorScreen() {
-    elements = new ArrayList<UiElement>();
-    Toolbar toolbar = new Toolbar();
+  EditorScreen() {    
+    Navbar navbar = new Navbar();
     Sidebar sidebar = new Sidebar();
-    elements.add(toolbar);
-    elements.add(sidebar);
+    
+    super.elements.add(navbar);
+    super.elements.add(sidebar);
   }
 
   void display() {
-    background(DARK4);
-    for (UiElement e : elements) {
-        e.display();
-    }
+    super.display();
+    
     if (canvas != null) {
       canvas.display(); 
     }
   }
-
-  void clicked() {
-      for (UiElement e : elements) {
-        e.clicked();
-      }
-    }
-
       
   class Sidebar extends UiElement {
-    private float x, y, w, h;
-    private color c;
-    
+
     LayersOptions layersOptions;
-    ColorPicker colorPicker;
+    //ColorPicker colorPicker;
     
     ArrayList<UiElement> elements;
+    
     Sidebar() { 
-      x = 1006;
-      y = 64;
-      w = 360;
-      h = 704;
-      c = DARK3;
+      super(1006, 64, 360, 704, DARK3);
       
       elements = new ArrayList<UiElement>();
       
       layersOptions = new LayersOptions();
-      colorPicker = new ColorPicker();
-      
       elements.add(layersOptions);
-      elements.add(colorPicker);
+
+      //colorPicker = new ColorPicker();
+      //elements.add(colorPicker);
     }
     
     void clicked() {
-      if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+      if(super.isHovering()) {
         for( UiElement e : elements) {
           e.clicked();
         }
@@ -60,73 +44,38 @@ class EditorScreen extends Screen {
     }
     
     void display() {
-      fill(c);
-      noStroke();
-      rect(x, y, w, h);
+      super.display();
       
       for( UiElement e : elements) {
           e.display();
       }
     }    
-    
-    class ColorPicker extends UiElement {
-      private float x, y, w, h;
-       
-      ColorPicker() {
-        x = 1026;
-        y = 72;
-        w = 50;
-        h = 50;
-      }
-      void display() {
-        stroke(255);
-        fill(color(0));
-        rect(x, y, w, h);
-      }
-      
-      //void clicked() {
-      //  if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
-      //    Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
-      //    if(chosenColor != null) {
-      //      penColor = chosenColor.intValue();
-      //    }
-      //  }
-      //}
-    }
       
     class LayersOptions extends UiElement {
       
+      ArrayList<LayerOptionCard> layerOptionCards;
+
       AddLayerButton addLayerBtn;
       ImportLayerButton importLayerBtn;
-      ArrayList<LayerOptionCard> layerOptionCards;
 
       int layerSelected = 0;
 
-      private float x, y, w, h;
-      private color c;
-        
       LayersOptions() {
+        super(1006, 348, 360, 420, DARK3);
+        
         addLayerBtn = new AddLayerButton();
         importLayerBtn = new ImportLayerButton(); 
-        
-        x = 1006;
-        y =  348;
-        w = 360;
-        h = 420;
 
-        c = DARK3;
+        layerOptionCards = new ArrayList<LayerOptionCard>(7); 
         
-        layerOptionCards = new ArrayList<LayerOptionCard>(10); 
-        
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 7; i++) {
           layerOptionCards.add(new LayerOptionCard(i));
         }
 
       }
     
       void clicked() {
-        if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
-          println("Sidebar clicked"); 
+        if(super.isHovering()) {          
           addLayerBtn.clicked();
           importLayerBtn.clicked();
 
@@ -155,7 +104,7 @@ class EditorScreen extends Screen {
             super("Import", 1277, 359, 69, 32, DARK2, color(255));
           }
           void clicked() {
-            if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+            if(super.isHovering()) {
               File selected = booster.showFileSelection();
               
               if (selected != null) {
@@ -184,31 +133,20 @@ class EditorScreen extends Screen {
         }
       }
 
-      class LayerOptionCard {
-        private float x, y, w, h;
-        private color c;
+      class LayerOptionCard extends UiElement{
         private int index;
 
         LayerOptionCard(int index) {
-          addLayerBtn = new AddLayerButton();
-          importLayerBtn = new ImportLayerButton(); 
-
-          x = 1026;
-          y =  398 + index * 50;
-          w = 321;
-          h = 50;
-
+          super(1026, 398 + index * 50,321, 50, DARK2);
           this.index = index;
 
-          c = DARK2;
+          addLayerBtn = new AddLayerButton();
+          importLayerBtn = new ImportLayerButton(); 
         }
         
         void display() {
+          super.display();
           Layer layer = canvas.layers.get(index);
-
-          fill(c);
-          stroke(DARK3);
-          rect(x, y, w, h);
 
           if (layer.selected) {
             fill(PRIMARY);
@@ -238,36 +176,24 @@ class EditorScreen extends Screen {
             layer.name = booster.showTextInputDialog("Layer name:");
           }
         }
-
-        
       }
     }
   }
 
-  class Toolbar extends UiElement {
-    private int x, y, w, h;
-    private color c;
+  class Navbar extends UiElement {
+
     private ArrayList<Button> navButtons = new ArrayList<Button>();
-    ToolOptions toolOptions;
-    Toolbar() { 
-      x = 0;
-      y = 0;
-      w = 1366;
-      h = 64;
-      c = DARK2;
+    Toolbar toolbar = new Toolbar();
+    
+    Navbar() { 
+      super(0, 0, 1366, 64, DARK2);
       
-      BackButton back = new BackButton();
-      ContinueButton cont = new ContinueButton();
-      navButtons.add(back);
-      navButtons.add(cont);
-      
-      toolOptions = new ToolOptions();
+      navButtons.add(new BackButton());
+      navButtons.add(new ContinueButton());
     }
     
     void clicked() {
-      if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
-        println("Toolbar clicked"); 
-        
+      if(super.isHovering()) {
         for(Button b : navButtons) {
           b.clicked(); 
         }
@@ -275,19 +201,11 @@ class EditorScreen extends Screen {
     }
     
     void display() {
-      fill(c);
-      noStroke();
-      rect(x, y, w, h);
+      super.display();
       
       for(Button b : navButtons) {
         b.display(); 
       }
-
-      toolOptions.display();
-    }
-    
-    int getToolSelected() {
-      return toolOptions.getToolSelected();
     }
     
     class BackButton extends Button {
@@ -313,7 +231,18 @@ class EditorScreen extends Screen {
       }
     }
     
-    class ToolOptions {
+    class Toolbar extends UiElement {
+      
+      Toolbar() {
+        super(300, 17, 117, 32, TRANSPARENT);
+      }
+      
+      
+    }
+  }
+}
+
+/* class ToolOptions {
       
       private int toolSelected = 0;
       
@@ -410,6 +339,29 @@ class EditorScreen extends Screen {
           return false;
         }
       }
-    }
-  }
-}
+    } */
+    
+//class ColorPicker extends UiElement {
+    //  private float x, y, w, h;
+       
+    //  ColorPicker() {
+    //    x = 1026;
+    //    y = 72;
+    //    w = 50;
+    //    h = 50;
+    //  }
+    //  void display() {
+    //    stroke(255);
+    //    fill(color(0));
+    //    rect(x, y, w, h);
+    //  }
+      
+    //  //void clicked() {
+    //  //  if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+    //  //    Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
+    //  //    if(chosenColor != null) {
+    //  //      penColor = chosenColor.intValue();
+    //  //    }
+    //  //  }
+    //  //}
+    //}

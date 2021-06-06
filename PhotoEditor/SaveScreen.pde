@@ -3,9 +3,9 @@ class SaveScreen extends Screen {
   
   SaveScreen() {
     elements = new ArrayList<UiElement>();
-    Toolbar toolbar = new Toolbar();
+    Navbar navbar = new Navbar();
     Sidebar sidebar = new Sidebar();
-    elements.add(toolbar);
+    elements.add(navbar);
     elements.add(sidebar);
   }
   
@@ -23,50 +23,34 @@ class SaveScreen extends Screen {
       e.clicked();
     }
   }
-  class Toolbar extends UiElement {
-    private int x, y, w, h;
-    private color c;
+  class Navbar extends UiElement {
     
-    Toolbar() { 
-      x = 0;
-      y = 0;
-      w = 1366;
-      h = 64;
-      c = DARK2;
+    Navbar() { 
+      super(0,0,1366,64,DARK2);
     }
     
     void clicked() {
-      if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
-         println("Toolbar clicked"); 
+      if(super.isHovering()) {
+         println("Navbar clicked"); 
       }
     }
-    
-    void display() {
-      fill(c);
-      noStroke();
-      rect(x, y, w, h);
-    }
   }
+  
   class Sidebar extends UiElement {
-    private float x, y, w, h;
-    private color c;
     private String confirmation;
     private YesButton yesBtn;
     private NoButton noBtn;
     
     Sidebar() { 
-      x = 1006;
-      y = 64;
-      w = 360;
-      h = 704;
-      c = DARK3;
+      super(1006, 64, 360, 704, DARK3);
+      
       confirmation = "Is this the image you want to save?";
       yesBtn = new YesButton();
       noBtn = new NoButton();
     }
     
     void clicked() {
-      if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+      if(super.isHovering()) {
          println("Sidebar clicked");
          yesBtn.clicked();
          noBtn.clicked();
@@ -74,9 +58,8 @@ class SaveScreen extends Screen {
     }
     
     void display() {
-      fill(c);
-      noStroke();
-      rect(x, y, w, h);
+      super.display();
+      
       textAlign(CENTER);
       textSize(18);
       fill(color(255));
@@ -91,7 +74,7 @@ class SaveScreen extends Screen {
     }
     
     void clicked() {
-      if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+      if(super.isHovering()) {
         String fileName = booster.showTextInputDialog("What would you like this photo to be named? Also include the file extension name. This will be saved within the gallery/ directory within this sketch.");
         stagedPhoto.save("gallery/"+fileName);
         exit();
@@ -104,7 +87,7 @@ class SaveScreen extends Screen {
     }
     
     void clicked() {
-      if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+      if(super.isHovering()) {
         scene--;
       }
     }

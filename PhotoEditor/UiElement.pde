@@ -14,6 +14,7 @@ class UiElement {
  
  void display() {
    fill(bgColor);
+   noStroke();
    rect(x, y, w, h);
  }
 
