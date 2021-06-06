@@ -53,3 +53,5 @@ For our final project, we are going to create a photo editor similar to Photosho
 ### June 3, 2021 (Thursday)
 - **Rickey** 🎈  
     Completed the FilterScreen with all 8 kernel filter options. Created and completed the SaveScreen where users can save their work or continue working.
+- **Shadman** 🧰  
+    Created a UI interface so that users can select layers and change a layer's names. I also created a basic draw tool.
