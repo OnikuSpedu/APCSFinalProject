@@ -1,4 +1,8 @@
 class EditorScreen extends Screen {
+  
+  //Create variables for draw tools
+  DrawTool drawTool;
+  MoveTool moveTool;
 
   EditorScreen() {    
     Navbar navbar = new Navbar();
@@ -6,6 +10,9 @@ class EditorScreen extends Screen {
     
     super.elements.add(navbar);
     super.elements.add(sidebar);
+    
+    drawTool = new DrawTool();
+    moveTool = new MoveTool();
   }
 
   void display() {
@@ -234,10 +241,12 @@ class EditorScreen extends Screen {
     class Toolbar extends UiElement {
       
       Toolbar() {
-        super(300, 17, 117, 32, TRANSPARENT);
+        super(300, 17, 117, 32, DARK1);
       }
       
-      
+      void display() {
+        super.display();
+      }
     }
   }
 }

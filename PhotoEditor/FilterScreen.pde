@@ -480,7 +480,7 @@ class FilterScreen extends Screen {
     private ArrayList<Button> navbarButtons = new ArrayList<Button>();
     
     Navbar() { 
-      super(0,0,1366,54,DARK2);
+      super(0,0,1366,64,DARK2);
       
       navbarButtons.add(new BackButton());
       navbarButtons.add(new ContinueButton());

@@ -1,6 +1,6 @@
 class MoveTool extends Tool {
   
-  boolean active;
+   boolean active;
   
   MoveTool() {
     active = false;

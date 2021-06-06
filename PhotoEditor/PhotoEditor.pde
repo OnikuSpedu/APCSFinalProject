@@ -32,8 +32,7 @@ FilterScreen filterScreen;
 SaveScreen saveScreen;
 Canvas canvas;
 
-// We can use an array instead
-ArrayList<Screen> screens;
+ArrayList<Screen> screens; // We can use an array instead
 
 /*---------------------------------------------------------------------------
    Setup 
