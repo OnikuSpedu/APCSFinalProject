@@ -80,18 +80,18 @@ class EditorScreen extends Screen {
       }
       void display() {
         stroke(255);
-        fill(penColor);
+        fill(color(0));
         rect(x, y, w, h);
       }
       
-      void clicked() {
-        if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
-          Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
-          if(chosenColor != null) {
-            penColor = chosenColor.intValue();
-          }
-        }
-      }
+      //void clicked() {
+      //  if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+      //    Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
+      //    if(chosenColor != null) {
+      //      penColor = chosenColor.intValue();
+      //    }
+      //  }
+      //}
     }
       
     class LayersOptions extends UiElement {
