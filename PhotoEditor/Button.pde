@@ -15,10 +15,10 @@ abstract class Button extends UiElement {
   void display() {
     super.display();
     
-    textAlign(CENTER);
+    textAlign(LEFT, TOP);
     textSize(fontSize);
     fill(fontColor);
-    text(label, super.x + (super.w / 2), super.y + super.h / 2 + 6); 
+    text(label, super.x + ((super.w - textWidth(label)) / 2), super.y - 2 + ((super.h - fontSize) / 2)); 
     
     if(isHovering()) {
       if (mousePressed) 

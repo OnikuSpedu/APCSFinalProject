@@ -182,12 +182,13 @@ class EditorScreen extends Screen {
       class LayerOptionCard extends UiElement{
         private int index;
         DeleteLayerButton deleteBtn;
-        
+        LayerOpacityButton opacityBtn;
         LayerOptionCard(int index) {
           super(1026, 398 + index * 50,321, 50, DARK2);
           this.index = index;
           
           deleteBtn = new DeleteLayerButton(1026 + 321 - 32, 398 + index * 50 + 18, index);
+          opacityBtn = new LayerOpacityButton(1026 + 321 - 32 - 40 - 16 - 8, 398 + index * 50 + 12, index);
         }
         
         void display() {
@@ -195,6 +196,7 @@ class EditorScreen extends Screen {
           Layer layer = canvas.layers.get(index);
           
           deleteBtn.display();
+          opacityBtn.display();
           
           if (layer.selected) {
             fill(PRIMARY);
@@ -215,11 +217,17 @@ class EditorScreen extends Screen {
         class LayerOpacityButton extends Button {
           int index;
           LayerOpacityButton(float x, float y, int index) {
-            super("x", x, y, 40, 16, BLACK, color(255));
+            super("Loading", x, y, 48, 26, color(40), color(255));
             this.index = index;
             
             super.fontSize = 10;
           }
+          
+          void display() {
+            super.label = "" + canvas.layers.get(index).opacity;
+            super.display();
+          }
+          
           void clicked() {
             if(super.isHovering()) {
     
@@ -272,6 +280,7 @@ class EditorScreen extends Screen {
             }
             
             deleteBtn.clicked();
+            opacityBtn.clicked();
             
             if(mouseX >= x + 32 + 8 && mouseX < x + 32 + + 8 + textWidth(layer.name) && mouseY >= y + 16 && mouseY < y + 16 + 16) {
               String newLayerNameInput = booster.showTextInputDialog("Layer name:");
