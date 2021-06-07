@@ -27,6 +27,9 @@ class FilterScreen extends Screen {
       e.clicked();
     }
   }
+  Sidebar getSidebar() {
+    return (Sidebar) elements.get(1);
+  }
   class Sidebar extends UiElement {
     private ArrayList<FilterOption> filters;
     
@@ -83,6 +86,9 @@ class FilterScreen extends Screen {
       for (FilterOption choice : filters) {
         choice.display();
       }
+    }
+    ArrayList<FilterOption> getFilters() {
+      return filters;
     }
   }
   
@@ -152,6 +158,9 @@ class FilterScreen extends Screen {
           oneTime++;
         }
       image(newPhoto, super.x, super.y);
+    }
+    void setTimes(int updated) {
+      this.oneTime = updated;
     }
   }
   class Kernel {
@@ -513,6 +522,9 @@ class FilterScreen extends Screen {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
           scene--;
           stagedPhoto = null;
+          for (FilterOption fO : filterScreen.getSidebar().getFilters()) {
+            fO.setTimes(0);
+          }
         }
       }
       

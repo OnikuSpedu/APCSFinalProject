@@ -33,4 +33,10 @@ class DrawTool extends Tool {
       }
     }
   }
+  void setColor(color other) {
+    this.c = other;
+  }
+  color getColor() {
+    return c;
+  }
 }

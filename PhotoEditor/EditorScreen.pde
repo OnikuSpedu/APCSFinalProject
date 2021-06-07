@@ -83,7 +83,7 @@ class EditorScreen extends Screen {
       }
       void display() {
         stroke(255);
-        fill(drawTool.c);
+        fill(drawTool.getColor());
         rect(super.x, super.y, super.w, super.h);
       }
       
