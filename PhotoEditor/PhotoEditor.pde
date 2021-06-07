@@ -52,6 +52,8 @@ void setup() {
   booster = new UiBooster();
 
   canvas = new Canvas(canvasWidth,canvasHeight);
+  drawTool = new DrawTool();
+  moveTool = new MoveTool();
   
   startScreen = new StartScreen();
   editorScreen = new EditorScreen();
@@ -64,9 +66,6 @@ void setup() {
   screens.add(editorScreen);
   screens.add(filterScreen);
   screens.add(saveScreen);
-  
-  drawTool = new DrawTool();
-  moveTool = new MoveTool();
   
   tools = new ArrayList<Tool>();
   tools.add(drawTool);

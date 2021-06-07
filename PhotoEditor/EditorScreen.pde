@@ -38,6 +38,7 @@ class EditorScreen extends Screen {
 
     LayersOptions layersOptions;
     ColorPicker colorPicker;
+    ThicknessWidget thicknessWidget;
     
     ArrayList<UiElement> elements;
     
@@ -51,12 +52,15 @@ class EditorScreen extends Screen {
 
       colorPicker = new ColorPicker();
       elements.add(colorPicker);
+      
+      thicknessWidget = new ThicknessWidget();
+      elements.add(thicknessWidget);      
     }
     
-    void clicked() {
+    void pressed() {
       if(super.isHovering()) {
         for( UiElement e : elements) {
-          e.clicked();
+          e.pressed();
         }
       }
     }
@@ -75,11 +79,11 @@ class EditorScreen extends Screen {
       for( UiElement e : elements) {
           e.display();
       }
-          }    
+    }    
     
     class ColorPicker extends UiElement {      
       ColorPicker() {
-        super(1026,72,50,50, TRANSPARENT);
+        super(1026,80,100,100, TRANSPARENT);
       }
       void display() {
         stroke(255);
@@ -87,7 +91,7 @@ class EditorScreen extends Screen {
         rect(super.x, super.y, super.w, super.h);
       }
       
-      void clicked() {
+      void pressed() {
         if(super.isHovering()) {
           Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
           if(chosenColor != null) {
@@ -97,6 +101,45 @@ class EditorScreen extends Screen {
       }
     }
     
+    class ThicknessWidget extends UiElement{
+      ThicknessInput thicknessInput;
+      ThicknessWidget() {
+        super(1136,80,280,50, TRANSPARENT);
+        thicknessInput = new ThicknessInput();
+      }
+      
+      class ThicknessInput extends Button {
+        ThicknessInput() {
+          super(Integer.toString(drawTool.thickness), 1136, 104, 132, 30, DARK2, color(255));
+        }
+        void pressed() {
+          if(super.isHovering()) {
+  
+            String input = booster.showTextInputDialog("Thickness:");
+            
+            try {
+              drawTool.thickness = Integer.parseInt(input);
+              super.label = input;
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        }
+      }
+      
+      void display() {
+        textAlign(LEFT, TOP);
+        textSize(16);
+        fill(color(240));
+        text("Thickness:", super.x,super.y);
+        thicknessInput.display();
+      }
+      
+      void pressed() {
+        thicknessInput.pressed();
+      }
+    }
+  
     class LayersOptions extends UiElement {
       
       ArrayList<LayerOptionCard> layerOptionCards;
@@ -120,13 +163,13 @@ class EditorScreen extends Screen {
 
       }
     
-      void clicked() {
+      void pressed() {
         if(super.isHovering()) {          
-          addLayerBtn.clicked();
-          importLayerBtn.clicked();
+          addLayerBtn.pressed();
+          importLayerBtn.pressed();
 
           for (int i = 0; i < canvas.layers.size(); i++) {
-            layerOptionCards.get(i).clicked();
+            layerOptionCards.get(i).pressed();
           }
           
           if (layerOptionCards.size() > canvas.layers.size()) {
@@ -157,7 +200,7 @@ class EditorScreen extends Screen {
           ImportLayerButton() {
             super("Import", 1277, 359, 69, 32, DARK2, color(255));
           }
-          void clicked() {
+          void pressed() {
             if(super.isHovering()) {
               File selected = booster.showFileSelection();
               
@@ -178,7 +221,7 @@ class EditorScreen extends Screen {
         AddLayerButton() {
           super("Add", 1208, 359, 59, 32,PRIMARY, color(255));
         }
-        void clicked() {
+        void pressed() {
           if(super.isHovering()) {
             if (canvas != null) {
               canvas.addLayer();
@@ -237,7 +280,7 @@ class EditorScreen extends Screen {
             super.display();
           }
           
-          void clicked() {
+          void pressed() {
             if(super.isHovering()) {
     
               String inputWidth = booster.showTextInputDialog("Width:");
@@ -272,7 +315,7 @@ class EditorScreen extends Screen {
             }
           }
           
-          void clicked() {
+          void pressed() {
             if(super.isHovering()) {
               if(canvas.layers.size() > 1)
                 canvas.layers.remove(this.index);
@@ -280,7 +323,7 @@ class EditorScreen extends Screen {
           }
         }
 
-        void clicked() {
+        void pressed() {
           Layer layer = canvas.layers.get(index);
           if (super.isHovering()) {
             if(mouseX >= x + 16 && mouseX < x + 16 + 16 && mouseY >= y + 18 && mouseY < y + 16 + 18) {
@@ -288,8 +331,8 @@ class EditorScreen extends Screen {
               println("Toggled");
             }
             
-            deleteBtn.clicked();
-            opacityBtn.clicked();
+            deleteBtn.pressed();
+            opacityBtn.pressed();
             
             if(mouseX >= x + 32 + 8 && mouseX < x + 32 + + 8 + textWidth(layer.name) && mouseY >= y + 16 && mouseY < y + 16 + 16) {
               String newLayerNameInput = booster.showTextInputDialog("Layer name:");
@@ -316,13 +359,13 @@ class EditorScreen extends Screen {
       navButtons.add(new ContinueButton());
     }
     
-    void clicked() {
+    void pressed() {
       if(super.isHovering()) {
         for(Button b : navButtons) {
-          b.clicked(); 
+          b.pressed(); 
         }
         
-        toolbar.clicked();
+        toolbar.pressed();
       }
     }
     
@@ -341,7 +384,7 @@ class EditorScreen extends Screen {
         super("Back", 12, 12, 100, 40,DARK1, color(255));
       }
       
-      void clicked() {
+      void pressed() {
         if(super.isHovering()) {
           scene--;
         }
@@ -352,7 +395,7 @@ class EditorScreen extends Screen {
       ContinueButton() {
         super("Continue", 1230, 17, 117, 31, PRIMARY, color(255));
       }
-      void clicked() {
+      void pressed() {
         if(super.isHovering()) {
           scene++;
         }
@@ -377,9 +420,9 @@ class EditorScreen extends Screen {
         }
       }
       
-      void clicked() {
+      void pressed() {
         for (Button btn : toolButtons) {
-          btn.clicked();
+          btn.pressed();
         }
       }
       
@@ -398,7 +441,7 @@ class EditorScreen extends Screen {
          super.display();
         }
         
-        void clicked() {
+        void pressed() {
           if (super.isHovering()) {
             drawTool.setActive(!drawTool.isActive());          
             for (Tool tool : tools) {
@@ -427,7 +470,7 @@ class EditorScreen extends Screen {
          super.display();
         }
         
-        void clicked() {
+        void pressed() {
           if (super.isHovering()) {
             moveTool.setActive(!moveTool.isActive()); 
             

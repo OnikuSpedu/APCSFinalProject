@@ -1,12 +1,11 @@
 class SaveScreen extends Screen {
-  ArrayList<UiElement> elements;
   
   SaveScreen() {
     elements = new ArrayList<UiElement>();
     Navbar navbar = new Navbar();
     Sidebar sidebar = new Sidebar();
-    elements.add(navbar);
-    elements.add(sidebar);
+    super.elements.add(navbar);
+    super.elements.add(sidebar);
   }
   
   void display() {
@@ -18,11 +17,7 @@ class SaveScreen extends Screen {
       image(stagedPhoto, (1006-stagedPhoto.width)/2, (704-stagedPhoto.height)/2 + 64);
     }
   }
-  void clicked() {
-    for (UiElement e : elements) {
-      e.clicked();
-    }
-  }
+
   class Navbar extends UiElement {
     
     Navbar() { 
@@ -49,11 +44,11 @@ class SaveScreen extends Screen {
       noBtn = new NoButton();
     }
     
-    void clicked() {
+    void pressed() {
       if(super.isHovering()) {
          println("Sidebar clicked");
-         yesBtn.clicked();
-         noBtn.clicked();
+         yesBtn.pressed();
+         noBtn.pressed();
       }
     }
     
@@ -73,7 +68,7 @@ class SaveScreen extends Screen {
       super("YES", 1048, 367, 117, 34, color(0,255,0), color(255));
     }
     
-    void clicked() {
+    void pressed() {
       if(super.isHovering()) {
         String fileName = booster.showTextInputDialog("What would you like this photo to be named? Also include the file extension name. This will be saved within the gallery/ directory within this sketch.");
         stagedPhoto.save("gallery/"+fileName);
@@ -86,7 +81,7 @@ class SaveScreen extends Screen {
       super("NO", 1207, 367, 117, 34, color(255,0,0), color(255));
     }
     
-    void clicked() {
+    void pressed() {
       if(super.isHovering()) {
         scene--;
       }

@@ -22,9 +22,9 @@ class FilterScreen extends Screen {
       image(stagedPhoto, (1006-stagedPhoto.width)/2, (704-stagedPhoto.height)/2 + 64);
     }
   }
-  void clicked() {
+  void pressed() {
     for (UiElement e : elements) {
-      e.clicked();
+      e.pressed();
     }
   }
   Sidebar getSidebar() {
@@ -72,10 +72,10 @@ class FilterScreen extends Screen {
       filters.add(new FilterOption(rightSobel, 1219, 655));
     }
     
-    void clicked() {
+    void pressed() {
       if(super.isHovering()) {
          for (FilterOption choice : filters) {
-           choice.clicked();
+           choice.pressed();
          }
       }
     }
@@ -104,7 +104,7 @@ class FilterScreen extends Screen {
       
       matrix = k.getKernelMatrix();
     }
-    void clicked() {
+    void pressed() {
       if(super.isHovering()) {
          println("filter option clicked");
          selected = !selected;
@@ -495,12 +495,12 @@ class FilterScreen extends Screen {
       navbarButtons.add(new ContinueButton());
     }
     
-    void clicked() {
+    void pressed() {
       if(super.isHovering()) {
          println("Navbar clicked"); 
          
          for(Button b : navbarButtons) {
-            b.clicked(); 
+            b.pressed(); 
          }
       }
     }
@@ -518,7 +518,7 @@ class FilterScreen extends Screen {
         super("Back", 12, 12, 100, 40,DARK1, color(255));
       }
       
-      void clicked() {
+      void pressed() {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
           scene--;
           stagedPhoto = null;
@@ -534,7 +534,7 @@ class FilterScreen extends Screen {
       ContinueButton() {
         super("Continue", 1230, 17, 117, 31, PRIMARY, color(255));
       }
-      void clicked() {
+      void pressed() {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
           scene++;
         }

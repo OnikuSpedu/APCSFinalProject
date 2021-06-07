@@ -70,9 +70,6 @@ class Canvas extends UiElement{
     
     float aBlue = aColor & 0xFF;
     float bBlue = bColor & 0xFF;
-    
-    //float aAlpha = (alpha(aColor) / 255) * aLayerOpacity;
-    //float bAlpha = (alpha(bColor) / 255) * bLayerOpacity;    
 
     //Calculate A over B
     float compAlphaDecimal = aAlphaDecimal + bAlphaDecimal* (1 - aAlphaDecimal);

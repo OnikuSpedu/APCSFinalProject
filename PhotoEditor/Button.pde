@@ -10,7 +10,7 @@ abstract class Button extends UiElement {
     fontSize = 16;
   }
   
-  abstract void clicked();
+  abstract void pressed();
   
   void display() {
     super.display();
