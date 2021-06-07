@@ -83,7 +83,7 @@ class EditorScreen extends Screen {
       }
       void display() {
         stroke(255);
-        fill(drawTool.c);
+        fill(drawTool.getColor());
         rect(super.x, super.y, super.w, super.h);
       }
       
@@ -91,7 +91,7 @@ class EditorScreen extends Screen {
         if(super.isHovering()) {
           Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
           if(chosenColor != null) {
-            drawTool.c = chosenColor.intValue();
+            drawTool.setColor(chosenColor.intValue());
           }
         }
       }

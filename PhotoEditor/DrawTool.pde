@@ -11,7 +11,7 @@ class DrawTool extends Tool {
   void apply(Layer layer, int x, int y) {
     for (int i = 0 - thickness/2; i <= thickness - thickness/2; i++) {
       for (int j = 0 - thickness/2; j <= thickness - thickness/2; j++) {
-        layer.setPixel(x + i + (int)layer.x,y + j + (int)layer.y, BLACK);
+        layer.setPixel(x + i + (int)layer.x,y + j + (int)layer.y, getColor());
       }  
     }
   }
@@ -32,5 +32,11 @@ class DrawTool extends Tool {
         }  
       }
     }
+  }
+  void setColor(color other) {
+    this.c = other;
+  }
+  color getColor() {
+    return c;
   }
 }
