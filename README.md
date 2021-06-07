@@ -51,7 +51,11 @@ For our final project, we are going to create a photo editor similar to Photosho
     Fixed bugs within Shadman's code which were based on the fact that images in Processing are x by y while 2D arrays are created, traversed, and accessed by row, col order. Created the FilterScreen class and corresponding classes and methods to let the user apply a filter to their image using kernel convolution.
 
 ### June 3, 2021 (Thursday)
-- **Rickey** 🎈  
-    Completed the FilterScreen with all 8 kernel filter options. Created and completed the SaveScreen where users can save their work or continue working.
 - **Shadman** 🧰  
     Created a UI interface so that users can select layers and change a layer's names. I also created a basic draw tool.
+- **Rickey** 🎈  
+    Completed the FilterScreen with all 8 kernel filter options. Created and completed the SaveScreen where users can save their work or continue working.
+
+### June 6, 2021 (Sunday)
+- **Rickey** 🎈  
+    Fixed two major bugs in the project: choosing a color from the color selector not updating and the thumbnail previews for the filters not changing after re-editing.
