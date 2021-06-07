@@ -45,23 +45,23 @@ class Canvas extends UiElement{
   }
   
   color calculatePixel(int x, int y, int layerNum) {
-    if (layerNum == layers.size() - 1) {
-      return layers.get(layerNum).getPixel(x,y);
-    } 
-    
     Layer aLayer = layers.get(layerNum);
     color aColor = aLayer.getPixel(x,y);
     
-    if(alpha(aColor) == 255) {
+    if (layerNum == layers.size() - 1) {
+      return color(aColor >> 16 & 0xFF, aColor >> 8 & 0xFF, aColor & 0xFF, 255 * ((alpha(aColor) / 255) * aLayer.opacity)) ;
+    }
+    
+    if ((layerNum == layers.size() - 1) || (alpha(aColor) == 255 && aLayer.opacity == 1)) {
       return aColor;
     }
     
     color bColor = calculatePixel(x, y, layerNum + 1);
 
-    return overOperator(aColor, bColor, aLayer.opacity, 1);
+    return overOperator(aColor, bColor, alpha(aColor) / 255 * aLayer.opacity, alpha(bColor) / 255);
   }
   
-  color overOperator(color aColor, color bColor, float aLayerOpacity, float bLayerOpacity) {
+  color overOperator(color aColor, color bColor, float aAlphaDecimal, float bAlphaDecimal) {
     float aRed = aColor >> 16 & 0xFF;
     float bRed = bColor >> 16 & 0xFF;
     
@@ -71,16 +71,16 @@ class Canvas extends UiElement{
     float aBlue = aColor & 0xFF;
     float bBlue = bColor & 0xFF;
     
-    float aAlpha = alpha(aColor) / 255 * aLayerOpacity;
-    float bAlpha = alpha(bColor) / 255 * bLayerOpacity;    
+    //float aAlpha = (alpha(aColor) / 255) * aLayerOpacity;
+    //float bAlpha = (alpha(bColor) / 255) * bLayerOpacity;    
 
     //Calculate A over B
-    float compAlpha = aAlpha + bAlpha* (1 - aAlpha);
-    float compRed = ((aRed * aAlpha) + (bRed * bAlpha * (1 - aAlpha))) / compAlpha;
-    float compGreen = ((aGreen * aAlpha) + (bGreen * bAlpha * (1 - aAlpha))) / compAlpha;    
-    float compBlue = ((aBlue * aAlpha) + (bBlue * bAlpha * (1 - aAlpha))) / compAlpha;
+    float compAlphaDecimal = aAlphaDecimal + bAlphaDecimal* (1 - aAlphaDecimal);
+    float compRed = ((aRed * aAlphaDecimal) + (bRed * bAlphaDecimal * (1 - aAlphaDecimal))) / compAlphaDecimal;
+    float compGreen = ((aGreen * aAlphaDecimal) + (bGreen * bAlphaDecimal * (1 - aAlphaDecimal))) / compAlphaDecimal;    
+    float compBlue = ((aBlue * aAlphaDecimal) + (bBlue * bAlphaDecimal * (1 - aAlphaDecimal))) / compAlphaDecimal;
 
-    return color(compRed, compGreen, compBlue, compAlpha * 255);
+    return color(compRed, compGreen, compBlue, compAlphaDecimal * 255);
   }
   
   void addLayer(PImage img) {
@@ -98,7 +98,7 @@ class Canvas extends UiElement{
 
     for(int i = 0; i < h; i++) {
        for(int j = 0; j < w; j++) {
-          set((int) (super.x+j), (int) (super.y+i), overOperator(composition[i][j], color(255), 1, 1));
+          set((int) (super.x+j), (int) (super.y+i), overOperator(composition[i][j], color(255), alpha(composition[i][j]) / 255, 1));
        }
     }
   }

@@ -183,6 +183,7 @@ class EditorScreen extends Screen {
         private int index;
         DeleteLayerButton deleteBtn;
         LayerOpacityButton opacityBtn;
+        
         LayerOptionCard(int index) {
           super(1026, 398 + index * 50,321, 50, DARK2);
           this.index = index;
