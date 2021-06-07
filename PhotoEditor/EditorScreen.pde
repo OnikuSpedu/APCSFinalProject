@@ -128,12 +128,20 @@ class EditorScreen extends Screen {
           for (int i = 0; i < canvas.layers.size(); i++) {
             layerOptionCards.get(i).clicked();
           }
+          
+          if (layerOptionCards.size() > canvas.layers.size()) {
+            for (int i = layerOptionCards.size(); i <  canvas.layers.size(); i++) {
+              layerOptionCards.add(new LayerOptionCard(i));
+            }
+          }
         }
       }
     
       void display() {
-        addLayerBtn.display();
-        importLayerBtn.display();
+        if (canvas.layers.size() < 7) {
+          addLayerBtn.display();
+          importLayerBtn.display();
+        }
         
         textAlign(LEFT, TOP);
         textSize(16);
