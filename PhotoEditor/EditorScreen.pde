@@ -91,7 +91,7 @@ class EditorScreen extends Screen {
         if(super.isHovering()) {
           Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
           if(chosenColor != null) {
-            drawTool.c = chosenColor.intValue();
+            drawTool.c = (chosenColor.intValue());
           }
         }
       }
@@ -181,19 +181,21 @@ class EditorScreen extends Screen {
 
       class LayerOptionCard extends UiElement{
         private int index;
-
+        DeleteLayerButton deleteBtn;
+        
         LayerOptionCard(int index) {
           super(1026, 398 + index * 50,321, 50, DARK2);
           this.index = index;
-
-          addLayerBtn = new AddLayerButton();
-          importLayerBtn = new ImportLayerButton(); 
+          
+          deleteBtn = new DeleteLayerButton(1026 + 321 - 32, 398 + index * 50 + 18, index);
         }
         
         void display() {
           super.display();
           Layer layer = canvas.layers.get(index);
-
+          
+          deleteBtn.display();
+          
           if (layer.selected) {
             fill(PRIMARY);
           } else {
@@ -209,20 +211,72 @@ class EditorScreen extends Screen {
           fill(color(240));
           text(layer.name, x+ 32 + 8, y + 16);
         }
+        
+        class LayerOpacity extends Button {
+          int index;
+          LayerOpacity(float x, float y, int index) {
+            super("x", x, y, 40, 16, BLACK, color(255));
+            this.index = index;
+          }
+          void clicked() {
+            if(super.isHovering()) {
+    
+              String inputWidth = booster.showTextInputDialog("Width:");
+              
+              try {
+                canvasWidth = Integer.parseInt(inputWidth);
+                super.label = inputWidth;
+              } catch (Exception e) {
+                e.printStackTrace();
+              }
+            }
+          }
+        }
+
+        class DeleteLayerButton extends Button {
+          int index;
+          DeleteLayerButton(float x, float y, int index) {
+            super("x", x, y, 16, 16, DARK1, color(255));
+            this.index = index;
+          }
+          
+          void display() {
+            if(canvas.layers.size() > 1) {
+              noStroke();
+              ellipseMode(LEFT);
+              if(isHovering()) {
+                fill(color(255,80,80));
+              } else {
+                fill(super.bgColor);
+              }
+              ellipse(x, y, 16, 16);
+            }
+          }
+          
+          void clicked() {
+            if(super.isHovering()) {
+              if(canvas.layers.size() > 1)
+                canvas.layers.remove(this.index);
+            }
+          }
+        }
 
         void clicked() {
           Layer layer = canvas.layers.get(index);
-          
-          if(mouseX >= x + 16 && mouseX < x + 16 + 16 && mouseY >= y + 18 && mouseY < y + 16 + 18) {
-            layer.selected = !layer.selected;
-            println("Toggled");
-          }
-
-          if(mouseX >= x + 32 + 8 && mouseX < x + 32 + + 8 + textWidth(layer.name) && mouseY >= y + 16 && mouseY < y + 16 + 16) {
-            String newLayerNameInput = booster.showTextInputDialog("Layer name:");
+          if (super.isHovering()) {
+            if(mouseX >= x + 16 && mouseX < x + 16 + 16 && mouseY >= y + 18 && mouseY < y + 16 + 18) {
+              layer.selected = !layer.selected;
+              println("Toggled");
+            }
             
-            if (newLayerNameInput != null && !newLayerNameInput.equals("")) {
-              layer.name = newLayerNameInput;
+            deleteBtn.clicked();
+            
+            if(mouseX >= x + 32 + 8 && mouseX < x + 32 + + 8 + textWidth(layer.name) && mouseY >= y + 16 && mouseY < y + 16 + 16) {
+              String newLayerNameInput = booster.showTextInputDialog("Layer name:");
+              
+              if (newLayerNameInput != null && !newLayerNameInput.equals("")) {
+                layer.name = newLayerNameInput;
+              }
             }
           }
         }
