@@ -212,11 +212,13 @@ class EditorScreen extends Screen {
           text(layer.name, x+ 32 + 8, y + 16);
         }
         
-        class LayerOpacity extends Button {
+        class LayerOpacityButton extends Button {
           int index;
-          LayerOpacity(float x, float y, int index) {
+          LayerOpacityButton(float x, float y, int index) {
             super("x", x, y, 40, 16, BLACK, color(255));
             this.index = index;
+            
+            super.fontSize = 10;
           }
           void clicked() {
             if(super.isHovering()) {
@@ -224,8 +226,8 @@ class EditorScreen extends Screen {
               String inputWidth = booster.showTextInputDialog("Width:");
               
               try {
-                canvasWidth = Integer.parseInt(inputWidth);
-                super.label = inputWidth;
+                Float userLayerOpacity  = Float.parseFloat(inputWidth);
+                canvas.layers.get(index).opacity = userLayerOpacity;
               } catch (Exception e) {
                 e.printStackTrace();
               }

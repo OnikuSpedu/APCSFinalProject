@@ -49,7 +49,8 @@ class Canvas extends UiElement{
       return layers.get(layerNum).getPixel(x,y);
     } 
     
-    color aColor = layers.get(layerNum).getPixel(x,y);
+    Layer aLayer = layers.get(layerNum);
+    color aColor = aLayer.getPixel(x,y);
     
     if(alpha(aColor) == 255) {
       return aColor;
@@ -57,10 +58,10 @@ class Canvas extends UiElement{
     
     color bColor = calculatePixel(x, y, layerNum + 1);
 
-    return overOperator(aColor, bColor);
+    return overOperator(aColor, bColor, aLayer.opacity, 1);
   }
   
-  color overOperator(color aColor, color bColor) {
+  color overOperator(color aColor, color bColor, float aLayerOpacity, float bLayerOpacity) {
     float aRed = aColor >> 16 & 0xFF;
     float bRed = bColor >> 16 & 0xFF;
     
@@ -70,8 +71,8 @@ class Canvas extends UiElement{
     float aBlue = aColor & 0xFF;
     float bBlue = bColor & 0xFF;
     
-    float aAlpha = alpha(aColor) / 255;
-    float bAlpha = alpha(bColor) / 255;    
+    float aAlpha = alpha(aColor) / 255 * aLayerOpacity;
+    float bAlpha = alpha(bColor) / 255 * bLayerOpacity;    
 
     //Calculate A over B
     float compAlpha = aAlpha + bAlpha* (1 - aAlpha);
@@ -97,7 +98,7 @@ class Canvas extends UiElement{
 
     for(int i = 0; i < h; i++) {
        for(int j = 0; j < w; j++) {
-          set((int) (super.x+j), (int) (super.y+i), overOperator(composition[i][j], color(255)));
+          set((int) (super.x+j), (int) (super.y+i), overOperator(composition[i][j], color(255), 1, 1));
        }
     }
   }
