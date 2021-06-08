@@ -33,4 +33,10 @@ class BucketTool extends Tool {
     float bDiff = blue(a) - blue(b);
     return ((rDiff*rDiff) + (gDiff*gDiff) + (bDiff*bDiff)) <= 25*25;
   }
+  void setColor(color other) {
+    this.c = other;
+  }
+  color getColor() {
+    return c;
+  }
 }
