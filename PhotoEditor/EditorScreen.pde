@@ -489,7 +489,28 @@ class EditorScreen extends Screen {
          super("Bucket", 300+117+117, 17, 117, 32, DARK1, color(255));
        }
        
+       void display() {
+         if (bucketTool.isActive()) {
+           super.bgColor = PRIMARY;
+         }
+         else {
+           super.bgColor = DARK1;
+         }
+         
+         super.display();
+       }
        
+       void pressed() {
+         if (super.isHovering()) {
+           bucketTool.setActive(!bucketTool.isActive());
+         }
+         println("Bucket");
+         for (Tool tool : tools) {
+           if (tool != bucketTool) {
+             tool.setActive(false);
+           }
+         }
+       }
      }
     }
   }
