@@ -114,6 +114,10 @@ class Canvas extends UiElement{
       if(moveTool.isActive()) {
          moveTool.pressed();
       }
+      
+      if (bucketTool.isActive()) {
+        bucketTool.apply(mouseX,mouseY);
+      }
     }
     
   }
