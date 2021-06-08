@@ -409,7 +409,8 @@ class EditorScreen extends Screen {
       Toolbar() {
         super(300, 17, 117, 32, DARK1);
         toolButtons.add(new DrawToggleButton());
-        toolButtons.add(new MoveToggleButton());        
+        toolButtons.add(new MoveToggleButton());       
+        toolButtons.add(new BucketToggleButton());
       }
       
       void display() {
@@ -483,6 +484,13 @@ class EditorScreen extends Screen {
           }
         }
       }
+     class BucketToggleButton extends Button {
+       BucketToggleButton() {
+         super("Bucket", 300+117+117, 17, 117, 32, DARK1, color(255));
+       }
+       
+       
+     }
     }
   }
 }
