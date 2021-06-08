@@ -27,4 +27,10 @@ class BucketTool extends Tool {
     apply(layer, x, y+1, previous);
     apply(layer, x, y-1, previous);
   }
+  boolean isSomewhatEqual(color a, color b) {
+    float rDiff = red(a) - red(b);
+    float gDiff = green(a) - green(b);
+    float bDiff = blue(a) - blue(b);
+    return ((rDiff*rDiff) + (gDiff*gDiff) + (bDiff*bDiff)) <= 25*25;
+  }
 }
