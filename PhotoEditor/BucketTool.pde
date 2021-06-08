@@ -14,6 +14,9 @@ class BucketTool extends Tool {
       }
     }
   }
+  void apply(Layer layer, int x, int y) {
+    
+  }
   void apply(Layer layer, int x, int y, color previous) {
     if (x < 0 || x >= layer.layerPixels[0].length || y < 0 || y >= layer.layerPixels.length) {
       return;

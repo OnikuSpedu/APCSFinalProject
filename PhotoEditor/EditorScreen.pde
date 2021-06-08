@@ -502,12 +502,12 @@ class EditorScreen extends Screen {
        
        void pressed() {
          if (super.isHovering()) {
-           bucketTool.setActive(!bucketTool.isActive());
-         }
-         println("Bucket");
-         for (Tool tool : tools) {
-           if (tool != bucketTool) {
-             tool.setActive(false);
+             bucketTool.setActive(!bucketTool.isActive());
+             println("Bucket");
+             for (Tool tool : tools) {
+               if (tool != bucketTool) {
+                 tool.setActive(false);
+             }
            }
          }
        }
