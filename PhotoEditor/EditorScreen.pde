@@ -399,6 +399,7 @@ class EditorScreen extends Screen {
           }
           
           void display() {
+            super.label = Float.toString(canvas.layers.get(index).opacity);
             super.display();
           }
           
