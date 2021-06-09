@@ -57,6 +57,7 @@ void setup() {
   drawTool = new DrawTool();
   moveTool = new MoveTool();
   bucketTool = new BucketTool();
+  eraserTool = new EraserTool();
   
   startScreen = new StartScreen();
   editorScreen = new EditorScreen();
