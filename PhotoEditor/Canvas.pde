@@ -145,6 +145,10 @@ class Canvas extends UiElement{
       if (bucketTool.isActive()) {
         bucketTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
       }
+      
+      if (eraserTool.isActive()) {
+        eraserTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
+      }
     }
     
   }
@@ -168,6 +172,10 @@ class Canvas extends UiElement{
       
       if(moveTool.isActive()) {
         moveTool.apply(mouseX-pmouseX,mouseY-pmouseY);
+      }
+      
+      if (eraserTool.isActive()) {
+        eraserTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
       }
     }
   }
