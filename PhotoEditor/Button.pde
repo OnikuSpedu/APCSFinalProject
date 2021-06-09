@@ -1,35 +1,36 @@
 abstract class Button extends UiElement {
-  private float x, y, w, h;
-  private color bgColor, fontColor;
+  private color fontColor;
   private String label;
+  int fontSize;
   
   Button(String label, float x, float y, float w, float h, color bgColor, color fontColor) { 
+    super(x, y, w, h, bgColor);
     this.label = label;
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.bgColor = bgColor;
     this.fontColor = fontColor;
+    fontSize = 16;
   }
   
-  abstract void click();
+  abstract void pressed();
   
   void display() {
-    fill(bgColor);
-    rect(x, y, w, h);
-    textAlign(CENTER);
-    textSize(16);
+    super.display();
+    
+    textAlign(LEFT, TOP);
+    textSize(fontSize);
     fill(fontColor);
-    text(label, x + (w / 2), y + h / 2 + 6); 
+    text(label, super.x + ((super.w - textWidth(label)) / 2), super.y - 2 + ((super.h - fontSize) / 2)); 
     
     if(isHovering()) {
-        if (mousePressed) 
-          pressedIndicator();
-        else 
-          onHover();
+      if (mousePressed) 
+        pressedIndicator();
+      else 
+        onHover();
     }
     
+  }
+  
+  boolean isHovering() {
+    return super.isHovering();
   }
   
   void onHover() {
@@ -40,12 +41,5 @@ abstract class Button extends UiElement {
   void pressedIndicator() {
     fill(color(0,0,0, 100));
     rect(x, y, w, h);
-  }
-  
-  boolean isHovering() {
-    if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
-        return true;
-    }
-    return false;
   }
 }

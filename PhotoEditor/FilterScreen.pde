@@ -5,9 +5,9 @@ class FilterScreen extends Screen {
   
   FilterScreen() {
       elements = new ArrayList<UiElement>();
-      Toolbar toolbar = new Toolbar();
+      Navbar navbar = new Navbar();
       Sidebar sidebar = new Sidebar();
-      elements.add(toolbar);
+      elements.add(navbar);
       elements.add(sidebar);
   }
   void display() {
@@ -22,22 +22,20 @@ class FilterScreen extends Screen {
       image(stagedPhoto, (1006-stagedPhoto.width)/2, (704-stagedPhoto.height)/2 + 64);
     }
   }
-  void click() {
+  void pressed() {
     for (UiElement e : elements) {
-      e.click();
+      e.pressed();
     }
   }
+  Sidebar getSidebar() {
+    return (Sidebar) elements.get(1);
+  }
   class Sidebar extends UiElement {
-    private float x, y, w, h;
-    private color c;
     private ArrayList<FilterOption> filters;
     
     Sidebar() { 
-      x = 1006;
-      y = 64;
-      w = 360;
-      h = 704;
-      c = DARK3;
+      super(1006, 64, 360, 704, DARK3);
+      
       filters = new ArrayList<FilterOption>();
       Kernel emboss = new Kernel(new float[][] { {-2, -1, 0},
                                                   {-1, 1, 1},
@@ -63,6 +61,7 @@ class FilterScreen extends Screen {
       Kernel rightSobel = new Kernel(new float[][] { {-1, 0, 1},
                                                       {-2, 0, 2},
                                                       {-1, 0, 1} } );
+      
       filters.add(new FilterOption(emboss, 1047, 110));
       filters.add(new FilterOption(outline, 1219, 110));
       filters.add(new FilterOption(blur, 1047, 291));
@@ -73,44 +72,40 @@ class FilterScreen extends Screen {
       filters.add(new FilterOption(rightSobel, 1219, 655));
     }
     
-    void click() {
-      if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
-         println("Sidebar clicked");
+    void pressed() {
+      if(super.isHovering()) {
          for (FilterOption choice : filters) {
-           choice.click();
+           choice.pressed();
          }
       }
     }
     
     void display() {
-      fill(c);
-      noStroke();
-      rect(x, y, w, h);
+      super.display();
+      
       for (FilterOption choice : filters) {
         choice.display();
       }
     }
+    ArrayList<FilterOption> getFilters() {
+      return filters;
+    }
   }
+  
   class FilterOption extends UiElement {
     PImage originalPhoto; //the one that the user has been working on
     PImage newPhoto; //like a newPhoto preview of the kernel option, a thumbnail
-    int x;
-    int y;
-    int w;
-    int h;
     int oneTime = 0;
     boolean selected = false;
     float[][] matrix;
     
     FilterOption(Kernel k, int xcor, int ycor) {
+      super(xcor, ycor, 107, 67, TRANSPARENT);
+      
       matrix = k.getKernelMatrix();
-      w = 107;
-      h = 67;
-      x = xcor;
-      y = ycor;
     }
-    void click() {
-      if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+    void pressed() {
+      if(super.isHovering()) {
          println("filter option clicked");
          selected = !selected;
          if (selected) {
@@ -162,7 +157,10 @@ class FilterScreen extends Screen {
           newPhoto.resize(107, 67);
           oneTime++;
         }
-      image(newPhoto, x, y);
+      image(newPhoto, super.x, super.y);
+    }
+    void setTimes(int updated) {
+      this.oneTime = updated;
     }
   }
   class Kernel {
@@ -486,53 +484,47 @@ class FilterScreen extends Screen {
       }
     }
   }
-  class Toolbar extends UiElement {
-    private int x, y, w, h;
-    private color c;
-    private ArrayList<Button> toolbarButtons = new ArrayList<Button>();
+  
+  class Navbar extends UiElement {
+    private ArrayList<Button> navbarButtons = new ArrayList<Button>();
     
-    Toolbar() { 
-      x = 0;
-      y = 0;
-      w = 1366;
-      h = 64;
-      c = DARK2;
+    Navbar() { 
+      super(0,0,1366,64,DARK2);
       
-      TestButton testBtn = new TestButton();
-      ContinueButton cont = new ContinueButton();
-      toolbarButtons.add(testBtn);
-      toolbarButtons.add(cont);
+      navbarButtons.add(new BackButton());
+      navbarButtons.add(new ContinueButton());
     }
     
-    void click() {
-      if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
-         println("Toolbar clicked"); 
+    void pressed() {
+      if(super.isHovering()) {
+         println("Navbar clicked"); 
          
-         for(Button b : toolbarButtons) {
-            b.click(); 
+         for(Button b : navbarButtons) {
+            b.pressed(); 
          }
       }
     }
     
     void display() {
-      fill(c);
-      noStroke();
-      rect(x, y, w, h);
+      super.display();
       
-      for(Button b : toolbarButtons) {
-            b.display(); 
+      for(Button b : navbarButtons) {
+        b.display(); 
       }
     }
     
-    class TestButton extends Button {
-      TestButton() {
+    class BackButton extends Button {
+      BackButton() {
         super("Back", 12, 12, 100, 40,DARK1, color(255));
       }
       
-      void click() {
+      void pressed() {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
           scene--;
           stagedPhoto = null;
+          for (FilterOption fO : filterScreen.getSidebar().getFilters()) {
+            fO.setTimes(0);
+          }
         }
       }
       
@@ -542,7 +534,7 @@ class FilterScreen extends Screen {
       ContinueButton() {
         super("Continue", 1230, 17, 117, 31, PRIMARY, color(255));
       }
-      void click() {
+      void pressed() {
         if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
           scene++;
         }

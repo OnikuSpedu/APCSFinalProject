@@ -40,8 +40,7 @@ class EditorScreen extends Screen {
     ColorPicker colorPicker;
     RadiusWidget radiusWidget;
     RoundnessWidget roundnessWidget;
-    ToleranceWidget toleranceWidget;
-    
+
     ArrayList<UiElement> elements;
     
     Sidebar() { 
@@ -60,9 +59,6 @@ class EditorScreen extends Screen {
 
       roundnessWidget = new RoundnessWidget();
       elements.add(roundnessWidget);     
-      
-      toleranceWidget = new ToleranceWidget();
-      elements.add(toleranceWidget);  
     }
     
     void pressed() {
@@ -127,16 +123,9 @@ class EditorScreen extends Screen {
             String input = booster.showTextInputDialog("Thickness:");
             
             try {
-              Integer parsedInput = Integer.parseInt(input);
-              if (parsedInput > 0) {
-                drawTool.radius = parsedInput;
-                eraserTool.radius = parsedInput;
-                super.label = input;
-              } else {
-                booster.showErrorDialog("Radius must be an postive integer (greater than 0).", "ERROR"); 
-              }
+              drawTool.radius = Integer.parseInt(input);
+              super.label = input;
             } catch (Exception e) {
-              booster.showErrorDialog("Radius must be an postive integer (greater than 0).", "ERROR"); 
               e.printStackTrace();
             }
           }
@@ -173,16 +162,9 @@ class EditorScreen extends Screen {
             String input = booster.showTextInputDialog("Roundness:");
             
             try {
-              Float parsedInput = Float.parseFloat(input);
-              if (parsedInput >= 0 && parsedInput <= 1) {
-                drawTool.roundness = parsedInput;
-                eraserTool.roundness = parsedInput;
-                super.label = input;
-              } else {
-                booster.showErrorDialog("Tolerance must be a float between 0 and 1 inclusive.", "ERROR"); 
-              }
+              drawTool.roundness = Float.parseFloat(input);
+              super.label = input;
             } catch (Exception e) {
-              booster.showErrorDialog("Roundness must be a float between 0 and 1 inclusive.", "ERROR"); 
               e.printStackTrace();
             }
           }
@@ -202,51 +184,6 @@ class EditorScreen extends Screen {
       }
     }
 
-    class ToleranceWidget extends UiElement{
-      ToleranceInput toleranceInput;
-      ToleranceWidget() {
-        super(1026,80+100+16,280,50, TRANSPARENT);
-        toleranceInput = new ToleranceInput();
-      }
-      
-      class ToleranceInput extends Button {
-        ToleranceInput() {
-          super(Float.toString(bucketTool.tolerance), 1026,80+100+16+24, 132, 30, DARK2, color(255));
-        }
-        void pressed() {
-          if(super.isHovering()) {
-  
-            String input = booster.showTextInputDialog("Tolerance:");
-            
-            try {
-              Float inputParsed = Float.parseFloat(input);
-               if(inputParsed >= 0 && inputParsed <= 1){
-                bucketTool.tolerance = inputParsed;
-                super.label = input;
-               } else {
-                booster.showErrorDialog("Tolerance must be a float between 0 and 1 inclusive.", "ERROR"); 
-               }
-            } catch (Exception e) {
-              booster.showErrorDialog("Tolerance must be a float between 0 and 1 inclusive.", "ERROR"); 
-              e.printStackTrace();
-            }
-          }
-        }
-      }
-      
-      void display() {
-        textAlign(LEFT, TOP);
-        textSize(16);
-        fill(color(240));
-        text("Tolerance:", super.x,super.y);
-        toleranceInput.display();
-      }
-      
-      void pressed() {
-        toleranceInput.pressed();
-      }
-    }
-    
     class LayersOptions extends UiElement {
       
       ArrayList<LayerOptionCard> layerOptionCards;
@@ -318,10 +255,8 @@ class EditorScreen extends Screen {
                     PImage img = loadImage(pathToSelectedFile);
                     canvas.addLayer(img);
                   }          
-                } else {
-                   booster.showErrorDialog("File must be a png, jpg, tga, or gif.", "ERROR"); 
                 }
-            } 
+            }
           }
         }
       }
@@ -351,9 +286,9 @@ class EditorScreen extends Screen {
           this.index = index;
           
           deleteBtn = new DeleteLayerButton(1026 + 321 - 32, 398 + index * 50 + 18, index);
-          upBtn = new MoveUpButton(1026 + 321 - 32 - 32, 398 + index * 50 + 9, index);
-          downBtn = new MoveDownButton(1026 + 321 - 32 - 32, 398 + index * 50 + 9 + 16, index);
-          opacityBtn = new LayerOpacityButton(1026 + 321 - 32 - 40 - 16 - 8 - 24, 398 + index * 50 + 12, index);
+          opacityBtn = new LayerOpacityButton(1026 + 321 - 32 - 40 - 16 - 8, 398 + index * 50 + 12, index);
+          upBtn = new MoveUpButton(1026 + 321 - 32 - 40 - 16 - 8 - 48 - 8, 398 + index * 50 + 12, index);
+          downBtn = new MoveDownButton(1026 + 321 - 32 - 40 - 16 - 8 - 48 - 8, 398 + index * 50 + 12, index);
         }
         
         void display() {
@@ -364,14 +299,8 @@ class EditorScreen extends Screen {
           
           deleteBtn.display();
           opacityBtn.display();
-
-          if(index != canvas.layers.size() - 1) {
-            downBtn.display();
-          }
-
-          if(index != 0) {
-            upBtn.display();
-          }
+          upBtn.display();
+          downBtn.display();
 
           if (layer.selected) {
             fill(PRIMARY);
@@ -399,23 +328,18 @@ class EditorScreen extends Screen {
           }
           
           void display() {
-            super.label = Float.toString(canvas.layers.get(index).opacity);
+            super.label = "" + canvas.layers.get(index).opacity;
             super.display();
           }
           
           void pressed() {
             if(super.isHovering()) {
     
-              String inputWidth = booster.showTextInputDialog("Opacity:");
+              String inputWidth = booster.showTextInputDialog("Width:");
               
               try {
                 Float userLayerOpacity  = Float.parseFloat(inputWidth);
-                if (userLayerOpacity >= 0 && userLayerOpacity <= 1) {
-                  canvas.layers.get(index).opacity = userLayerOpacity;
-                  super.label = "" + userLayerOpacity;
-                } else {
-                  booster.showErrorDialog("Opacity must be a float between 0 and 1 inclusive.", "ERROR"); 
-                }
+                canvas.layers.get(index).opacity = userLayerOpacity;
               } catch (Exception e) {
                 e.printStackTrace();
               }
@@ -454,9 +378,8 @@ class EditorScreen extends Screen {
         class MoveUpButton extends Button {
           int index;
           MoveUpButton(float x, float y, int index) {
-            super("▲", x, y, 24, 16, DARK1, color(255));
+            super("▲", x, y, 32, 16, DARK1, color(255));
             this.index = index;
-            this.fontSize = 10;
           }
           
           void pressed() {
@@ -470,9 +393,8 @@ class EditorScreen extends Screen {
         class MoveDownButton extends Button {
           int index;
           MoveDownButton(float x, float y, int index) {
-            super("▼", x, y, 24, 16, DARK1, color(255));
+            super("▼", x, y, 32, 16, DARK1, color(255));
             this.index = index;
-            this.fontSize = 10;
           }
           
           void pressed() {
@@ -501,8 +423,6 @@ class EditorScreen extends Screen {
               
               if (newLayerNameInput != null && !newLayerNameInput.equals("")) {
                 layer.name = newLayerNameInput;
-              } else {
-                booster.showErrorDialog("Did not change name. Input must be a non-empty string.", "ERROR"); 
               }
             }
           }
@@ -575,7 +495,6 @@ class EditorScreen extends Screen {
         toolButtons.add(new DrawToggleButton());
         toolButtons.add(new MoveToggleButton());       
         toolButtons.add(new BucketToggleButton());
-        toolButtons.add(new EraserToggleButton());
       }
       
       void display() {
@@ -671,34 +590,6 @@ class EditorScreen extends Screen {
              println("Bucket");
              for (Tool tool : tools) {
                if (tool != bucketTool) {
-                 tool.setActive(false);
-             }
-           }
-         }
-       }
-     }
-     class EraserToggleButton extends Button {
-       EraserToggleButton() {
-         super("Eraser", 300+117+117+117, 17, 117, 32, DARK1, color(255));
-       }
-       
-       void display() {
-         if (eraserTool.isActive()) {
-           super.bgColor = PRIMARY;
-         }
-         else {
-           super.bgColor = DARK1;
-         }
-         
-         super.display();
-       }
-       
-       void pressed() {
-         if (super.isHovering()) {
-             eraserTool.setActive(!eraserTool.isActive());
-             println("Eraser");
-             for (Tool tool : tools) {
-               if (tool != eraserTool) {
                  tool.setActive(false);
              }
            }

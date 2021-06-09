@@ -1,6 +1,5 @@
 class StartScreen extends Screen {
 
-  ArrayList<UiElement> elements;
   PImage logo, bgPhoto;
   
   StartScreen() {
@@ -9,19 +8,16 @@ class StartScreen extends Screen {
     CreateCanvas createCanvas = new CreateCanvas();
     ImportCanvas importCanvas = new ImportCanvas();
 
-    elements.add(createCanvas);
-    elements.add(importCanvas);
+    super.elements.add(createCanvas);
+    super.elements.add(importCanvas);
 
 
-    logo = loadImage("Phixel.png");
-    bgPhoto = loadImage("dark-theme-background-0.jpg");
-    
-    bgPhoto.resize(width,height);
+    logo = loadImage("Phixel.png");    
   }
 
 
   void display() {
-    background(DARK4);
+    super.display();
     //image(bgPhoto, 0, 0);
     image(logo, width/2-logo.width/2, 64);
     textAlign(CENTER);
@@ -29,76 +25,51 @@ class StartScreen extends Screen {
     fill(color(240));
     text("To get started, either create a new canvas or upload an image", width / 2,196);
     text("By Shadman Rakib & Rickey Dong", width / 2,height-16-36); 
-    
-    for (UiElement e : elements) {
-      e.display();
-    }
-  }
-
-  void click() {
-    for (UiElement e : elements) {
-      e.click();
-    }
   }
   
-  class CreateCanvas extends UiElement {
-    float x, y, w, h;
-    
-    CreateButton createBtn;
-    WidthButton widthBtn;
-    HeightButton heightBtn;
-
+  class CreateCanvas extends UiElement {   
     ArrayList<Button> buttons;
     
     CreateCanvas() {
-      x = 286;
-      y = 257;
-      w = 369;
-      h = 396;
+      super(286, 257, 369, 396, DARK3);
       
-     buttons = new ArrayList<Button>();
+      buttons = new ArrayList<Button>();
      
-     createBtn = new CreateButton();
-     widthBtn = new WidthButton();
-     heightBtn = new HeightButton();
-     
-     buttons.add(createBtn);
-     buttons.add(widthBtn);
-     buttons.add(heightBtn);
+     buttons.add(new CreateButton());
+     buttons.add(new WidthButton());
+     buttons.add(new HeightButton());
     }
     
     void display() {
-      noStroke();
-      fill(DARK3);
-      rect(x, y, w, h);
+      super.display();
       
       textAlign(LEFT, TOP);
       textSize(20);
       fill(color(240));
-      text("Create A Canvas", x+36,y+36);
+      text("Create A Canvas", super.x+36,super.y+36);
       textSize(16);
-      text("Width:", x+36,362);
-      text("Height:", x+36,423);
+      text("Width:",super.x+36,362);
+      text("Height:", super.x+36,423);
       
       for (Button button : buttons) {
          button.display(); 
       }
     }
     
-    void click() {
-      if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+    void pressed() {
+      if(super.isHovering()) {
         for (Button button : buttons) {
-         button.click(); 
+         button.pressed(); 
         }
       }
     }
     
     class CreateButton extends Button {
       CreateButton() {
-        super("Create", x+36, y+h-48-36, w-36-36, 48,PRIMARY, color(255));
+        super("Create", 286+36, 257+396-48-36, 369-36-36, 48,PRIMARY, color(255));
       }
-      void click() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+      void pressed() {
+        if(super.isHovering()) {
           canvas = new Canvas(canvasWidth, canvasHeight);
           scene++;
         }
@@ -107,17 +78,23 @@ class StartScreen extends Screen {
     
     class WidthButton extends Button {
       WidthButton() {
-        super(Integer.toString(canvasWidth), x+100, 350, 132, 40, DARK2, color(255));
+        super(Integer.toString(canvasWidth), 286+100, 350, 132, 40, DARK2, color(255));
       }
-      void click() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+      void pressed() {
+        if(super.isHovering()) {
 
           String inputWidth = booster.showTextInputDialog("Width:");
           
           try {
-            canvasWidth = Integer.parseInt(inputWidth);
-            super.label = inputWidth;
+            Integer parsedInput = Integer.parseInt(inputWidth);
+            if(parsedInput > 0 && parsedInput <= 650) {
+              canvasWidth = parsedInput;
+              super.label = inputWidth;
+            } else {
+               booster.showErrorDialog("Width must be between 1 and 650 inclusive.", "ERROR");  
+            }
           } catch (Exception e) {
+            booster.showErrorDialog("Width must be between 1 and 650 inclusive.", "ERROR");  
             e.printStackTrace();
           }
         }
@@ -126,17 +103,23 @@ class StartScreen extends Screen {
     
     class HeightButton extends Button {
       HeightButton() {
-        super(Integer.toString(canvasHeight), x+100, 411, 132, 40, DARK2, color(255));
+        super(Integer.toString(canvasHeight), 286+100, 411, 132, 40, DARK2, color(255));
       }
-      void click() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+      void pressed() {
+        if(super.isHovering()) {
 
           String inputHeight = booster.showTextInputDialog("Height:");
           
           try {
-            canvasHeight = Integer.parseInt(inputHeight);
-            super.label = inputHeight;
+            Integer parsedInput = Integer.parseInt(inputHeight);
+            if(parsedInput > 0 && parsedInput <= 650) {
+              canvasWidth = parsedInput;
+              super.label = inputHeight;
+            } else {
+               booster.showErrorDialog("Height must be between 1 and 650 inclusive.", "ERROR");  
+            }
           } catch (Exception e) {
+            booster.showErrorDialog("Height must be between 1 and 650 inclusive.", "ERROR");  
             e.printStackTrace();
           }
         }
@@ -144,9 +127,7 @@ class StartScreen extends Screen {
     }
   }
   
-  class ImportCanvas extends UiElement {
-    float x, y, w, h;
-    
+  class ImportCanvas extends UiElement {    
     ImportButton importBtn;
     UploadButton uploadBtn;
 
@@ -155,10 +136,7 @@ class StartScreen extends Screen {
     ArrayList<Button> buttons;
     
     ImportCanvas() {
-      x = 710;
-      y = 257;
-      w = 369;
-      h = 396;
+      super(710,257,369,396, DARK3);
      
       pathToSelectedFile = "";
       
@@ -172,34 +150,32 @@ class StartScreen extends Screen {
     }
     
     void display() {
-      noStroke();
-      fill(DARK3);
-      rect(x, y, w, h);
+      super.display();
       
       textAlign(LEFT, TOP);
       textSize(20);
       fill(color(240));
-      text("Import An Image", x+36,293);
+      text("Import An Image", 710+36,293);
       
       for (Button button : buttons) {
          button.display(); 
       }
     }
     
-    void click() {
-      if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+    void pressed() {
+      if(super.isHovering()) {
         for (Button button : buttons) {
-         button.click(); 
+         button.pressed(); 
         }
       }
     }
     
     class ImportButton extends Button {
       ImportButton() {
-        super("Import", x+36, y+h-36-48, w-72, 48,PRIMARY, color(255));
+        super("Import", 710+36, 257+396-36-48, 369-72, 48,PRIMARY, color(255));
       }
-      void click() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+      void pressed() {
+        if(super.isHovering()) {
           if(!pathToSelectedFile.equals("") && ((pathToSelectedFile.toLowerCase().endsWith(".jpg") || pathToSelectedFile.toLowerCase().endsWith(".png") || pathToSelectedFile.toLowerCase().endsWith(".tga") || pathToSelectedFile.toLowerCase().endsWith(".gif")))) {
              PImage selectedImage = loadImage(pathToSelectedFile);
              canvas = new Canvas(selectedImage);
@@ -212,7 +188,7 @@ class StartScreen extends Screen {
     class UploadButton extends Button {
       PImage thumbnail;
       UploadButton() {
-        super("Upload An Image", x+36, 350, w-72, 100, DARK2, color(255));
+        super("Upload An Image", 710+36, 350, 369-72, 100, DARK2, color(255));
       }
       
       void display() {
@@ -234,8 +210,8 @@ class StartScreen extends Screen {
         super.display();
       }
       
-      void click() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+      void pressed() {
+        if(super.isHovering()) {
 
           File selected = booster.showFileSelection();
           
@@ -249,14 +225,13 @@ class StartScreen extends Screen {
                 thumbnail.resize((int) ((float) thumbnail.width * ( 150.0 / thumbnail.height )), 150);
               } 
               
-              if (thumbnail.width > w-72) {
-                thumbnail.resize((int) (w-72), (int)  ((float) thumbnail.height * ( (w-72) / thumbnail.width )));
+              if (thumbnail.width > 369-72) {
+                thumbnail.resize((int) (369-72), (int)  ((float) thumbnail.height * ( (369-72) / thumbnail.width )));
               }
             
             }
             
-        }
-
+          }
         }
       }
     }

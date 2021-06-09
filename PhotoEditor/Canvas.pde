@@ -1,40 +1,41 @@
 class Canvas extends UiElement{
   ArrayList<Layer> layers;
-  int x, y, w, h;
   color[][] composition;
   
-  Canvas(int w, int h) {
-    x = (1006-w)/2;
-    y = (704-h)/2 + 64;
-    this.w = w;
-    this.h = h;
+  Canvas(float w, float h) {
+    super((1006-w)/2, (704-h)/2 + 64, w, h, BLACK);
     
     layers = new ArrayList<Layer>();
     
-    layers.add(new Layer(w, h));
+    layers.add(new Layer((int) w, (int) h));
     
-    composition = new color[w][h];
+    composition = new color[(int) h][(int) w];
   }
   
   Canvas(PImage img) {
-    x = (1006-img.width)/2;
-    y = (704-img.height)/2 + 64;
-    this.w = img.width;
-    this.h = img.height;
+    super((1006-650)/2, (704-650)/2 + 64, 650, 650, BLACK);
+    
+    if (img.width < 650) {
+        super.x = (1006-img.width)/2;
+        super.w = img.width;
+    }
+    
+    if (img.height < 650) {
+        super.y = (704-img.height)/2 + 64;
+        super.h = img.height;
+    }
     
     layers = new ArrayList<Layer>();
     
     layers.add(new Layer(img));
     
-    composition = new color[h][w];
+    composition = new color[(int) h][(int) w];
   }
   
   void calculateComposition() {
     for (int i = 0; i < composition.length; i++) {
       for (int j = 0; j < composition[0].length; j++) {
-        
          composition[i][j] = calculatePixel(j, i);
-        
       }
     }
   }
@@ -44,13 +45,28 @@ class Canvas extends UiElement{
   }
   
   color calculatePixel(int x, int y, int layerNum) {
-    if (layerNum == layers.size() - 1) {
-      return layers.get(layerNum).getPixel(x,y);
-    } 
+    Layer aLayer = layers.get(layerNum);
     
-    color aColor = layers.get(layerNum).getPixel(x,y);
+    color aColor = aLayer.getPixel(x,y);
+    
+    if (layerNum == layers.size() - 1) {
+      return color(aColor >> 16 & 0xFF, aColor >> 8 & 0xFF, aColor & 0xFF, 255 * ((alpha(aColor) / 255) * aLayer.opacity)) ;
+    }
+    
+    if ((layerNum == layers.size() - 1) || (alpha(aColor) == 255 && aLayer.opacity == 1)) {
+      return aColor;
+    }
+    
     color bColor = calculatePixel(x, y, layerNum + 1);
+    
+    if ((layerNum < layers.size() - 1 && alpha(aColor) == 0)) {
+      return bColor;
+    }
 
+    return overOperator(aColor, bColor, alpha(aColor) / 255 * aLayer.opacity, alpha(bColor) / 255);
+  }
+  
+  color overOperator(color aColor, color bColor, float aAlphaDecimal, float bAlphaDecimal) {
     float aRed = aColor >> 16 & 0xFF;
     float bRed = bColor >> 16 & 0xFF;
     
@@ -59,17 +75,14 @@ class Canvas extends UiElement{
     
     float aBlue = aColor & 0xFF;
     float bBlue = bColor & 0xFF;
-    
-    float aAlpha = alpha(aColor) / 255;
-    float bAlpha = alpha(bColor) / 255;    
 
     //Calculate A over B
-    float compAlpha = aAlpha + bAlpha* (1 - aAlpha);
-    float compRed = ((aRed * aAlpha) + (bRed * bAlpha * (1 - aAlpha))) / compAlpha;
-    float compGreen = ((aGreen * aAlpha) + (bGreen * bAlpha * (1 - aAlpha))) / compAlpha;    
-    float compBlue = ((aBlue * aAlpha) + (bBlue * bAlpha * (1 - aAlpha))) / compAlpha;
+    float compAlphaDecimal = aAlphaDecimal + bAlphaDecimal* (1 - aAlphaDecimal);
+    float compRed = ((aRed * aAlphaDecimal) + (bRed * bAlphaDecimal * (1 - aAlphaDecimal))) / compAlphaDecimal;
+    float compGreen = ((aGreen * aAlphaDecimal) + (bGreen * bAlphaDecimal * (1 - aAlphaDecimal))) / compAlphaDecimal;    
+    float compBlue = ((aBlue * aAlphaDecimal) + (bBlue * bAlphaDecimal * (1 - aAlphaDecimal))) / compAlphaDecimal;
 
-    return color(compRed, compGreen, compBlue, compAlpha * 255);
+    return color(compRed, compGreen, compBlue, compAlphaDecimal * 255);
   }
   
   void addLayer(PImage img) {
@@ -81,36 +94,92 @@ class Canvas extends UiElement{
   }
   
   void display() {
+    super.display();
+    
     calculateComposition();
+    color bgCheckerBoardColor = color(255);
+    boolean updatedPixel = false;
+    
+    for(int i = 0; i < h; i++) {
+       for(int j = 0; j < w; j++) {
+          updatedPixel = false;
+          if ((i / 10) % 2 == (j / 10) % 2) {
+            bgCheckerBoardColor = color(240);
+          } else {
+            bgCheckerBoardColor = color(255);
+          }
+          
+          for (int l = 0; l < layers.size() && !updatedPixel; l++) {
+            Layer layer = layers.get(l);
+            
+            if (layer.selected) {
 
-    for(int i = 0; i < w; i++) {
-       for(int j = 0; j < h; j++) {
-          set(x+i,y+j, DARK4);
-          set(x+i,y+j, composition[j][i]);
+              if(
+                ((j == layer.x - 1 || j == layer.x + h) && (i >= layer.y - 1 && i < layer.y + h)) ||
+                ((i == layer.y - 1 || i == layer.y + h) && (j >= layer.x - 1 && j < layer.x + h))
+              ) {
+                  updatedPixel = true;
+                  set((int) (super.x+j), (int) (super.y+i), PRIMARY);
+              }
+            }
+          } 
+          
+          if (!updatedPixel) {
+            set((int) (super.x+j), (int) (super.y+i), overOperator(composition[i][j], bgCheckerBoardColor, alpha(composition[i][j]) / 255, 1));
+          }
        }
+    }
+  }
+  
+  color[][] getComposition() {
+    return composition;
+  }
+  
+  void pressed() {
+    if (super.isHovering()) {
+      
+      if(drawTool.isActive()) {
+        drawTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
+      }
+      
+      if(moveTool.isActive()) {
+         moveTool.pressed();
+      }
+      
+      if (bucketTool.isActive()) {
+        bucketTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
+      }
+      
+      if (eraserTool.isActive()) {
+        eraserTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
+      }
     }
     
   }
   
-  void click() {
+  void released() {
+    if (super.isHovering()) {
+      
+      if(moveTool.isActive()) {
+         moveTool.released();
+      }
+    }
     
   }
-  color[][] getComposition() {
-    return composition;
-  }
-
+  
   void dragged() {
-    if (mouseX >= x && mouseX < x+w && mouseY >= y && mouseY < y + h) {
-      drawTool((int) (mouseX-x), (int) (mouseY-y), penColor, 10);
-    }
-  }
-
-  void drawTool(int x, int y, color c, int thickness) {
-    for (Layer layer : canvas.layers) {
-      if (layer.selected) {
-        for (int i = 0 - thickness/2; i <= thickness - thickness/2; ++i) {
-          layer.setPixel(x + i,y + i,c);
-        }  
+    if (super.isHovering()) {
+      
+      if(drawTool.isActive()) {
+        drawTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
+      }
+      
+      if(moveTool.isActive()) {
+        moveTool.apply(mouseX-pmouseX,mouseY-pmouseY);
+      }
+      
+      if (eraserTool.isActive()) {
+        eraserTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
       }
     }
   }

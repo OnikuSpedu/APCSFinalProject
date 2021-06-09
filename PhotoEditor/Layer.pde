@@ -2,7 +2,10 @@ class Layer {
   float x, y, w, h, opacity;
   color[][] layerPixels;
   String name;
-  boolean selected = true;
+  boolean selected = false;
+  boolean shouldMove = false;
+  float xOffset = 0.0; 
+  float yOffset = 0.0; 
   
   Layer(float w, float h) {
     this.x = 0;
@@ -13,7 +16,7 @@ class Layer {
     
     name = "Untitled";
     
-    layerPixels = new color[(int)w][(int)h];
+    layerPixels = new color[(int)h][(int)w];
     
     for (int row = 0; row < layerPixels.length; row++) {
       for (int col = 0; col < layerPixels[row].length; col++) {
@@ -113,8 +116,8 @@ class Layer {
   }
   
   color getPixel(int x, int y) {
-      x += (int) this.x;
-      y += (int) this.y;
+      x -= (int) this.x;
+      y -= (int) this.y;
       if (x >= 0 && x < layerPixels[0].length && y >= 0 && y < layerPixels.length) {
         return layerPixels[y][x];
       } 

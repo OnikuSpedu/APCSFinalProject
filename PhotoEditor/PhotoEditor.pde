@@ -1,14 +1,18 @@
 import uibooster.*;
 import java.util.Arrays;
+import java.util.Collections;
 
 UiBooster booster;
 
+// Global Color Palette
 color BLACK = color(0);
 color DARK4 = color(30,30,30);
 color DARK3 = color(37,37,38);
 color DARK2 = color(45,45,48);
 color DARK1 = color(55,55,60);
 color PRIMARY = color(0,122,204);
+color TRANSPARENT = color(0,0,0,255);
+
 
 /*Scenes
 0 - welcome
@@ -18,16 +22,31 @@ color PRIMARY = color(0,122,204);
 */
 int scene = 0;
 
+// Set default size to 650 x 650
 int canvasWidth = 650;
 int canvasHeight = 650;
 
-color penColor = color(0);
-
+// Create variables for screens
 EditorScreen editorScreen;
 StartScreen startScreen;
 FilterScreen filterScreen;
 SaveScreen saveScreen;
-Canvas canvas = new Canvas(canvasWidth,canvasHeight);
+Canvas canvas;
+
+ArrayList<Screen> screens; // We can use an array instead
+
+//Create variables for draw tools
+DrawTool drawTool;
+MoveTool moveTool;
+BucketTool bucketTool;
+EraserTool eraserTool;
+ArrayList<Tool> tools;
+  
+/*---------------------------------------------------------------------------
+   Setup 
+   - Set window size and background
+   - Initialize scenes and add them to screens ArrayList.
+  ---------------------------------------------------------------------------*/ 
 
 void setup() {
   size(1366,768);
@@ -35,39 +54,56 @@ void setup() {
   
   booster = new UiBooster();
 
-  editorScreen = new EditorScreen();
+  canvas = new Canvas(canvasWidth,canvasHeight);
+  drawTool = new DrawTool();
+  moveTool = new MoveTool();
+  bucketTool = new BucketTool();
+  eraserTool = new EraserTool();
+  
   startScreen = new StartScreen();
+  editorScreen = new EditorScreen();
   filterScreen = new FilterScreen();
   saveScreen = new SaveScreen();
+  
+  screens = new ArrayList<Screen>();
+  
+  screens.add(startScreen);
+  screens.add(editorScreen);
+  screens.add(filterScreen);
+  screens.add(saveScreen);
+  
+  tools = new ArrayList<Tool>();
+  tools.add(drawTool);
+  tools.add(moveTool);
+  tools.add(bucketTool);
+  tools.add(eraserTool);
 }
+
+/*---------------------------------------------------------------------------
+   Draw
+  ---------------------------------------------------------------------------*/
 
 void draw() {
-  if (scene == 0) {
-    startScreen.display();
-  } else if (scene == 1) {
-    editorScreen.display();
-  } else if (scene == 2) {
-    filterScreen.display();
-  } else if (scene == 3) {
-    saveScreen.display();
-  }
+  background(DARK4);
+  screens.get(scene).display();
 }
 
+/*---------------------------------------------------------------------------
+   All mouse interactions
+  ---------------------------------------------------------------------------*/
+  
 void mouseClicked() {
-  if (scene == 0) {
-      startScreen.click();
-  } else if (scene == 1) {
-      editorScreen.click();
-  } else if (scene == 2) {
-      filterScreen.click();
-  } else if (scene == 3) {
-      saveScreen.click();
-  }
+  screens.get(scene).clicked();
 }
 
 void mouseDragged() {
-  if (scene == 1) {
-      editorScreen.dragged();
-      println("dragged");
-  } 
+  screens.get(scene).dragged();
+}
+
+void mousePressed() {
+  screens.get(scene).pressed();
+}
+
+void mouseReleased() {
+  screens.get(scene).released();
 }

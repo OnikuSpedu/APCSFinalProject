@@ -1,12 +1,11 @@
 class SaveScreen extends Screen {
-  ArrayList<UiElement> elements;
   
   SaveScreen() {
     elements = new ArrayList<UiElement>();
-    Toolbar toolbar = new Toolbar();
+    Navbar navbar = new Navbar();
     Sidebar sidebar = new Sidebar();
-    elements.add(toolbar);
-    elements.add(sidebar);
+    super.elements.add(navbar);
+    super.elements.add(sidebar);
   }
   
   void display() {
@@ -18,65 +17,44 @@ class SaveScreen extends Screen {
       image(stagedPhoto, (1006-stagedPhoto.width)/2, (704-stagedPhoto.height)/2 + 64);
     }
   }
-  void click() {
-    for (UiElement e : elements) {
-      e.click();
-    }
-  }
-  class Toolbar extends UiElement {
-    private int x, y, w, h;
-    private color c;
+
+  class Navbar extends UiElement {
     
-    Toolbar() { 
-      x = 0;
-      y = 0;
-      w = 1366;
-      h = 64;
-      c = DARK2;
+    Navbar() { 
+      super(0,0,1366,64,DARK2);
     }
     
-    void click() {
-      if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
-         println("Toolbar clicked"); 
+    void clicked() {
+      if(super.isHovering()) {
+         println("Navbar clicked"); 
       }
     }
-    
-    void display() {
-      fill(c);
-      noStroke();
-      rect(x, y, w, h);
-    }
   }
+  
   class Sidebar extends UiElement {
-    private float x, y, w, h;
-    private color c;
     private String confirmation;
     private YesButton yesBtn;
     private NoButton noBtn;
     
     Sidebar() { 
-      x = 1006;
-      y = 64;
-      w = 360;
-      h = 704;
-      c = DARK3;
+      super(1006, 64, 360, 704, DARK3);
+      
       confirmation = "Is this the image you want to save?";
       yesBtn = new YesButton();
       noBtn = new NoButton();
     }
     
-    void click() {
-      if(mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h) {
+    void pressed() {
+      if(super.isHovering()) {
          println("Sidebar clicked");
-         yesBtn.click();
-         noBtn.click();
+         yesBtn.pressed();
+         noBtn.pressed();
       }
     }
     
     void display() {
-      fill(c);
-      noStroke();
-      rect(x, y, w, h);
+      super.display();
+      
       textAlign(CENTER);
       textSize(18);
       fill(color(255));
@@ -90,11 +68,16 @@ class SaveScreen extends Screen {
       super("YES", 1048, 367, 117, 34, color(0,255,0), color(255));
     }
     
-    void click() {
-      if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
-        String fileName = booster.showTextInputDialog("What would you like this photo to be named? Also include the file extension name. This will be saved within the gallery/ directory within this sketch.");
-        stagedPhoto.save("gallery/"+fileName);
-        exit();
+    void pressed() {
+      if(super.isHovering()) {
+        String fileName = booster.showTextInputDialog("File Name: (Include the file extension name)");
+        if (fileName != null && (fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".tga") || fileName.endsWith(".gif"))) {
+          stagedPhoto.save("gallery/"+fileName);
+          booster.showInfoDialog("Saved! Going to exit now");
+          exit();
+        } else {
+          booster.showErrorDialog("You must provide a file name including the file extension. The file extensions supported are jpg, png, tga, and gif. \nExample: savedPicture.png", "ERROR");
+        }
       }
     }
   }
@@ -103,8 +86,8 @@ class SaveScreen extends Screen {
       super("NO", 1207, 367, 117, 34, color(255,0,0), color(255));
     }
     
-    void click() {
-      if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+    void pressed() {
+      if(super.isHovering()) {
         scene--;
       }
     }
