@@ -96,6 +96,7 @@ class EditorScreen extends Screen {
           Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
           if(chosenColor != null) {
             drawTool.c = (chosenColor.intValue());
+            bucketTool.c = (chosenColor.intValue());
           }
         }
       }
@@ -411,7 +412,8 @@ class EditorScreen extends Screen {
       Toolbar() {
         super(300, 17, 117, 32, DARK1);
         toolButtons.add(new DrawToggleButton());
-        toolButtons.add(new MoveToggleButton());        
+        toolButtons.add(new MoveToggleButton());       
+        toolButtons.add(new BucketToggleButton());
       }
       
       void display() {
@@ -485,6 +487,34 @@ class EditorScreen extends Screen {
           }
         }
       }
+     class BucketToggleButton extends Button {
+       BucketToggleButton() {
+         super("Bucket", 300+117+117, 17, 117, 32, DARK1, color(255));
+       }
+       
+       void display() {
+         if (bucketTool.isActive()) {
+           super.bgColor = PRIMARY;
+         }
+         else {
+           super.bgColor = DARK1;
+         }
+         
+         super.display();
+       }
+       
+       void pressed() {
+         if (super.isHovering()) {
+             bucketTool.setActive(!bucketTool.isActive());
+             println("Bucket");
+             for (Tool tool : tools) {
+               if (tool != bucketTool) {
+                 tool.setActive(false);
+             }
+           }
+         }
+       }
+     }
     }
   }
 }

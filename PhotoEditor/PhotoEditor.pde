@@ -37,6 +37,7 @@ ArrayList<Screen> screens; // We can use an array instead
 //Create variables for draw tools
 DrawTool drawTool;
 MoveTool moveTool;
+BucketTool bucketTool;
 ArrayList<Tool> tools;
   
 /*---------------------------------------------------------------------------
@@ -54,6 +55,7 @@ void setup() {
   canvas = new Canvas(canvasWidth,canvasHeight);
   drawTool = new DrawTool();
   moveTool = new MoveTool();
+  bucketTool = new BucketTool();
   
   startScreen = new StartScreen();
   editorScreen = new EditorScreen();
@@ -69,7 +71,8 @@ void setup() {
   
   tools = new ArrayList<Tool>();
   tools.add(drawTool);
-  tools.add(moveTool);    
+  tools.add(moveTool);
+  tools.add(bucketTool);
 }
 
 /*---------------------------------------------------------------------------

@@ -9,7 +9,7 @@ class Canvas extends UiElement{
     
     layers.add(new Layer((int) w, (int) h));
     
-    composition = new color[(int) w][(int) h];
+    composition = new color[(int) h][(int) w];
   }
   
   Canvas(PImage img) {
@@ -140,6 +140,10 @@ class Canvas extends UiElement{
       
       if(moveTool.isActive()) {
          moveTool.pressed();
+      }
+      
+      if (bucketTool.isActive()) {
+        bucketTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
       }
     }
     
