@@ -47,10 +47,6 @@ class Canvas extends UiElement{
   color calculatePixel(int x, int y, int layerNum) {
     Layer aLayer = layers.get(layerNum);
     
-    if (millis() % 500 == 0) {
-      println(aLayer.x + " " + aLayer.y);
-      println(x + " " +y);
-    }
     color aColor = aLayer.getPixel(x,y);
     
     if (layerNum == layers.size() - 1) {
@@ -113,11 +109,13 @@ class Canvas extends UiElement{
             Layer layer = layers.get(l);
             
             if (layer.selected) {
-              if (millis() % 500 == 0)
-              println(layer.x + " " + layer.y);
-              if((layer.x == j && layer.y == i)) { //|| i == layer.y || i == layer.y + h
+
+              if(
+                ((j == layer.x || j == layer.x + h) && (i >= layer.y && i < layer.y + h)) ||
+                ((i == layer.y || i == layer.y + h) && (j >= layer.x && j < layer.x + h))
+              ) {
                   updatedPixel = true;
-                  set((int) (super.x+j), (int) (super.y+i), BLACK);
+                  set((int) (super.x+j), (int) (super.y+i), PRIMARY);
               }
             }
           } 
