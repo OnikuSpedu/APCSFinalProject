@@ -59,3 +59,7 @@ For our final project, we are going to create a photo editor similar to Photosho
 ### June 6, 2021 (Sunday)
 - **Rickey** 🎈  
     Fixed two major bugs in the project: choosing a color from the color selector not updating and the thumbnail previews for the filters not changing after re-editing.
+
+### June 8, 2021 (Tuesday)
+- **Rickey** 🎈  
+    Completed the bucket tool and completed the eraser tool.
