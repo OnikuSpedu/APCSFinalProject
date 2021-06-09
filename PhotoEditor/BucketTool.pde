@@ -31,6 +31,7 @@ class BucketTool extends Tool {
   void apply(Layer layer, int x, int y) {
     
   }
+  
   boolean apply(Layer layer, boolean[][] visits, int[] coord, color previous) {
     int x = coord[0];
     int y = coord[1];

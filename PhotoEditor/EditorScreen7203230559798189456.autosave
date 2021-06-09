@@ -286,9 +286,9 @@ class EditorScreen extends Screen {
           this.index = index;
           
           deleteBtn = new DeleteLayerButton(1026 + 321 - 32, 398 + index * 50 + 18, index);
-          upBtn = new MoveUpButton(1026 + 321 - 32 - 32, 398 + index * 50 + 9, index);
-          downBtn = new MoveDownButton(1026 + 321 - 32 - 32, 398 + index * 50 + 9 + 16, index);
-          opacityBtn = new LayerOpacityButton(1026 + 321 - 32 - 40 - 16 - 8 - 24, 398 + index * 50 + 12, index);
+          opacityBtn = new LayerOpacityButton(1026 + 321 - 32 - 40 - 16 - 8, 398 + index * 50 + 12, index);
+          upBtn = new MoveUpButton(1026 + 321 - 32 - 40 - 16 - 8 - 48 - 8, 398 + index * 50 + 12, index);
+          downBtn = new MoveDownButton(1026 + 321 - 32 - 40 - 16 - 8 - 48 - 8, 398 + index * 50 + 12, index);
         }
         
         void display() {
@@ -299,14 +299,8 @@ class EditorScreen extends Screen {
           
           deleteBtn.display();
           opacityBtn.display();
-
-          if(index != canvas.layers.size() - 1) {
-            downBtn.display();
-          }
-
-          if(index != 0) {
-            upBtn.display();
-          }
+          upBtn.display();
+          downBtn.display();
 
           if (layer.selected) {
             fill(PRIMARY);
@@ -384,9 +378,8 @@ class EditorScreen extends Screen {
         class MoveUpButton extends Button {
           int index;
           MoveUpButton(float x, float y, int index) {
-            super("▲", x, y, 24, 16, DARK1, color(255));
+            super("▲", x, y, 32, 16, DARK1, color(255));
             this.index = index;
-            this.fontSize = 10;
           }
           
           void pressed() {
@@ -400,9 +393,8 @@ class EditorScreen extends Screen {
         class MoveDownButton extends Button {
           int index;
           MoveDownButton(float x, float y, int index) {
-            super("▼", x, y, 24, 16, DARK1, color(255));
+            super("▼", x, y, 32, 16, DARK1, color(255));
             this.index = index;
-            this.fontSize = 10;
           }
           
           void pressed() {
