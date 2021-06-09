@@ -10,11 +10,11 @@ class BucketTool extends Tool {
   }
   
   void apply(int x, int y) {
+    ArrayDeque<int[]> q = new ArrayDeque<int[]>();
     for (Layer layer : canvas.layers) {
       if (layer.selected) {
          color original = layer.getPixel(x,y);
          boolean[][] visited = new boolean[layer.layerPixels.length][layer.layerPixels[0].length];
-         ArrayDeque<int[]> q = new ArrayDeque<int[]>();
          q.add(new int[] {x, y});
          while (!q.isEmpty()) {
            int[] point = q.remove();
