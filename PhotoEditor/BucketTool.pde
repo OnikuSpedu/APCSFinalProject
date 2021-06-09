@@ -38,18 +38,18 @@ class BucketTool extends Tool {
     int layerX = x - (int)layer.x;
     int layerY = y - (int)layer.y;
          
-    if (x < 0 || x >= layer.layerPixels[0].length || y < 0 || y >= layer.layerPixels.length) {
+    if (layerX < 0 || layerX >= layer.layerPixels[0].length || layerY < 0 || layerY >= layer.layerPixels.length) {
       return false;
     }
     if (!isSomewhatEqual(layer.getPixel(x,y), previous)) {
       return false;
     }
-    if (visits[y][x]) {
+    if (visits[layerY][layerX]) {
       return false;
     }
 
     layer.setPixel(layerX, layerY, this.c);
-    visits[y][x] = true;
+    visits[layerY][layerX] = true;
     return true;
   }
   boolean isSomewhatEqual(color a, color b) {
