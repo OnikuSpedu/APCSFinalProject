@@ -127,10 +127,16 @@ class EditorScreen extends Screen {
             String input = booster.showTextInputDialog("Thickness:");
             
             try {
-              drawTool.radius = Integer.parseInt(input);
-              eraserTool.radius = Integer.parseInt(input);
-              super.label = input;
+              Integer parsedInput = Integer.parseInt(input);
+              if (parsedInput > 0) {
+                drawTool.radius = parsedInput;
+                eraserTool.radius = parsedInput;
+                super.label = input;
+              } else {
+                booster.showErrorDialog("Radius must be an postive integer (greater than 0).", "ERROR"); 
+              }
             } catch (Exception e) {
+              booster.showErrorDialog("Radius must be an postive integer (greater than 0).", "ERROR"); 
               e.printStackTrace();
             }
           }
@@ -167,10 +173,16 @@ class EditorScreen extends Screen {
             String input = booster.showTextInputDialog("Roundness:");
             
             try {
-              drawTool.roundness = Float.parseFloat(input);
-              eraserTool.roundness = Float.parseFloat(input);
-              super.label = input;
+              Float parsedInput = Float.parseFloat(input);
+              if (parsedInput >= 0 && parsedInput <= 1) {
+                drawTool.roundness = parsedInput;
+                eraserTool.roundness = parsedInput;
+                super.label = input;
+              } else {
+                booster.showErrorDialog("Tolerance must be a float between 0 and 1 inclusive.", "ERROR"); 
+              }
             } catch (Exception e) {
+              booster.showErrorDialog("Roundness must be a float between 0 and 1 inclusive.", "ERROR"); 
               e.printStackTrace();
             }
           }
@@ -207,9 +219,15 @@ class EditorScreen extends Screen {
             String input = booster.showTextInputDialog("Tolerance:");
             
             try {
-              bucketTool.tolerance = Float.parseFloat(input);
-              super.label = input;
+              Float inputParsed = Float.parseFloat(input);
+               if(inputParsed >= 0 && inputParsed <= 1){
+                bucketTool.tolerance = inputParsed;
+                super.label = input;
+               } else {
+                booster.showErrorDialog("Tolerance must be a float between 0 and 1 inclusive.", "ERROR"); 
+               }
             } catch (Exception e) {
+              booster.showErrorDialog("Tolerance must be a float between 0 and 1 inclusive.", "ERROR"); 
               e.printStackTrace();
             }
           }
@@ -300,8 +318,10 @@ class EditorScreen extends Screen {
                     PImage img = loadImage(pathToSelectedFile);
                     canvas.addLayer(img);
                   }          
+                } else {
+                   booster.showErrorDialog("File must be a png, jpg, tga, or gif.", "ERROR"); 
                 }
-            }
+            } 
           }
         }
       }
@@ -392,6 +412,8 @@ class EditorScreen extends Screen {
                 if (userLayerOpacity >= 0 && userLayerOpacity <= 1) {
                   canvas.layers.get(index).opacity = userLayerOpacity;
                   super.label = "" + userLayerOpacity;
+                } else {
+                  booster.showErrorDialog("Opacity must be a float between 0 and 1 inclusive.", "ERROR"); 
                 }
               } catch (Exception e) {
                 e.printStackTrace();
@@ -478,6 +500,8 @@ class EditorScreen extends Screen {
               
               if (newLayerNameInput != null && !newLayerNameInput.equals("")) {
                 layer.name = newLayerNameInput;
+              } else {
+                booster.showErrorDialog("Did not change name. Input must be a non-empty string.", "ERROR"); 
               }
             }
           }
