@@ -379,18 +379,20 @@ class EditorScreen extends Screen {
           }
           
           void display() {
-            super.label = "" + canvas.layers.get(index).opacity;
             super.display();
           }
           
           void pressed() {
             if(super.isHovering()) {
     
-              String inputWidth = booster.showTextInputDialog("Width:");
+              String inputWidth = booster.showTextInputDialog("Opacity:");
               
               try {
                 Float userLayerOpacity  = Float.parseFloat(inputWidth);
-                canvas.layers.get(index).opacity = userLayerOpacity;
+                if (userLayerOpacity >= 0 && userLayerOpacity <= 1) {
+                  canvas.layers.get(index).opacity = userLayerOpacity;
+                  super.label = "" + userLayerOpacity;
+                }
               } catch (Exception e) {
                 e.printStackTrace();
               }
