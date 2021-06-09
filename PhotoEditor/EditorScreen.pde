@@ -40,7 +40,8 @@ class EditorScreen extends Screen {
     ColorPicker colorPicker;
     RadiusWidget radiusWidget;
     RoundnessWidget roundnessWidget;
-
+    ToleranceWidget toleranceWidget;
+    
     ArrayList<UiElement> elements;
     
     Sidebar() { 
@@ -59,6 +60,9 @@ class EditorScreen extends Screen {
 
       roundnessWidget = new RoundnessWidget();
       elements.add(roundnessWidget);     
+      
+      toleranceWidget = new ToleranceWidget();
+      elements.add(toleranceWidget);  
     }
     
     void pressed() {
@@ -186,6 +190,45 @@ class EditorScreen extends Screen {
       }
     }
 
+    class ToleranceWidget extends UiElement{
+      ToleranceInput toleranceInput;
+      ToleranceWidget() {
+        super(1026,80+100+16,280,50, TRANSPARENT);
+        toleranceInput = new ToleranceInput();
+      }
+      
+      class ToleranceInput extends Button {
+        ToleranceInput() {
+          super(Float.toString(bucketTool.tolerance), 1026,80+100+16+24, 132, 30, DARK2, color(255));
+        }
+        void pressed() {
+          if(super.isHovering()) {
+  
+            String input = booster.showTextInputDialog("Tolerance:");
+            
+            try {
+              bucketTool.tolerance = Float.parseFloat(input);
+              super.label = input;
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        }
+      }
+      
+      void display() {
+        textAlign(LEFT, TOP);
+        textSize(16);
+        fill(color(240));
+        text("Tolerance:", super.x,super.y);
+        toleranceInput.display();
+      }
+      
+      void pressed() {
+        toleranceInput.pressed();
+      }
+    }
+    
     class LayersOptions extends UiElement {
       
       ArrayList<LayerOptionCard> layerOptionCards;
