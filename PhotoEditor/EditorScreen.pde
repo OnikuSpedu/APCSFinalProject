@@ -244,7 +244,9 @@ class EditorScreen extends Screen {
         }
         
         void display() {
-          super.display();
+          fill(bgColor);
+          stroke(DARK3);
+         rect(x, y, w, h);
           Layer layer = canvas.layers.get(index);
           
           deleteBtn.display();

@@ -46,6 +46,11 @@ class Canvas extends UiElement{
   
   color calculatePixel(int x, int y, int layerNum) {
     Layer aLayer = layers.get(layerNum);
+    
+    if (millis() % 500 == 0) {
+      println(aLayer.x + " " + aLayer.y);
+      println(x + " " +y);
+    }
     color aColor = aLayer.getPixel(x,y);
     
     if (layerNum == layers.size() - 1) {
@@ -92,10 +97,34 @@ class Canvas extends UiElement{
     super.display();
     
     calculateComposition();
-
+    color bgCheckerBoardColor = color(255);
+    boolean updatedPixel = false;
+    
     for(int i = 0; i < h; i++) {
        for(int j = 0; j < w; j++) {
-          set((int) (super.x+j), (int) (super.y+i), overOperator(composition[i][j], color(255), alpha(composition[i][j]) / 255, 1));
+          updatedPixel = false;
+          if ((i / 10) % 2 == (j / 10) % 2) {
+            bgCheckerBoardColor = color(240);
+          } else {
+            bgCheckerBoardColor = color(255);
+          }
+          
+          for (int l = 0; l < layers.size() && !updatedPixel; l++) {
+            Layer layer = layers.get(l);
+            
+            if (layer.selected) {
+              if (millis() % 500 == 0)
+              println(layer.x + " " + layer.y);
+              if((layer.x == j && layer.y == i)) { //|| i == layer.y || i == layer.y + h
+                  updatedPixel = true;
+                  set((int) (super.x+j), (int) (super.y+i), BLACK);
+              }
+            }
+          } 
+          
+          if (!updatedPixel) {
+            set((int) (super.x+j), (int) (super.y+i), overOperator(composition[i][j], bgCheckerBoardColor, alpha(composition[i][j]) / 255, 1));
+          }
        }
     }
   }

@@ -16,7 +16,7 @@ class Layer {
     
     name = "Untitled";
     
-    layerPixels = new color[(int)w][(int)h];
+    layerPixels = new color[(int)h][(int)w];
     
     for (int row = 0; row < layerPixels.length; row++) {
       for (int col = 0; col < layerPixels[row].length; col++) {
