@@ -56,10 +56,30 @@ For our final project, we are going to create a photo editor similar to Photosho
 - **Rickey** 🎈  
     Completed the FilterScreen with all 8 kernel filter options. Created and completed the SaveScreen where users can save their work or continue working.
 
+### June 4, 2021 (Friday)
+- **Shadman** 🧰  
+    Added color selection for draw tool. Added a way to drag layers. Started creating a toolbar.
+    
+### June 5, 2021 (Saturday)
+- **Shadman** 🧰  
+    Removed the pen and move layer tools. Refactored PhotoEditor code to make the code more modular, less redundant, and cleaner. Updated UiElement to include commonly user methods like isHovering. Added a variable in screen to store an arraylist of ui elements. Fixed inconsistent composition array dimensions.
+
 ### June 6, 2021 (Sunday)
+- **Shadman** 🧰  
+    Added default display method to UiElement. Created a layer move tool and a draw tool. Created toolbar UI for move and draw tool. 
 - **Rickey** 🎈  
     Fixed two major bugs in the project: choosing a color from the color selector not updating and the thumbnail previews for the filters not changing after re-editing.
+
+### June 7, 2021 (Monday)
+- **Shadman** 🧰  
+    Added delete layer button. Added layer opacity button. Fixed calculate compositon bug. Hid add layer buttons when there are 7 or more layers. Added a thickness input.
 
 ### June 8, 2021 (Tuesday)
 - **Rickey** 🎈  
     Completed the bucket tool and completed the eraser tool.
+- **Shadman** 🧰  
+    Added a checkerboard pattern to the canvas to indicate transparency. Fixed canvas coordinate system. Added board around selected layers. Fixed the draw tool. Fixed bucket tool. Added draw tool roundness and necessary input in editor screen. Added buttons to swap layer positions.
+    
+### June 9, 2021 (Wednesday)
+- **Shadman** 🧰  
+    Fixed eraser roundness and radius. Fixed bucket tolerance bug. Added validation for all text inputs. fixed layer opacity button bug and layer border bug.
