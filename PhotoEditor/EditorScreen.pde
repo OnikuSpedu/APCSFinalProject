@@ -503,6 +503,7 @@ class EditorScreen extends Screen {
         toolButtons.add(new DrawToggleButton());
         toolButtons.add(new MoveToggleButton());       
         toolButtons.add(new BucketToggleButton());
+        toolButtons.add(new EraserToggleButton());
       }
       
       void display() {
@@ -598,6 +599,34 @@ class EditorScreen extends Screen {
              println("Bucket");
              for (Tool tool : tools) {
                if (tool != bucketTool) {
+                 tool.setActive(false);
+             }
+           }
+         }
+       }
+     }
+     class EraserToggleButton extends Button {
+       EraserToggleButton() {
+         super("Eraser", 300+117+117+117, 17, 117, 32, DARK1, color(255));
+       }
+       
+       void display() {
+         if (eraserTool.isActive()) {
+           super.bgColor = PRIMARY;
+         }
+         else {
+           super.bgColor = DARK1;
+         }
+         
+         super.display();
+       }
+       
+       void pressed() {
+         if (super.isHovering()) {
+             eraserTool.setActive(!eraserTool.isActive());
+             println("Eraser");
+             for (Tool tool : tools) {
+               if (tool != eraserTool) {
                  tool.setActive(false);
              }
            }

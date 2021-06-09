@@ -39,6 +39,7 @@ ArrayList<Screen> screens; // We can use an array instead
 DrawTool drawTool;
 MoveTool moveTool;
 BucketTool bucketTool;
+EraserTool eraserTool;
 ArrayList<Tool> tools;
   
 /*---------------------------------------------------------------------------
@@ -57,6 +58,7 @@ void setup() {
   drawTool = new DrawTool();
   moveTool = new MoveTool();
   bucketTool = new BucketTool();
+  eraserTool = new EraserTool();
   
   startScreen = new StartScreen();
   editorScreen = new EditorScreen();
@@ -74,6 +76,7 @@ void setup() {
   tools.add(drawTool);
   tools.add(moveTool);
   tools.add(bucketTool);
+  tools.add(eraserTool);
 }
 
 /*---------------------------------------------------------------------------
