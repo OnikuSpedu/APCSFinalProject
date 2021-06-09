@@ -58,6 +58,10 @@ class Canvas extends UiElement{
     }
     
     color bColor = calculatePixel(x, y, layerNum + 1);
+    
+    if ((layerNum < layers.size() - 1 && alpha(aColor) == 0)) {
+      return bColor;
+    }
 
     return overOperator(aColor, bColor, alpha(aColor) / 255 * aLayer.opacity, alpha(bColor) / 255);
   }

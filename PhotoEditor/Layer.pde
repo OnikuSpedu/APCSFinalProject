@@ -2,7 +2,7 @@ class Layer {
   float x, y, w, h, opacity;
   color[][] layerPixels;
   String name;
-  boolean selected = true;
+  boolean selected = false;
   boolean shouldMove = false;
   float xOffset = 0.0; 
   float yOffset = 0.0; 
