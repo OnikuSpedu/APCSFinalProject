@@ -115,8 +115,8 @@ class Canvas extends UiElement{
             if (layer.selected) {
 
               if(
-                ((j == layer.x - 1 || j == layer.x + h) && (i >= layer.y - 1 && i < layer.y + h)) ||
-                ((i == layer.y - 1 || i == layer.y + h) && (j >= layer.x - 1 && j < layer.x + h))
+                ((j == layer.x - 1 || j == layer.x + layer.w) && (i >= layer.y - 1 && i < layer.y + layer.h)) ||
+                ((i == layer.y - 1 || i == layer.y + layer.h) && (j >= layer.x - 1 && j < layer.x + layer.w))
               ) {
                   updatedPixel = true;
                   set((int) (super.x+j), (int) (super.y+i), PRIMARY);
