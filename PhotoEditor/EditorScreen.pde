@@ -96,6 +96,7 @@ class EditorScreen extends Screen {
           Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
           if(chosenColor != null) {
             drawTool.c = (chosenColor.intValue());
+            bucketTool.c = (chosenColor.intValue());
           }
         }
       }
