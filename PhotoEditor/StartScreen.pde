@@ -12,10 +12,7 @@ class StartScreen extends Screen {
     super.elements.add(importCanvas);
 
 
-    logo = loadImage("Phixel.png");
-    bgPhoto = loadImage("dark-theme-background-0.jpg");
-    
-    bgPhoto.resize(width,height);
+    logo = loadImage("Phixel.png");    
   }
 
 
@@ -36,7 +33,7 @@ class StartScreen extends Screen {
     CreateCanvas() {
       super(286, 257, 369, 396, DARK3);
       
-     buttons = new ArrayList<Button>();
+      buttons = new ArrayList<Button>();
      
      buttons.add(new CreateButton());
      buttons.add(new WidthButton());
