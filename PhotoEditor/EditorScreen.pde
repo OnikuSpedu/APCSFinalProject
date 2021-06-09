@@ -38,8 +38,9 @@ class EditorScreen extends Screen {
 
     LayersOptions layersOptions;
     ColorPicker colorPicker;
-    ThicknessWidget thicknessWidget;
-    
+    RadiusWidget radiusWidget;
+    RoundnessWidget roundnessWidget;
+
     ArrayList<UiElement> elements;
     
     Sidebar() { 
@@ -53,8 +54,11 @@ class EditorScreen extends Screen {
       colorPicker = new ColorPicker();
       elements.add(colorPicker);
       
-      thicknessWidget = new ThicknessWidget();
-      elements.add(thicknessWidget);      
+      radiusWidget = new RadiusWidget();
+      elements.add(radiusWidget);    
+
+      roundnessWidget = new RoundnessWidget();
+      elements.add(roundnessWidget);     
     }
     
     void pressed() {
@@ -102,16 +106,16 @@ class EditorScreen extends Screen {
       }
     }
     
-    class ThicknessWidget extends UiElement{
-      ThicknessInput thicknessInput;
-      ThicknessWidget() {
+    class RadiusWidget extends UiElement{
+      RadiusInput radiusInput;
+      RadiusWidget() {
         super(1136,80,280,50, TRANSPARENT);
-        thicknessInput = new ThicknessInput();
+        radiusInput = new RadiusInput();
       }
       
-      class ThicknessInput extends Button {
-        ThicknessInput() {
-          super(Integer.toString(drawTool.thickness), 1136, 104, 132, 30, DARK2, color(255));
+      class RadiusInput extends Button {
+        RadiusInput() {
+          super(Integer.toString(drawTool.radius), 1136, 104, 132, 30, DARK2, color(255));
         }
         void pressed() {
           if(super.isHovering()) {
@@ -119,7 +123,7 @@ class EditorScreen extends Screen {
             String input = booster.showTextInputDialog("Thickness:");
             
             try {
-              drawTool.thickness = Integer.parseInt(input);
+              drawTool.radius = Integer.parseInt(input);
               super.label = input;
             } catch (Exception e) {
               e.printStackTrace();
@@ -132,15 +136,54 @@ class EditorScreen extends Screen {
         textAlign(LEFT, TOP);
         textSize(16);
         fill(color(240));
-        text("Thickness:", super.x,super.y);
-        thicknessInput.display();
+        text("Radius:", super.x,super.y);
+        radiusInput.display();
       }
       
       void pressed() {
-        thicknessInput.pressed();
+        radiusInput.pressed();
       }
     }
+
+    class RoundnessWidget extends UiElement{
+      RoundnessInput roundnessInput;
+      RoundnessWidget() {
+        super(1136,140,280,50, TRANSPARENT);
+        roundnessInput = new RoundnessInput();
+      }
+      
+      class RoundnessInput extends Button {
+        RoundnessInput() {
+          super(Float.toString(drawTool.roundness), 1136, 164, 132, 30, DARK2, color(255));
+        }
+        void pressed() {
+          if(super.isHovering()) {
   
+            String input = booster.showTextInputDialog("Roundness:");
+            
+            try {
+              drawTool.roundness = Float.parseFloat(input);
+              super.label = input;
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        }
+      }
+      
+      void display() {
+        textAlign(LEFT, TOP);
+        textSize(16);
+        fill(color(240));
+        text("Roundness:", super.x,super.y);
+        roundnessInput.display();
+      }
+      
+      void pressed() {
+        roundnessInput.pressed();
+      }
+    }
+
     class LayersOptions extends UiElement {
       
       ArrayList<LayerOptionCard> layerOptionCards;

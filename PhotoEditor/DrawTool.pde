@@ -1,17 +1,20 @@
 class DrawTool extends Tool {
   
   color c;
-  int thickness;
-  
+  int radius;
+  float roundness;
+
   DrawTool() {
     c = color(0);
-    thickness = 10;
+    radius = 10;
+    roundness = 1;
   }
   
   void apply(Layer layer, int x, int y) {
-    for (int i = 0 - thickness/2; i <= thickness - thickness/2; i++) {
-      for (int j = 0 - thickness/2; j <= thickness - thickness/2; j++) {
-        layer.setPixel(x + i - (int)layer.x,y + j - (int)layer.y, c);
+    for (int i = 0 - radius; i <= radius; i++) {
+      for (int j = 0 - radius; j <= radius; j++) {
+        if(Math.pow(i*i + j*j, 0.5) <= (radius) + roundness * (Math.pow(2* Math.pow(radius, 2),0.5) - radius))
+          layer.setPixel(x + i - (int)layer.x,y + j - (int)layer.y, c);
       }  
     }
   }
