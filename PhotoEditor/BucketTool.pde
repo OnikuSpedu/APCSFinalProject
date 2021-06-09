@@ -2,9 +2,11 @@ import java.util.ArrayDeque;
 class BucketTool extends Tool {
   
   color c;
-  
+  float sensitivity;
+
   BucketTool() {
     c = color(0);
+    sensitivity = 0.20;
   }
   
   void apply(int x, int y) {
@@ -32,6 +34,10 @@ class BucketTool extends Tool {
   boolean apply(Layer layer, boolean[][] visits, int[] coord, color previous) {
     int x = coord[0];
     int y = coord[1];
+    
+    int layerX = x - (int)layer.x;
+    int layerY = y - (int)layer.y;
+         
     if (x < 0 || x >= layer.layerPixels[0].length || y < 0 || y >= layer.layerPixels.length) {
       return false;
     }
@@ -41,15 +47,16 @@ class BucketTool extends Tool {
     if (visits[y][x]) {
       return false;
     }
-    layer.setPixel(x, y, this.c);
+
+    layer.setPixel(layerX, layerY, this.c);
     visits[y][x] = true;
     return true;
   }
   boolean isSomewhatEqual(color a, color b) {
-    float rDiff = red(a) - red(b);
-    float gDiff = green(a) - green(b);
-    float bDiff = blue(a) - blue(b);
-    return ((rDiff*rDiff) + (gDiff*gDiff) + (bDiff*bDiff)) <= 50*50;
+    float rDiff = (red(a) - red(b)) / 255;
+    float gDiff = (green(a) - green(b)) / 255;
+    float bDiff = (blue(a) - blue(b)) / 255;
+    return ((rDiff*rDiff) + (gDiff*gDiff) + (bDiff*bDiff)) <= sensitivity;
   }
   void setColor(color other) {
     this.c = other;
