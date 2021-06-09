@@ -57,7 +57,8 @@ class BucketTool extends Tool {
     float rDiff = (red(a) - red(b)) / 255;
     float gDiff = (green(a) - green(b)) / 255;
     float bDiff = (blue(a) - blue(b)) / 255;
-    return ((rDiff*rDiff) + (gDiff*gDiff) + (bDiff*bDiff)) <= sensitivity;
+    float aDiff = (alpha(a) - alpha(b)) / 255;
+    return ((rDiff*rDiff) + (gDiff*gDiff) + (bDiff*bDiff) + (aDiff*aDiff)) <= sensitivity;
   }
   void setColor(color other) {
     this.c = other;

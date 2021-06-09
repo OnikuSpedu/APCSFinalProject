@@ -124,6 +124,7 @@ class EditorScreen extends Screen {
             
             try {
               drawTool.radius = Integer.parseInt(input);
+              eraserTool.radius = Integer.parseInt(input);
               super.label = input;
             } catch (Exception e) {
               e.printStackTrace();
@@ -163,6 +164,7 @@ class EditorScreen extends Screen {
             
             try {
               drawTool.roundness = Float.parseFloat(input);
+              eraserTool.roundness = Float.parseFloat(input);
               super.label = input;
             } catch (Exception e) {
               e.printStackTrace();
