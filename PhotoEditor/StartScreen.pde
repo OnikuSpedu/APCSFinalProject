@@ -86,9 +86,15 @@ class StartScreen extends Screen {
           String inputWidth = booster.showTextInputDialog("Width:");
           
           try {
-            canvasWidth = Integer.parseInt(inputWidth);
-            super.label = inputWidth;
+            Integer parsedInput = Integer.parseInt(inputWidth);
+            if(parsedInput > 0 && parsedInput <= 650) {
+              canvasWidth = parsedInput;
+              super.label = inputWidth;
+            } else {
+               booster.showErrorDialog("Width must be between 1 and 650 inclusive.", "ERROR");  
+            }
           } catch (Exception e) {
+            booster.showErrorDialog("Width must be between 1 and 650 inclusive.", "ERROR");  
             e.printStackTrace();
           }
         }
@@ -105,9 +111,15 @@ class StartScreen extends Screen {
           String inputHeight = booster.showTextInputDialog("Height:");
           
           try {
-            canvasHeight = Integer.parseInt(inputHeight);
-            super.label = inputHeight;
+            Integer parsedInput = Integer.parseInt(inputHeight);
+            if(parsedInput > 0 && parsedInput <= 650) {
+              canvasWidth = parsedInput;
+              super.label = inputHeight;
+            } else {
+               booster.showErrorDialog("Height must be between 1 and 650 inclusive.", "ERROR");  
+            }
           } catch (Exception e) {
+            booster.showErrorDialog("Height must be between 1 and 650 inclusive.", "ERROR");  
             e.printStackTrace();
           }
         }
