@@ -54,9 +54,9 @@ class BucketTool extends Tool {
     return true;
   }
   boolean isSomewhatEqual(color a, color b) {
-    float rDiff = ((a >> 16 & 0xFF) - (b >> 16 & 0xFF)) / 255;
-    float gDiff = ((a >> 8 & 0xFF) - (b >> 8 & 0xFF)) / 255;
-    float bDiff = ((a & 0xFF) - (b & 0xFF)) / 255;
+    float rDiff = (red(a) - red(b)) / 255;
+    float gDiff = (green(a) - green(b)) / 255;
+    float bDiff = (blue(a) - blue(b)) / 255;
     float aDiff = (alpha(a) - alpha(b)) / 255;
     return ((rDiff*rDiff) + (gDiff*gDiff) + (bDiff*bDiff) + (aDiff*aDiff)) <= tolerance * tolerance;
   }
