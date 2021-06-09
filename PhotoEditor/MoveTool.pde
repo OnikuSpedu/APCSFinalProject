@@ -7,8 +7,8 @@ class MoveTool extends Tool {
   }
   
   void apply(Layer layer, int x, int y) {
-    layer.x -= x; 
-    layer.y -= y; 
+    layer.x += x; 
+    layer.y += y; 
   }
   
   void pressed() {
