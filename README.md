@@ -17,23 +17,37 @@ For our final project, we are going to create a photo editor similar to Photosho
 4. Download the UIBooster library.
 5. Click the "run" button in the Processing editor.
 
-Screens
-Start Screen
+###Start Screen
+Choose to create a white canvas (max 650 x 650) or import an image. Images over 650 x 650 will not be resized, but users can use the move tool to reposition the image.
 ![image](https://user-images.githubusercontent.com/64807913/121603948-a8347200-ca17-11eb-81c0-51a6f989c5c6.png)
 
-Editor Screen
+###Editor Screen
+Edit and create art.
 ![image](https://user-images.githubusercontent.com/64807913/121603971-b3879d80-ca17-11eb-912e-ae0e536d0c67.png)
+
+Use the navbar continue and back button to navigate through the app. Use the toolbar to select tools to apply to use.
 ![image](https://user-images.githubusercontent.com/64807913/121604003-c601d700-ca17-11eb-9330-9277fb25d4b1.png)
+
+Set the color of the draw and bucket tool. Set the radius and roundness of the draw and eraser tool. Set the tolerance of the bucket tool.
 ![image](https://user-images.githubusercontent.com/64807913/121604029-d1ed9900-ca17-11eb-8713-158c7c3d263c.png)
+
+Add and import new layers. 
 ![image](https://user-images.githubusercontent.com/64807913/121604067-dfa31e80-ca17-11eb-84de-477b4dd6227f.png)
+
+Select a layer by clicking the left most circle. Selected circles are blue. Only layers that are selected can be modified by the tools. Click the layer name to change it. Click the layer opacity button to change the opacity. Move layers up and down using the the up and down buttons. Remove a layer by clicking the right most button. It should turn red on hover.
+
 ![image](https://user-images.githubusercontent.com/64807913/121604099-ef226780-ca17-11eb-9cdb-cc4f4685e15f.png)
+
 ![image](https://user-images.githubusercontent.com/64807913/121604158-07928200-ca18-11eb-9fa2-9f67ae09db48.png)
+
 ![image](https://user-images.githubusercontent.com/64807913/121604186-11b48080-ca18-11eb-81e5-eddf9f25c60b.png)
 
-Filter Screen
+###Filter Screen
+Choose filters to add to your work.
 ![image](https://user-images.githubusercontent.com/64807913/121604322-4cb6b400-ca18-11eb-8305-6c225b5d98d4.png)
 
-Save Screen
+####Save Screen
+Save your artwork.
 ![image](https://user-images.githubusercontent.com/64807913/121604340-550eef00-ca18-11eb-8b92-c3bd27b29907.png)
 
 
