@@ -124,7 +124,7 @@ class EditorScreen extends Screen {
         void pressed() {
           if(super.isHovering()) {
   
-            String input = booster.showTextInputDialog("Thickness:");
+            String input = booster.showTextInputDialog("Radius:");
             
             try {
               Integer parsedInput = Integer.parseInt(input);
