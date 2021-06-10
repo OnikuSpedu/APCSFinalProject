@@ -17,6 +17,26 @@ For our final project, we are going to create a photo editor similar to Photosho
 4. Download the UIBooster library.
 5. Click the "run" button in the Processing editor.
 
+Screens
+Start Screen
+![image](https://user-images.githubusercontent.com/64807913/121603948-a8347200-ca17-11eb-81c0-51a6f989c5c6.png)
+
+Editor Screen
+![image](https://user-images.githubusercontent.com/64807913/121603971-b3879d80-ca17-11eb-912e-ae0e536d0c67.png)
+![image](https://user-images.githubusercontent.com/64807913/121604003-c601d700-ca17-11eb-9330-9277fb25d4b1.png)
+![image](https://user-images.githubusercontent.com/64807913/121604029-d1ed9900-ca17-11eb-8713-158c7c3d263c.png)
+![image](https://user-images.githubusercontent.com/64807913/121604067-dfa31e80-ca17-11eb-84de-477b4dd6227f.png)
+![image](https://user-images.githubusercontent.com/64807913/121604099-ef226780-ca17-11eb-9cdb-cc4f4685e15f.png)
+![image](https://user-images.githubusercontent.com/64807913/121604158-07928200-ca18-11eb-9fa2-9f67ae09db48.png)
+![image](https://user-images.githubusercontent.com/64807913/121604186-11b48080-ca18-11eb-81e5-eddf9f25c60b.png)
+
+Filter Screen
+![image](https://user-images.githubusercontent.com/64807913/121604322-4cb6b400-ca18-11eb-8305-6c225b5d98d4.png)
+
+Save Screen
+![image](https://user-images.githubusercontent.com/64807913/121604340-550eef00-ca18-11eb-8b92-c3bd27b29907.png)
+
+
 ## 📃 Development Log
 ### May 24, 2021 (Monday)
 - **Shadman** 🧰  
@@ -92,3 +112,7 @@ For our final project, we are going to create a photo editor similar to Photosho
     Fixed eraser roundness and radius. Fixed bucket tolerance bug. Added validation for all text inputs. Fixed layer opacity button bug and layer border bug.
 - **Rickey** 🎈  
     Worked with Shadman to find bugs and fix them. Fixed the isSomewhatEqual method for bucket tool where black ink would fill the whole canvas despite there being a black perimeter. Fixed the bug where the stagedPhoto can sometimes stay null when the user goes to the previous screen after not having chosen a filter.
+    
+### June 10, 2021 (Thurday)
+- **Shadman** 🧰  
+    Fixed radius input prompt. Added instructions and documentation to README.md.
