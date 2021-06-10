@@ -18,10 +18,12 @@ For our final project, we are going to create a photo editor similar to Photosho
 5. Click the "run" button in the Processing editor.
 
 ###Start Screen
+
 Choose to create a white canvas (max 650 x 650) or import an image. Images over 650 x 650 will not be resized, but users can use the move tool to reposition the image.
 ![image](https://user-images.githubusercontent.com/64807913/121603948-a8347200-ca17-11eb-81c0-51a6f989c5c6.png)
 
 ###Editor Screen
+
 Edit and create art.
 ![image](https://user-images.githubusercontent.com/64807913/121603971-b3879d80-ca17-11eb-912e-ae0e536d0c67.png)
 
@@ -43,10 +45,12 @@ Select a layer by clicking the left most circle. Selected circles are blue. Only
 ![image](https://user-images.githubusercontent.com/64807913/121604186-11b48080-ca18-11eb-81e5-eddf9f25c60b.png)
 
 ###Filter Screen
+
 Choose filters to add to your work.
 ![image](https://user-images.githubusercontent.com/64807913/121604322-4cb6b400-ca18-11eb-8305-6c225b5d98d4.png)
 
 ####Save Screen
+
 Save your artwork.
 ![image](https://user-images.githubusercontent.com/64807913/121604340-550eef00-ca18-11eb-8b92-c3bd27b29907.png)
 
