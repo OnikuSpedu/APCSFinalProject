@@ -75,11 +75,13 @@ For our final project, we are going to create a photo editor similar to Photosho
     Added delete layer button. Added layer opacity button. Fixed calculate compositon bug. Hid add layer buttons when there are 7 or more layers. Added a thickness input.
 
 ### June 8, 2021 (Tuesday)
-- **Rickey** 🎈  
-    Completed the bucket tool and completed the eraser tool.
 - **Shadman** 🧰  
     Added a checkerboard pattern to the canvas to indicate transparency. Fixed canvas coordinate system. Added board around selected layers. Fixed the draw tool. Fixed bucket tool. Added draw tool roundness and necessary input in editor screen. Added buttons to swap layer positions.
-    
+- **Rickey** 🎈  
+    Completed the bucket tool and completed the eraser tool.
+
 ### June 9, 2021 (Wednesday)
 - **Shadman** 🧰  
-    Fixed eraser roundness and radius. Fixed bucket tolerance bug. Added validation for all text inputs. fixed layer opacity button bug and layer border bug.
+    Fixed eraser roundness and radius. Fixed bucket tolerance bug. Added validation for all text inputs. Fixed layer opacity button bug and layer border bug.
+- **Rickey** 🎈  
+    Worked with Shadman to find bugs and fix them. Fixed the isSomewhatEqual method for bucket tool where black ink would fill the whole canvas despite there being a black perimeter. Fixed the bug where the stagedPhoto can sometimes stay null when the user goes to the previous screen after not having chosen a filter.
