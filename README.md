@@ -10,6 +10,13 @@
 
 For our final project, we are going to create a photo editor similar to Photoshop in Processing. This photo editor would allow users to import a photo from their computer and edit it in the application, and they can save their work at the end. Some features include using kernels to convolute the image, drawing on the picture with various colors, and adding stickers. Image convolution with kernels should account for the border pixels by using edge extension.
 
+**Installation Instructions:**
+
+1. Clone the repository.
+2. Open the PhotoEditor/PhotoEditor.pde file in the Processing editor.
+4. Download the UIBooster library.
+5. Click the "run" button in the Processing editor.
+
 ## 📃 Development Log
 ### May 24, 2021 (Monday)
 - **Shadman** 🧰  
