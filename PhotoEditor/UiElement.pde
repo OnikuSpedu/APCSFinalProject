@@ -22,6 +22,19 @@ class UiElement {
    return mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + h;
  }
  
+ float getX() {
+   return x;
+ }
+ float getY() {
+   return y;
+ }
+ float getW() {
+   return w;
+ }
+ float getH() {
+   return h;
+ }
+ 
  void clicked() {};
  void released() {};
  void pressed() {};
