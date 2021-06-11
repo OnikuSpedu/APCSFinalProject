@@ -1,5 +1,5 @@
 class Screen extends UiElement {
-   private ArrayList<UiElement> elements;
+   ArrayList<UiElement> elements;
    
    Screen() {
      super(0,0, width, height, DARK4);

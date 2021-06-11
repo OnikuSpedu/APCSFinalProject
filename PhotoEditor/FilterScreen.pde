@@ -106,7 +106,6 @@ class FilterScreen extends Screen {
     }
     void pressed() {
       if(super.isHovering()) {
-         println("filter option clicked");
          selected = !selected;
          if (selected) {
            stagedPhoto = originalPhoto.copy();
@@ -119,8 +118,6 @@ class FilterScreen extends Screen {
            another.apply(originalPhoto, tempPhoto);
            loadPixels();
            color[] c = pixels.clone();
-           println(stagedPhoto + "is the staged");
-           println(tempPhoto + " is the temp");
            image(tempPhoto, (1006-stagedPhoto.width)/2, (704-stagedPhoto.height)/2 + 64);
            loadPixels();
            if (Arrays.equals(pixels, c)) {
@@ -500,7 +497,6 @@ class FilterScreen extends Screen {
     
     void pressed() {
       if(super.isHovering()) {
-         println("Navbar clicked"); 
          
          for(Button b : navbarButtons) {
             b.pressed(); 

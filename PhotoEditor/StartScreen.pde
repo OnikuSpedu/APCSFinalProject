@@ -1,6 +1,6 @@
 class StartScreen extends Screen {
 
-  private PImage logo, bgPhoto;
+  private PImage logo;
   
   StartScreen() {
     elements = new ArrayList<UiElement>();

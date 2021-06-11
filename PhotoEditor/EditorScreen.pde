@@ -488,7 +488,6 @@ class EditorScreen extends Screen {
           if (super.isHovering()) {
             if(mouseX >= x + 16 && mouseX < x + 16 + 16 && mouseY >= y + 18 && mouseY < y + 16 + 18) {
               layer.setSelected(!layer.isSelected());
-              println("Toggled");
             }
             
             deleteBtn.pressed();
@@ -614,9 +613,7 @@ class EditorScreen extends Screen {
               if (tool != drawTool) {
                 tool.setActive(false);
               }
-            }
-            
-            println("Draw");
+            }        
           }
         }
       }
@@ -639,8 +636,6 @@ class EditorScreen extends Screen {
         void pressed() {
           if (super.isHovering()) {
             moveTool.setActive(!moveTool.isActive()); 
-            
-            println("Move");
             for (Tool tool : tools) {
               if (tool != moveTool) {
                 tool.setActive(false);
@@ -668,7 +663,6 @@ class EditorScreen extends Screen {
        void pressed() {
          if (super.isHovering()) {
              bucketTool.setActive(!bucketTool.isActive());
-             println("Bucket");
              for (Tool tool : tools) {
                if (tool != bucketTool) {
                  tool.setActive(false);
@@ -696,7 +690,6 @@ class EditorScreen extends Screen {
        void pressed() {
          if (super.isHovering()) {
              eraserTool.setActive(!eraserTool.isActive());
-             println("Eraser");
              for (Tool tool : tools) {
                if (tool != eraserTool) {
                  tool.setActive(false);

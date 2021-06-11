@@ -26,7 +26,6 @@ class SaveScreen extends Screen {
     
     void clicked() {
       if(super.isHovering()) {
-         println("Navbar clicked"); 
       }
     }
   }
@@ -46,7 +45,6 @@ class SaveScreen extends Screen {
     
     void pressed() {
       if(super.isHovering()) {
-         println("Sidebar clicked");
          yesBtn.pressed();
          noBtn.pressed();
       }

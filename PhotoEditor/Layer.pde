@@ -3,9 +3,6 @@ class Layer {
   private color[][] layerPixels;
   private String name;
   private boolean selected = false;
-  private boolean shouldMove = false;
-  private float xOffset = 0.0; 
-  private float yOffset = 0.0; 
   
   Layer(float w, float h) {
     this.x = 0;
