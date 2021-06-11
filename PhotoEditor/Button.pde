@@ -42,4 +42,8 @@ abstract class Button extends UiElement {
     fill(color(0,0,0, 100));
     rect(x, y, w, h);
   }
+  
+  String getLabel() {
+    return label;
+  }
 }

@@ -66,4 +66,7 @@ class BucketTool extends Tool {
   color getColor() {
     return c;
   }
+  float getTolerance() {
+    return tolerance;
+  }
 }

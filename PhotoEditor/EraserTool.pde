@@ -27,4 +27,7 @@ class EraserTool extends Tool {
   int getRadius() {
     return radius;
   }
+  float getRoundness() {
+    return roundness;
+  }
 }
