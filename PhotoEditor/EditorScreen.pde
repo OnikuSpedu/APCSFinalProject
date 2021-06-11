@@ -4,10 +4,10 @@ class EditorScreen extends Screen {
     Navbar navbar = new Navbar();
     Sidebar sidebar = new Sidebar();
     
-    super.elements.add(navbar);
-    super.elements.add(sidebar);
+    super.getElements().add(navbar);
+    super.getElements().add(sidebar);
   }
-      
+
   void display() {
     super.display();
     canvas.display();
@@ -96,15 +96,15 @@ class EditorScreen extends Screen {
       void display() {
         stroke(255);
         fill(drawTool.getColor());
-        rect(super.x, super.y, super.w, super.h);
+        rect(super.getX(), super.getY(), super.getW(), super.getH());
       }
       
       void pressed() {
         if(super.isHovering()) {
           Integer chosenColor = booster.showColorPickerAndGetRGB("Choose your favorite color", "Color picking");
           if(chosenColor != null) {
-            drawTool.c = (chosenColor.intValue());
-            bucketTool.c = (chosenColor.intValue());
+            drawTool.setColor((chosenColor.intValue()));
+            bucketTool.setColor((chosenColor.intValue()));
           }
         }
       }
@@ -119,7 +119,7 @@ class EditorScreen extends Screen {
       
       class RadiusInput extends Button {
         RadiusInput() {
-          super(Integer.toString(drawTool.radius), 1136, 104, 132, 30, DARK2, color(255));
+          super(Integer.toString(drawTool.getRadius()), 1136, 104, 132, 30, DARK2, color(255));
         }
         void pressed() {
           if(super.isHovering()) {
@@ -129,9 +129,9 @@ class EditorScreen extends Screen {
             try {
               Integer parsedInput = Integer.parseInt(input);
               if (parsedInput > 0) {
-                drawTool.radius = parsedInput;
-                eraserTool.radius = parsedInput;
-                super.label = input;
+                drawTool.setRadius(parsedInput);
+                eraserTool.setRadius(parsedInput);
+                super.setLabel(input);
               } else {
                 booster.showErrorDialog("Radius must be an postive integer (greater than 0).", "ERROR"); 
               }
@@ -147,7 +147,7 @@ class EditorScreen extends Screen {
         textAlign(LEFT, TOP);
         textSize(16);
         fill(color(240));
-        text("Radius:", super.x,super.y);
+        text("Radius:", super.getX(),super.getY());
         radiusInput.display();
       }
       
@@ -165,7 +165,7 @@ class EditorScreen extends Screen {
       
       class RoundnessInput extends Button {
         RoundnessInput() {
-          super(Float.toString(drawTool.roundness), 1136, 164, 132, 30, DARK2, color(255));
+          super(Float.toString(drawTool.getRoundness()), 1136, 164, 132, 30, DARK2, color(255));
         }
         void pressed() {
           if(super.isHovering()) {
@@ -175,9 +175,9 @@ class EditorScreen extends Screen {
             try {
               Float parsedInput = Float.parseFloat(input);
               if (parsedInput >= 0 && parsedInput <= 1) {
-                drawTool.roundness = parsedInput;
-                eraserTool.roundness = parsedInput;
-                super.label = input;
+                drawTool.setRoundness(parsedInput);
+                eraserTool.setRoundness(parsedInput);
+                super.setLabel(input);
               } else {
                 booster.showErrorDialog("Tolerance must be a float between 0 and 1 inclusive.", "ERROR"); 
               }
@@ -193,7 +193,7 @@ class EditorScreen extends Screen {
         textAlign(LEFT, TOP);
         textSize(16);
         fill(color(240));
-        text("Roundness:", super.x,super.y);
+        text("Roundness:", super.getX(),super.getY());
         roundnessInput.display();
       }
       
@@ -211,7 +211,7 @@ class EditorScreen extends Screen {
       
       class ToleranceInput extends Button {
         ToleranceInput() {
-          super(Float.toString(bucketTool.tolerance), 1026,80+100+16+24, 132, 30, DARK2, color(255));
+          super(Float.toString(bucketTool.getTolerance()), 1026,80+100+16+24, 132, 30, DARK2, color(255));
         }
         void pressed() {
           if(super.isHovering()) {
@@ -221,8 +221,8 @@ class EditorScreen extends Screen {
             try {
               Float inputParsed = Float.parseFloat(input);
                if(inputParsed >= 0 && inputParsed <= 1){
-                bucketTool.tolerance = inputParsed;
-                super.label = input;
+                bucketTool.setTolerance(inputParsed);
+                super.setLabel(input);
                } else {
                 booster.showErrorDialog("Tolerance must be a float between 0 and 1 inclusive.", "ERROR"); 
                }
@@ -238,7 +238,7 @@ class EditorScreen extends Screen {
         textAlign(LEFT, TOP);
         textSize(16);
         fill(color(240));
-        text("Tolerance:", super.x,super.y);
+        text("Tolerance:", super.getX(),super.getY());
         toleranceInput.display();
       }
       
@@ -275,12 +275,12 @@ class EditorScreen extends Screen {
           addLayerBtn.pressed();
           importLayerBtn.pressed();
 
-          for (int i = 0; i < canvas.layers.size(); i++) {
+          for (int i = 0; i < canvas.getLayers().size(); i++) {
             layerOptionCards.get(i).pressed();
           }
           
-          if (layerOptionCards.size() > canvas.layers.size()) {
-            for (int i = layerOptionCards.size(); i <  canvas.layers.size(); i++) {
+          if (layerOptionCards.size() > canvas.getLayers().size()) {
+            for (int i = layerOptionCards.size(); i <  canvas.getLayers().size(); i++) {
               layerOptionCards.add(new LayerOptionCard(i));
             }
           }
@@ -288,7 +288,7 @@ class EditorScreen extends Screen {
       }
     
       void display() {
-        if (canvas.layers.size() < 7) {
+        if (canvas.getLayers().size() < 7) {
           addLayerBtn.display();
           importLayerBtn.display();
         }
@@ -298,7 +298,7 @@ class EditorScreen extends Screen {
         fill(color(240));
         text("Layer(s)", 1026, y + 16);
 
-        for (int i = 0; i < canvas.layers.size(); i++) {
+        for (int i = 0; i < canvas.getLayers().size(); i++) {
           layerOptionCards.get(i).display();
         }
       } 
@@ -360,12 +360,12 @@ class EditorScreen extends Screen {
           fill(bgColor);
           stroke(DARK3);
          rect(x, y, w, h);
-          Layer layer = canvas.layers.get(index);
+          Layer layer = canvas.getLayers().get(index);
           
           deleteBtn.display();
           opacityBtn.display();
 
-          if(index != canvas.layers.size() - 1) {
+          if(index != canvas.getLayers().size() - 1) {
             downBtn.display();
           }
 
@@ -373,7 +373,7 @@ class EditorScreen extends Screen {
             upBtn.display();
           }
 
-          if (layer.selected) {
+          if (layer.isSelected()) {
             fill(PRIMARY);
           } else {
             fill(DARK1);
@@ -386,7 +386,7 @@ class EditorScreen extends Screen {
           textAlign(LEFT, TOP);
           textSize(14);
           fill(color(240));
-          text(layer.name, x+ 32 + 8, y + 16);
+          text(layer.getname(), x+ 32 + 8, y + 16);
         }
         
         class LayerOpacityButton extends Button {
@@ -395,11 +395,11 @@ class EditorScreen extends Screen {
             super("Loading", x, y, 48, 26, color(40), color(255));
             this.index = index;
             
-            super.fontSize = 10;
+            super.setFontSize(10);
           }
           
           void display() {
-            super.label = Float.toString(canvas.layers.get(index).opacity);
+            super.setLabel(Float.toString(canvas.getLayers().get(index).getOpacity()));
             super.display();
           }
           
@@ -411,8 +411,8 @@ class EditorScreen extends Screen {
               try {
                 Float userLayerOpacity  = Float.parseFloat(inputWidth);
                 if (userLayerOpacity >= 0 && userLayerOpacity <= 1) {
-                  canvas.layers.get(index).opacity = userLayerOpacity;
-                  super.label = "" + userLayerOpacity;
+                  canvas.getLayers().get(index).setOpacity(userLayerOpacity);
+                  super.setLabel("" + userLayerOpacity);
                 } else {
                   booster.showErrorDialog("Opacity must be a float between 0 and 1 inclusive.", "ERROR"); 
                 }
@@ -431,13 +431,13 @@ class EditorScreen extends Screen {
           }
           
           void display() {
-            if(canvas.layers.size() > 1) {
+            if(canvas.getLayers().size() > 1) {
               noStroke();
               ellipseMode(LEFT);
               if(isHovering()) {
                 fill(color(255,80,80));
               } else {
-                fill(super.bgColor);
+                fill(super.getBGColor());
               }
               ellipse(x, y, 16, 16);
             }
@@ -445,8 +445,8 @@ class EditorScreen extends Screen {
           
           void pressed() {
             if(super.isHovering()) {
-              if(canvas.layers.size() > 1)
-                canvas.layers.remove(this.index);
+              if(canvas.getLayers().size() > 1)
+                canvas.getLayers().remove(this.index);
             }
           }
         }
@@ -461,8 +461,8 @@ class EditorScreen extends Screen {
           
           void pressed() {
             if(super.isHovering()) {
-              if(canvas.layers.size() > 1 && index > 0)
-                Collections.swap(canvas.layers,(index), index-1);
+              if(canvas.getLayers().size() > 1 && index > 0)
+                Collections.swap(canvas.getLayers(),(index), index-1);
             }
           }
         }
@@ -477,18 +477,17 @@ class EditorScreen extends Screen {
           
           void pressed() {
             if(super.isHovering()) {
-              if(canvas.layers.size() > 1 && index < canvas.layers.size() - 1)
-                Collections.swap(canvas.layers,(index), index+1);
+              if(canvas.getLayers().size() > 1 && index < canvas.getLayers().size() - 1)
+                Collections.swap(canvas.getLayers(),(index), index+1);
             }
           }
         }
 
         void pressed() {
-          Layer layer = canvas.layers.get(index);
+          Layer layer = canvas.getLayers().get(index);
           if (super.isHovering()) {
             if(mouseX >= x + 16 && mouseX < x + 16 + 16 && mouseY >= y + 18 && mouseY < y + 16 + 18) {
-              layer.selected = !layer.selected;
-              println("Toggled");
+              layer.setSelected(!layer.isSelected());
             }
             
             deleteBtn.pressed();
@@ -496,11 +495,11 @@ class EditorScreen extends Screen {
             upBtn.pressed();
             downBtn.pressed();
 
-            if(mouseX >= x + 32 + 8 && mouseX < x + 32 + + 8 + textWidth(layer.name) && mouseY >= y + 16 && mouseY < y + 16 + 16) {
+            if(mouseX >= x + 32 + 8 && mouseX < x + 32 + + 8 + textWidth(layer.getname()) && mouseY >= y + 16 && mouseY < y + 16 + 16) {
               String newLayerNameInput = booster.showTextInputDialog("Layer name:");
               
               if (newLayerNameInput != null && !newLayerNameInput.equals("")) {
-                layer.name = newLayerNameInput;
+                layer.setname(newLayerNameInput);
               } else {
                 booster.showErrorDialog("Did not change name. Input must be a non-empty string.", "ERROR"); 
               }
@@ -599,9 +598,9 @@ class EditorScreen extends Screen {
         
         void display() {
          if(drawTool.isActive()) {
-           super.bgColor = PRIMARY;
+           super.setBGColor(PRIMARY);
          } else {
-           super.bgColor = DARK1;
+           super.setBGColor(DARK1);
          }
          
          super.display();
@@ -614,9 +613,7 @@ class EditorScreen extends Screen {
               if (tool != drawTool) {
                 tool.setActive(false);
               }
-            }
-            
-            println("Draw");
+            }        
           }
         }
       }
@@ -628,9 +625,9 @@ class EditorScreen extends Screen {
         
         void display() {
          if(moveTool.isActive()) {
-           super.bgColor = PRIMARY;
+           super.setBGColor(PRIMARY);
          } else {
-           super.bgColor = DARK1;
+           super.setBGColor(DARK1);
          }
          
          super.display();
@@ -639,8 +636,6 @@ class EditorScreen extends Screen {
         void pressed() {
           if (super.isHovering()) {
             moveTool.setActive(!moveTool.isActive()); 
-            
-            println("Move");
             for (Tool tool : tools) {
               if (tool != moveTool) {
                 tool.setActive(false);
@@ -656,10 +651,10 @@ class EditorScreen extends Screen {
        
        void display() {
          if (bucketTool.isActive()) {
-           super.bgColor = PRIMARY;
+           super.setBGColor(PRIMARY);
          }
          else {
-           super.bgColor = DARK1;
+           super.setBGColor(DARK1);
          }
          
          super.display();
@@ -668,7 +663,6 @@ class EditorScreen extends Screen {
        void pressed() {
          if (super.isHovering()) {
              bucketTool.setActive(!bucketTool.isActive());
-             println("Bucket");
              for (Tool tool : tools) {
                if (tool != bucketTool) {
                  tool.setActive(false);
@@ -684,10 +678,10 @@ class EditorScreen extends Screen {
        
        void display() {
          if (eraserTool.isActive()) {
-           super.bgColor = PRIMARY;
+           super.setBGColor(PRIMARY);
          }
          else {
-           super.bgColor = DARK1;
+           super.setBGColor(DARK1);
          }
          
          super.display();
@@ -696,7 +690,6 @@ class EditorScreen extends Screen {
        void pressed() {
          if (super.isHovering()) {
              eraserTool.setActive(!eraserTool.isActive());
-             println("Eraser");
              for (Tool tool : tools) {
                if (tool != eraserTool) {
                  tool.setActive(false);

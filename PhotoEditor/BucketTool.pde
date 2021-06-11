@@ -1,8 +1,8 @@
 import java.util.ArrayDeque;
 class BucketTool extends Tool {
   
-  color c;
-  float tolerance;
+  private color c;
+  private float tolerance;
 
   BucketTool() {
     c = color(0);
@@ -11,10 +11,10 @@ class BucketTool extends Tool {
   
   void apply(int x, int y) {
     ArrayDeque<int[]> q = new ArrayDeque<int[]>();
-    for (Layer layer : canvas.layers) {
-      if (layer.selected) {
+    for (Layer layer : canvas.getLayers()) {
+      if (layer.isSelected()) {
          color original = layer.getPixel(x,y);
-         boolean[][] visited = new boolean[layer.layerPixels.length][layer.layerPixels[0].length];
+         boolean[][] visited = new boolean[layer.getLayerPixels().length][layer.getLayerPixels()[0].length];
          q.add(new int[] {x, y});
          while (!q.isEmpty()) {
            int[] point = q.remove();
@@ -36,10 +36,10 @@ class BucketTool extends Tool {
     int x = coord[0];
     int y = coord[1];
     
-    int layerX = x - (int)layer.x;
-    int layerY = y - (int)layer.y;
+    int layerX = x - (int)layer.getX();
+    int layerY = y - (int)layer.getY();
          
-    if (layerX < 0 || layerX >= layer.layerPixels[0].length || layerY < 0 || layerY >= layer.layerPixels.length) {
+    if (layerX < 0 || layerX >= layer.getLayerPixels()[0].length || layerY < 0 || layerY >= layer.getLayerPixels().length) {
       return false;
     }
     if (!isSomewhatEqual(layer.getPixel(x,y), previous)) {
@@ -65,5 +65,11 @@ class BucketTool extends Tool {
   }
   color getColor() {
     return c;
+  }
+  float getTolerance() {
+    return tolerance;
+  }
+  void setTolerance(float other) {
+    tolerance = other;
   }
 }

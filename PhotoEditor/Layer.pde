@@ -1,11 +1,8 @@
 class Layer {
-  float x, y, w, h, opacity;
-  color[][] layerPixels;
-  String name;
-  boolean selected = false;
-  boolean shouldMove = false;
-  float xOffset = 0.0; 
-  float yOffset = 0.0; 
+  private float x, y, w, h, opacity;
+  private color[][] layerPixels;
+  private String name;
+  private boolean selected = false;
   
   Layer(float w, float h) {
     this.x = 0;
@@ -115,6 +112,42 @@ class Layer {
     }
   }
   
+  boolean isSelected() {
+    return selected;
+  }
+  void setSelected(boolean other) {
+    selected = other;
+  }
+  color[][] getLayerPixels() {
+    return layerPixels;
+  }
+  
+  float getX() {
+    return x;
+  }
+  void setX(float other) {
+    x = other;
+  }
+  float getY() {
+    return y;
+  }
+  void setY(float other) {
+    y = other;
+  }
+  float getW() {
+   return w;
+  }
+  
+  float getH() {
+   return h;
+  }
+  
+  float getOpacity() {
+    return opacity;
+  }
+  void setOpacity(float other) {
+    opacity = other;
+  }
   color getPixel(int x, int y) {
       x -= (int) this.x;
       y -= (int) this.y;
@@ -125,6 +158,12 @@ class Layer {
       return color(0,0,0,0);
   }
   
+  String getname() {
+    return name;
+  }
+  void setname(String other) {
+    name = other;
+  }
   boolean setPixel(int x, int y, color c) {
       if (x >= 0 && x < layerPixels[0].length && y >= 0 && y < layerPixels.length) {
         layerPixels[y][x] = c;
