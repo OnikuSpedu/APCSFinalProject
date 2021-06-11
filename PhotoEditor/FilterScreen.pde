@@ -160,7 +160,7 @@ class FilterScreen extends Screen {
           oneTime++;
           stagedPhoto = originalPhoto.copy();
         }
-      image(newPhoto, super.x, super.y);
+      image(newPhoto, super.getX(), super.getY());
     }
     void setTimes(int updated) {
       this.oneTime = updated;
@@ -522,7 +522,7 @@ class FilterScreen extends Screen {
       }
       
       void pressed() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+        if(mouseX >= super.getX() && mouseX < super.getX() + super.getW() && mouseY >= super.getY() && mouseY < super.getY() + super.getH()) {
           scene--;
           stagedPhoto = null;
           for (FilterOption fO : filterScreen.getSidebar().getFilters()) {
@@ -538,7 +538,7 @@ class FilterScreen extends Screen {
         super("Continue", 1230, 17, 117, 31, PRIMARY, color(255));
       }
       void pressed() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+        if(mouseX >= super.getX() && mouseX < super.getX() + super.getW() && mouseY >= super.getY() && mouseY < super.getY() + super.getH()) {
           scene++;
         }
       }
