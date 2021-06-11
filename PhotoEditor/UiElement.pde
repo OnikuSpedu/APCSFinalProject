@@ -34,7 +34,9 @@ class UiElement {
  float getH() {
    return h;
  }
- 
+ color getBGColor() {
+   return bgColor;
+ }
  void clicked() {};
  void released() {};
  void pressed() {};

@@ -153,6 +153,10 @@ class Layer {
       return color(0,0,0,0);
   }
   
+  String getname() {
+    return name;
+  }
+  
   boolean setPixel(int x, int y, color c) {
       if (x >= 0 && x < layerPixels[0].length && y >= 0 && y < layerPixels.length) {
         layerPixels[y][x] = c;
