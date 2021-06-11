@@ -4,8 +4,8 @@ class SaveScreen extends Screen {
     elements = new ArrayList<UiElement>();
     Navbar navbar = new Navbar();
     Sidebar sidebar = new Sidebar();
-    super.elements.add(navbar);
-    super.elements.add(sidebar);
+    super.getElements().add(navbar);
+    super.getElements().add(sidebar);
   }
   
   void display() {
@@ -26,7 +26,6 @@ class SaveScreen extends Screen {
     
     void clicked() {
       if(super.isHovering()) {
-         println("Navbar clicked"); 
       }
     }
   }
@@ -46,7 +45,6 @@ class SaveScreen extends Screen {
     
     void pressed() {
       if(super.isHovering()) {
-         println("Sidebar clicked");
          yesBtn.pressed();
          noBtn.pressed();
       }

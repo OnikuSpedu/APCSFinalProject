@@ -1,7 +1,7 @@
 import java.util.Arrays;
 PImage stagedPhoto; //the photo that is displayed on the work area, gets changed by the kernels
 class FilterScreen extends Screen {
-  ArrayList<UiElement> elements;
+  private ArrayList<UiElement> elements;
   
   FilterScreen() {
       elements = new ArrayList<UiElement>();
@@ -106,7 +106,6 @@ class FilterScreen extends Screen {
     }
     void pressed() {
       if(super.isHovering()) {
-         println("filter option clicked");
          selected = !selected;
          if (selected) {
            stagedPhoto = originalPhoto.copy();
@@ -119,8 +118,6 @@ class FilterScreen extends Screen {
            another.apply(originalPhoto, tempPhoto);
            loadPixels();
            color[] c = pixels.clone();
-           println(stagedPhoto + "is the staged");
-           println(tempPhoto + " is the temp");
            image(tempPhoto, (1006-stagedPhoto.width)/2, (704-stagedPhoto.height)/2 + 64);
            loadPixels();
            if (Arrays.equals(pixels, c)) {
@@ -148,19 +145,11 @@ class FilterScreen extends Screen {
           newPhoto = originalPhoto.copy();
           Kernel k = new Kernel(matrix);
           k.apply(originalPhoto, newPhoto);
-          //if (newPhoto.height > 67) {
-          //   newPhoto.resize((int) ((float) newPhoto.width * ( 67.0 / newPhoto.height )), 67);
-          //   h = newPhoto.height;
-          //} //thumbnail resizing?
-          //if (newPhoto.width > 107) {
-          //   newPhoto.resize((int) 107, (int)  ((float) newPhoto.height * ( 107 / newPhoto.width )));
-          //   w = newPhoto.width;
-          //}
           newPhoto.resize(107, 67);
           oneTime++;
           stagedPhoto = originalPhoto.copy();
         }
-      image(newPhoto, super.x, super.y);
+      image(newPhoto, super.getX(), super.getY());
     }
     void setTimes(int updated) {
       this.oneTime = updated;
@@ -500,7 +489,6 @@ class FilterScreen extends Screen {
     
     void pressed() {
       if(super.isHovering()) {
-         println("Navbar clicked"); 
          
          for(Button b : navbarButtons) {
             b.pressed(); 
@@ -522,7 +510,7 @@ class FilterScreen extends Screen {
       }
       
       void pressed() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+        if(mouseX >= super.getX() && mouseX < super.getX() + super.getW() && mouseY >= super.getY() && mouseY < super.getY() + super.getH()) {
           scene--;
           stagedPhoto = null;
           for (FilterOption fO : filterScreen.getSidebar().getFilters()) {
@@ -538,7 +526,7 @@ class FilterScreen extends Screen {
         super("Continue", 1230, 17, 117, 31, PRIMARY, color(255));
       }
       void pressed() {
-        if(mouseX >= super.x && mouseX < super.x + super.w && mouseY >= super.y && mouseY < super.y + super.h) {
+        if(mouseX >= super.getX() && mouseX < super.getX() + super.getW() && mouseY >= super.getY() && mouseY < super.getY() + super.getH()) {
           scene++;
         }
       }

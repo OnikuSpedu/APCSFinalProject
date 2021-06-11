@@ -1,6 +1,6 @@
 class Canvas extends UiElement{
-  ArrayList<Layer> layers;
-  color[][] composition;
+  private ArrayList<Layer> layers;
+  private color[][] composition;
   
   Canvas(float w, float h) {
     super((1006-w)/2, (704-h)/2 + 64, w, h, BLACK);
@@ -16,13 +16,13 @@ class Canvas extends UiElement{
     super((1006-650)/2, (704-650)/2 + 64, 650, 650, BLACK);
     
     if (img.width < 650) {
-        super.x = (1006-img.width)/2;
-        super.w = img.width;
+        super.setX((1006-img.width)/2);
+        super.setW(img.width);
     }
     
     if (img.height < 650) {
-        super.y = (704-img.height)/2 + 64;
-        super.h = img.height;
+        super.setY((704-img.height)/2 + 64);
+        super.setH(img.height);
     }
     
     layers = new ArrayList<Layer>();
@@ -30,6 +30,10 @@ class Canvas extends UiElement{
     layers.add(new Layer(img));
     
     composition = new color[(int) h][(int) w];
+  }
+  
+  ArrayList<Layer> getLayers() {
+    return layers;
   }
   
   void calculateComposition() {
@@ -50,10 +54,10 @@ class Canvas extends UiElement{
     color aColor = aLayer.getPixel(x,y);
     
     if (layerNum == layers.size() - 1) {
-      return color(aColor >> 16 & 0xFF, aColor >> 8 & 0xFF, aColor & 0xFF, 255 * ((alpha(aColor) / 255) * aLayer.opacity)) ;
+      return color(aColor >> 16 & 0xFF, aColor >> 8 & 0xFF, aColor & 0xFF, 255 * ((alpha(aColor) / 255) * aLayer.getOpacity())) ;
     }
     
-    if ((layerNum == layers.size() - 1) || (alpha(aColor) == 255 && aLayer.opacity == 1)) {
+    if ((layerNum == layers.size() - 1) || (alpha(aColor) == 255 && aLayer.getOpacity() == 1)) {
       return aColor;
     }
     
@@ -63,7 +67,7 @@ class Canvas extends UiElement{
       return bColor;
     }
 
-    return overOperator(aColor, bColor, alpha(aColor) / 255 * aLayer.opacity, alpha(bColor) / 255);
+    return overOperator(aColor, bColor, alpha(aColor) / 255 * aLayer.getOpacity(), alpha(bColor) / 255);
   }
   
   color overOperator(color aColor, color bColor, float aAlphaDecimal, float bAlphaDecimal) {
@@ -112,20 +116,20 @@ class Canvas extends UiElement{
           for (int l = 0; l < layers.size() && !updatedPixel; l++) {
             Layer layer = layers.get(l);
             
-            if (layer.selected) {
+            if (layer.isSelected()) {
 
               if(
-                ((j == layer.x - 1 || j == layer.x + layer.w) && (i >= layer.y - 1 && i < layer.y + layer.h)) ||
-                ((i == layer.y - 1 || i == layer.y + layer.h) && (j >= layer.x - 1 && j < layer.x + layer.w))
+                ((j == layer.getX() - 1 || j == layer.getX() + layer.getW()) && (i >= layer.getY() - 1 && i < layer.getY() + layer.getH())) ||
+                ((i == layer.getY() - 1 || i == layer.getY() + layer.getH()) && (j >= layer.getX() - 1 && j < layer.getX() + layer.getW()))
               ) {
                   updatedPixel = true;
-                  set((int) (super.x+j), (int) (super.y+i), PRIMARY);
+                  set((int) (super.getX()+j), (int) (super.getY()+i), PRIMARY);
               }
             }
           } 
           
           if (!updatedPixel) {
-            set((int) (super.x+j), (int) (super.y+i), overOperator(composition[i][j], bgCheckerBoardColor, alpha(composition[i][j]) / 255, 1));
+            set((int) (super.getX()+j), (int) (super.getY()+i), overOperator(composition[i][j], bgCheckerBoardColor, alpha(composition[i][j]) / 255, 1));
           }
        }
     }
@@ -139,7 +143,7 @@ class Canvas extends UiElement{
     if (super.isHovering()) {
       
       if(drawTool.isActive()) {
-        drawTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
+        drawTool.apply((int) (mouseX-super.getX()), (int) (mouseY-super.getY()));
       }
       
       if(moveTool.isActive()) {
@@ -147,11 +151,11 @@ class Canvas extends UiElement{
       }
       
       if (bucketTool.isActive()) {
-        bucketTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
+        bucketTool.apply((int) (mouseX-super.getX()), (int) (mouseY-super.getY()));
       }
       
       if (eraserTool.isActive()) {
-        eraserTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
+        eraserTool.apply((int) (mouseX-super.getX()), (int) (mouseY-super.getY()));
       }
     }
     
@@ -171,7 +175,7 @@ class Canvas extends UiElement{
     if (super.isHovering()) {
       
       if(drawTool.isActive()) {
-        drawTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
+        drawTool.apply((int) (mouseX-super.getX()), (int) (mouseY-super.getY()));
       }
       
       if(moveTool.isActive()) {
@@ -179,7 +183,7 @@ class Canvas extends UiElement{
       }
       
       if (eraserTool.isActive()) {
-        eraserTool.apply((int) (mouseX-super.x), (int) (mouseY-super.y));
+        eraserTool.apply((int) (mouseX-super.getX()), (int) (mouseY-super.getY()));
       }
     }
   }
