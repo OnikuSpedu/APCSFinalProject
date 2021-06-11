@@ -1,5 +1,5 @@
 abstract class Tool {
-  boolean active;
+  private boolean active;
   
   Tool() {
     active = false;

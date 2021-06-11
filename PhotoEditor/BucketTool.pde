@@ -1,8 +1,8 @@
 import java.util.ArrayDeque;
 class BucketTool extends Tool {
   
-  color c;
-  float tolerance;
+  private color c;
+  private float tolerance;
 
   BucketTool() {
     c = color(0);

@@ -1,6 +1,6 @@
 class MoveTool extends Tool {
    
-  boolean locked; 
+  private boolean locked; 
   
   MoveTool() {
     locked = true;

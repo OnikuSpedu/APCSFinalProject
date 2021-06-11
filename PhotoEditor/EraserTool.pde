@@ -1,7 +1,7 @@
 class EraserTool extends Tool {
   
-  int radius;
-  float roundness;
+  private int radius;
+  private float roundness;
 
   EraserTool() {
     radius = 10;

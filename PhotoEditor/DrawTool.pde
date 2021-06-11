@@ -1,8 +1,8 @@
 class DrawTool extends Tool {
   
-  color c;
-  int radius;
-  float roundness;
+  private color c;
+  private int radius;
+  private float roundness;
 
   DrawTool() {
     c = color(0);

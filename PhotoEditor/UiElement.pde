@@ -1,7 +1,7 @@
 class UiElement {
  
- float x, y, w, h;
- color bgColor;
+ private float x, y, w, h;
+ private color bgColor;
  
  UiElement(float x, float y, float w, float h, color bgColor) {
    this.x = x;

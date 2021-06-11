@@ -1,7 +1,7 @@
 import java.util.Arrays;
 PImage stagedPhoto; //the photo that is displayed on the work area, gets changed by the kernels
 class FilterScreen extends Screen {
-  ArrayList<UiElement> elements;
+  private ArrayList<UiElement> elements;
   
   FilterScreen() {
       elements = new ArrayList<UiElement>();

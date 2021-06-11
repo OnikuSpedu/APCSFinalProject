@@ -1,11 +1,11 @@
 class Layer {
-  float x, y, w, h, opacity;
-  color[][] layerPixels;
-  String name;
-  boolean selected = false;
-  boolean shouldMove = false;
-  float xOffset = 0.0; 
-  float yOffset = 0.0; 
+  private float x, y, w, h, opacity;
+  private color[][] layerPixels;
+  private String name;
+  private boolean selected = false;
+  private boolean shouldMove = false;
+  private float xOffset = 0.0; 
+  private float yOffset = 0.0; 
   
   Layer(float w, float h) {
     this.x = 0;
@@ -135,7 +135,7 @@ class Layer {
     return y;
   }
   void setY(float other) {
-    y = other;
+  
   }
   float getW() {
    return w;
