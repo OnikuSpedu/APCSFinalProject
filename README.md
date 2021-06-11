@@ -141,3 +141,5 @@ Save your artwork. The extensions supported include .png, .jpg, .tga, and .tif. 
 ### June 10, 2021 (Thurday)
 - **Shadman** 🧰  
     Fixed radius input prompt. Added instructions and documentation to README.md.
+- **Rickey** 🎈  
+    Rewrote files that accessed variables directly by creating accessor and mutator methods for better OOP methodology. Updated prototype and UML diagram.
