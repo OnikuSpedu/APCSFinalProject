@@ -18,7 +18,7 @@ abstract class Button extends UiElement {
     textAlign(LEFT, TOP);
     textSize(fontSize);
     fill(fontColor);
-    text(label, super.x + ((super.w - textWidth(label)) / 2), super.y - 2 + ((super.h - fontSize) / 2)); 
+    text(label, super.getX() + ((super.getW() - textWidth(label)) / 2), super.getY() - 2 + ((super.getH() - fontSize) / 2)); 
     
     if(isHovering()) {
       if (mousePressed) 
