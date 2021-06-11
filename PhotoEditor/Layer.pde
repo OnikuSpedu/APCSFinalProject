@@ -128,11 +128,15 @@ class Layer {
   float getX() {
     return x;
   }
-  
+  void setX(float other) {
+    x = other;
+  }
   float getY() {
     return y;
   }
-  
+  void setY(float other) {
+    y = other;
+  }
   float getW() {
    return w;
   }
