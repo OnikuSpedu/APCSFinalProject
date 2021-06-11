@@ -8,8 +8,8 @@ class StartScreen extends Screen {
     CreateCanvas createCanvas = new CreateCanvas();
     ImportCanvas importCanvas = new ImportCanvas();
 
-    super.elements.add(createCanvas);
-    super.elements.add(importCanvas);
+    super.getElements().add(createCanvas);
+    super.getElements().add(importCanvas);
 
 
     logo = loadImage("Phixel.png");    
@@ -46,10 +46,10 @@ class StartScreen extends Screen {
       textAlign(LEFT, TOP);
       textSize(20);
       fill(color(240));
-      text("Create A Canvas", super.x+36,super.y+36);
+      text("Create A Canvas", super.getX()+36,super.getY()+36);
       textSize(16);
-      text("Width:",super.x+36,362);
-      text("Height:", super.x+36,423);
+      text("Width:",super.getX()+36,362);
+      text("Height:", super.getX()+36,423);
       
       for (Button button : buttons) {
          button.display(); 
@@ -89,7 +89,7 @@ class StartScreen extends Screen {
             Integer parsedInput = Integer.parseInt(inputWidth);
             if(parsedInput > 0 && parsedInput <= 650) {
               canvasWidth = parsedInput;
-              super.label = inputWidth;
+              super.setLabel(inputWidth);
             } else {
                booster.showErrorDialog("Width must be between 1 and 650 inclusive.", "ERROR");  
             }
@@ -114,7 +114,7 @@ class StartScreen extends Screen {
             Integer parsedInput = Integer.parseInt(inputHeight);
             if(parsedInput > 0 && parsedInput <= 650) {
               canvasWidth = parsedInput;
-              super.label = inputHeight;
+              super.setLabel(inputHeight);
             } else {
                booster.showErrorDialog("Height must be between 1 and 650 inclusive.", "ERROR");  
             }
@@ -193,18 +193,18 @@ class StartScreen extends Screen {
       
       void display() {
         if (pathToSelectedFile != null && !pathToSelectedFile.equals("")) {
-          super.y = 520;
-          super.h = 40;
-          super.label = "Replace Image";
+          super.setY(520);
+          super.setH(40);
+          super.setLabel("Replace Image");
           
           if (thumbnail != null && thumbnail.width > 0 && thumbnail.height > 0) {
               image(thumbnail, x+36, 330);
           }
           
         } else {
-          super.label = "Upload An Image";
-          super.y = 350;
-          super.h = 100;
+          super.setLabel("Upload An Image");
+          super.setY(350);
+          super.setH(100);
         }
         
         super.display();
