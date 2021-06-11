@@ -76,7 +76,7 @@ class SaveScreen extends Screen {
           booster.showInfoDialog("Saved! Going to exit now");
           exit();
         } else {
-          booster.showErrorDialog("You must provide a file name including the file extension. The file extensions supported are jpg, png, tga, and tif. \nExample: savedPicture.png", "ERROR");
+          booster.showErrorDialog("You must provide a file name including the file extension. The file extensions supported are .jpg, .png, .tga, and .tif. \nExample: savedPicture.png", "ERROR");
         }
       }
     }
