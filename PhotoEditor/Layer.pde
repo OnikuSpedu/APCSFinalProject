@@ -131,6 +131,18 @@ class Layer {
     return y;
   }
   
+  float getW() {
+   return w;
+  }
+  
+  float getH() {
+   return h;
+  }
+  
+  float getOpacity() {
+    return opacity;
+  }
+  
   color getPixel(int x, int y) {
       x -= (int) this.x;
       y -= (int) this.y;
