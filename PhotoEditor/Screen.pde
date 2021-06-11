@@ -37,4 +37,7 @@ class Screen extends UiElement {
         e.released();
      }
    }
+   ArrayList<UiElement> getElements() {
+     return elements;
+   }
 }
