@@ -4,8 +4,8 @@ class SaveScreen extends Screen {
     elements = new ArrayList<UiElement>();
     Navbar navbar = new Navbar();
     Sidebar sidebar = new Sidebar();
-    super.elements.add(navbar);
-    super.elements.add(sidebar);
+    super.getElements().add(navbar);
+    super.getElements().add(sidebar);
   }
   
   void display() {
