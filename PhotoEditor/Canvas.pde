@@ -1,6 +1,6 @@
 class Canvas extends UiElement{
-  ArrayList<Layer> layers;
-  color[][] composition;
+  private ArrayList<Layer> layers;
+  private color[][] composition;
   
   Canvas(float w, float h) {
     super((1006-w)/2, (704-h)/2 + 64, w, h, BLACK);
