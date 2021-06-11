@@ -32,6 +32,10 @@ class Canvas extends UiElement{
     composition = new color[(int) h][(int) w];
   }
   
+  ArrayList<Layer> getLayers() {
+    return layers;
+  }
+  
   void calculateComposition() {
     for (int i = 0; i < composition.length; i++) {
       for (int j = 0; j < composition[0].length; j++) {
