@@ -145,14 +145,6 @@ class FilterScreen extends Screen {
           newPhoto = originalPhoto.copy();
           Kernel k = new Kernel(matrix);
           k.apply(originalPhoto, newPhoto);
-          //if (newPhoto.height > 67) {
-          //   newPhoto.resize((int) ((float) newPhoto.width * ( 67.0 / newPhoto.height )), 67);
-          //   h = newPhoto.height;
-          //} //thumbnail resizing?
-          //if (newPhoto.width > 107) {
-          //   newPhoto.resize((int) 107, (int)  ((float) newPhoto.height * ( 107 / newPhoto.width )));
-          //   w = newPhoto.width;
-          //}
           newPhoto.resize(107, 67);
           oneTime++;
           stagedPhoto = originalPhoto.copy();
