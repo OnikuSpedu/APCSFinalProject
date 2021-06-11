@@ -8,7 +8,7 @@
 
 **Brief Project Description:**
 
-For our final project, we are going to create a photo editor similar to Photoshop in Processing. This photo editor would allow users to import a photo from their computer and edit it in the application, and they can save their work at the end. Some features include using kernels to convolute the image, drawing on the picture with various colors, and adding stickers. Image convolution with kernels should account for the border pixels by using edge extension.
+For our final project, we are going to create a photo editor similar to Photoshop in Processing. This photo editor would allow users to import a photo from their computer and edit it in the application, and they can save their work at the end. Some features include using kernels to convolute the image and drawing on the picture with various colors. And like in Photoshop, users can just create a canvas without images as well. They also can use layering tools to edit a certain part of the canvas without affecting other parts. Creating one whole image from all of the layers will use an alpha compositing algorithm. Image convolution with kernels should account for the border pixels by using edge extension.
 
 **Installation Instructions:**
 
@@ -29,7 +29,7 @@ Edit and create art.
 
 ![image](https://user-images.githubusercontent.com/64807913/121603971-b3879d80-ca17-11eb-912e-ae0e536d0c67.png)
 
-Use the navbar continue and back button to navigate through the app. Use the toolbar to select tools to apply to use.
+Use the navbar's continue and back button to navigate through the app. Use the toolbar to select tools to use.
 
 ![image](https://user-images.githubusercontent.com/64807913/121604003-c601d700-ca17-11eb-9330-9277fb25d4b1.png)
 
@@ -37,7 +37,7 @@ Set the color of the draw and bucket tool. Set the radius and roundness of the d
 
 ![image](https://user-images.githubusercontent.com/64807913/121604029-d1ed9900-ca17-11eb-8713-158c7c3d263c.png)
 
-Add and import new layers. 
+Add and import new layers. Note that the original bottom-most layer is completely opaque while new ones that get added in are initially set to fully transparent.
 
 ![image](https://user-images.githubusercontent.com/64807913/121604067-dfa31e80-ca17-11eb-84de-477b4dd6227f.png)
 
