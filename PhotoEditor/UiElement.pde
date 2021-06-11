@@ -34,6 +34,18 @@ class UiElement {
  float getH() {
    return h;
  }
+ void setX(float other) {
+   x = other;
+ }
+ void setY(float other) {
+   y = other;
+ }
+ void setW(float other) {
+   w = other;
+ }
+ void setH(float other) {
+   h = other;
+ }
  color getBGColor() {
    return bgColor;
  }
