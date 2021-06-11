@@ -41,7 +41,7 @@ Add and import new layers. Note that the original bottom-most layer is completel
 
 ![image](https://user-images.githubusercontent.com/64807913/121604067-dfa31e80-ca17-11eb-84de-477b4dd6227f.png)
 
-Select a layer by clicking the left most circle. Selected circles are blue. Only layers that are selected can be modified by the tools. Click the layer name to change it. Click the layer opacity button to change the opacity. Move layers up and down using the the up and down buttons. Remove a layer by clicking the right most button. It should turn red on hover.
+Select a layer by clicking the left most circle. Selected circles are blue. Only layers that are selected can be modified by the tools! Do not forget to select a layer. Click the layer name to change it. Click the layer opacity button to change the opacity. Move layers up and down using the the up and down buttons. Remove a layer by clicking the right most button. It should turn red on hover.
 
 ![image](https://user-images.githubusercontent.com/64807913/121604099-ef226780-ca17-11eb-9cdb-cc4f4685e15f.png)
 
