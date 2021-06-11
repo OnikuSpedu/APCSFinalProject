@@ -115,6 +115,22 @@ class Layer {
     }
   }
   
+  boolean isSelected() {
+    return selected;
+  }
+  
+  color[][] getLayerPixels() {
+    return layerPixels;
+  }
+  
+  float getX() {
+    return x;
+  }
+  
+  float getY() {
+    return y;
+  }
+  
   color getPixel(int x, int y) {
       x -= (int) this.x;
       y -= (int) this.y;
