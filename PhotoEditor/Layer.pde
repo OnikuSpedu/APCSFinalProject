@@ -132,7 +132,7 @@ class Layer {
     return y;
   }
   void setY(float other) {
-  
+    y = other;
   }
   float getW() {
    return w;
