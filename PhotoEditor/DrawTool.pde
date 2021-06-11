@@ -42,4 +42,7 @@ class DrawTool extends Tool {
   color getColor() {
     return c;
   }
+  int getRadius() {
+    return radius;
+  }
 }

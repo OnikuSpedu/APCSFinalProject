@@ -24,4 +24,7 @@ class EraserTool extends Tool {
       }
     }
   }
+  int getRadius() {
+    return radius;
+  }
 }
