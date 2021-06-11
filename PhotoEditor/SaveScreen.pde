@@ -71,12 +71,12 @@ class SaveScreen extends Screen {
     void pressed() {
       if(super.isHovering()) {
         String fileName = booster.showTextInputDialog("File Name: (Include the file extension name)");
-        if (fileName != null && (fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".tga") || fileName.endsWith(".gif"))) {
+        if (fileName != null && (fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".tga") || fileName.endsWith(".tif"))) {
           stagedPhoto.save("gallery/"+fileName);
           booster.showInfoDialog("Saved! Going to exit now");
           exit();
         } else {
-          booster.showErrorDialog("You must provide a file name including the file extension. The file extensions supported are jpg, png, tga, and gif. \nExample: savedPicture.png", "ERROR");
+          booster.showErrorDialog("You must provide a file name including the file extension. The file extensions supported are jpg, png, tga, and tif. \nExample: savedPicture.png", "ERROR");
         }
       }
     }
