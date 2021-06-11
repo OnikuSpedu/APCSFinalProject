@@ -49,6 +49,9 @@ class UiElement {
  color getBGColor() {
    return bgColor;
  }
+ void setBGColor(color other) {
+   bgColor = other;
+ }
  void clicked() {};
  void released() {};
  void pressed() {};

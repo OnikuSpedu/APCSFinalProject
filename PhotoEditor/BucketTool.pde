@@ -69,4 +69,7 @@ class BucketTool extends Tool {
   float getTolerance() {
     return tolerance;
   }
+  void setTolerance(float other) {
+    tolerance = other;
+  }
 }

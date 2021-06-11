@@ -46,7 +46,13 @@ abstract class Button extends UiElement {
   String getLabel() {
     return label;
   }
+  void setLabel(String other) {
+    label = other;
+  }
   int getFontSize() {
     return fontSize;
+  }
+  void setFontSize(int other) {
+    fontSize = other;
   }
 }

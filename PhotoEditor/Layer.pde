@@ -118,7 +118,9 @@ class Layer {
   boolean isSelected() {
     return selected;
   }
-  
+  void setSelected(boolean other) {
+    selected = other;
+  }
   color[][] getLayerPixels() {
     return layerPixels;
   }
@@ -142,7 +144,9 @@ class Layer {
   float getOpacity() {
     return opacity;
   }
-  
+  void setOpacity(float other) {
+    opacity = other;
+  }
   color getPixel(int x, int y) {
       x -= (int) this.x;
       y -= (int) this.y;
@@ -156,7 +160,9 @@ class Layer {
   String getname() {
     return name;
   }
-  
+  void setname(String other) {
+    name = other;
+  }
   boolean setPixel(int x, int y, color c) {
       if (x >= 0 && x < layerPixels[0].length && y >= 0 && y < layerPixels.length) {
         layerPixels[y][x] = c;

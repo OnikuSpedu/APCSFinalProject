@@ -45,7 +45,13 @@ class DrawTool extends Tool {
   int getRadius() {
     return radius;
   }
+  void setRadius(int other) {
+    radius = other;
+  }
   float getRoundness() {
     return roundness;
+  }
+  void setRoundness(float other) {
+    roundness = other;
   }
 }
