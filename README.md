@@ -57,7 +57,7 @@ Choose filters to add to your work.
 
 ### Save Screen
 
-Save your artwork.
+Save your artwork. The extensions supported include .png, .jpg, .tga, and .tif. The file is saved in the gallery directory in the sketch directory.
 
 ![image](https://user-images.githubusercontent.com/64807913/121604340-550eef00-ca18-11eb-8b92-c3bd27b29907.png)
 
